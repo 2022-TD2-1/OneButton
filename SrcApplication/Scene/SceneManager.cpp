@@ -6,7 +6,7 @@
 
 void SceneManager::Init()
 {
-	Transition<TestScene>();
+	Transition<GameScene>();
 }
 
 void SceneManager::Update()
@@ -15,7 +15,7 @@ void SceneManager::Update()
 
 	if (Input::Key::Triggered(DIK_R))
 	{
-		Transition<TestScene>();
+		Transition<GameScene>();
 	}
 }
 
