@@ -14,3 +14,5 @@
 #define PIf 3.14159265359f
 #endif
 
+
+float DegToRad(float deg);

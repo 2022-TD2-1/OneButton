@@ -14,7 +14,7 @@ void GameScene::Init()
 	player.position = { 0,0,0 };
 
 	camera.projectionMode = ProjectionMode::Perspective;
-	camera.position = { 0, 0, -10 };
+	camera.position = { 0, 0, -12.5 };
 	camera.targetMode = CameraTargetMode::LookTo;
 	camera.rotation= { 0, 0, 0 };
 
