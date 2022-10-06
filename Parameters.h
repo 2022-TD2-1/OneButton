@@ -7,6 +7,7 @@ namespace PlayerParams {
 	//UŒ‚‘¬“x‚²‚Æ‚ÌUŒ‚ŠÔŠu(ƒtƒŒ[ƒ€)
 	constexpr int attackTime[4] = {16, 8, 4, 2};
 
+	//‰ñ“]”¼Œa
 	constexpr float circleR = 8;
 }
 
