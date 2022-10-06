@@ -16,6 +16,7 @@
 #include "Sprite.h"
 #include "TextDrawer.h"
 #include "GPipelineManager.h"
+#include <Parameters.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -32,7 +33,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウを生成
 	{
 		wWindow wwnd;
-		wwnd.Create(L"DirectX", 1280, 720);
+		wwnd.Create(L"DirectX", CommonParams::Win::width, CommonParams::Win::height);
 		RegisterwWindow(wwnd, "Default");
 	}
 

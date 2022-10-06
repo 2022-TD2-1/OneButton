@@ -147,7 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FrameRate.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SrcApplication\Scene\GameScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\MonkeyScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
@@ -189,6 +192,10 @@
     <ClCompile Include="SrcEngine\Windows\wWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FrameRate.h" />
+    <ClInclude Include="ModelManager.h" />
+    <ClInclude Include="Parameters.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SrcApplication\Scene\GameScene.h" />
     <ClInclude Include="SrcApplication\Scene\MonkeyScene.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />

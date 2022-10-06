@@ -115,6 +115,21 @@
     <Filter Include="Engine\ヘッダーファイル\Sound">
       <UniqueIdentifier>{a45ec72f-19a2-448e-a2d9-f19d6bd72d0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Application\ヘッダーファイル\バランス調整用">
+      <UniqueIdentifier>{174a7ecb-62b1-43b9-9729-4904218c72e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\ヘッダーファイル\Player">
+      <UniqueIdentifier>{831de0d5-050b-4ff3-a9ec-cb94a813d99e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\ソースファイル\Player">
+      <UniqueIdentifier>{b03f9b17-5482-4b82-a5fb-64f78ea4d28c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\ソースファイル\Managers">
+      <UniqueIdentifier>{5c2188e2-ae36-4f72-90a7-f4a41f72f43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\ヘッダーファイル\Managers">
+      <UniqueIdentifier>{ec361b67-3edb-4dba-b278-2d4c1dd847ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -236,6 +251,15 @@
     </ClCompile>
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp">
       <Filter>Engine\ソースファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Application\ソースファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameRate.cpp">
+      <Filter>Application\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelManager.cpp">
+      <Filter>Application\ソースファイル\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +388,18 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\Sound\SoundManager.h">
       <Filter>Engine\ヘッダーファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Application\ヘッダーファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Parameters.h">
+      <Filter>Application\ヘッダーファイル\バランス調整用</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameRate.h">
+      <Filter>Application\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelManager.h">
+      <Filter>Application\ヘッダーファイル\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
