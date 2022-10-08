@@ -261,6 +261,9 @@
     <ClCompile Include="ModelManager.cpp">
       <Filter>Application\ソースファイル\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Application\ソースファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -400,6 +403,9 @@
     </ClInclude>
     <ClInclude Include="ModelManager.h">
       <Filter>Application\ヘッダーファイル\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Application\ヘッダーファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

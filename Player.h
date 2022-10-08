@@ -1,6 +1,7 @@
 #pragma once
 #include "Object3D.h"
 #include "Parameters.h"
+#include <PlayerBullet.h>
 
 enum class Side {
     Clock,
@@ -25,5 +26,21 @@ public:
         Move,
         Stop
     } state = State::Move;
+
+    //現在のプレイヤーのインスタンスを取得
+    static Player* GetCurrent();
+
+    //プレイヤーを初期化してCurrentに設定
+    static Player* Create();
+private:
+
+    static Player current;
+
+    //弾関連
+private:
+    vector<PlayerBullet> bullets;
+
+    void UpdateAllBullets();
+    void DrawAllBullets();
 };
 

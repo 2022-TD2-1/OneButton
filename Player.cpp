@@ -42,3 +42,34 @@ void Player::Draw()
 {
 	Object3D::Draw();
 }
+
+Player* Player::GetCurrent()
+{
+	return &current;
+}
+
+Player* Player::Create()
+{
+	current = Player();
+	return &current;
+}
+
+void Player::UpdateAllBullets()
+{
+	for (auto itr = bullets.begin(); itr != bullets.end();)
+	{
+		itr->Update();
+		if (itr->del) itr = bullets.erase(itr);
+		else itr++;
+	}
+}
+
+void Player::DrawAllBullets()
+{
+	for (auto& bullet : bullets)
+	{
+		bullet.Draw();
+	}
+}
+
+Player Player::current;

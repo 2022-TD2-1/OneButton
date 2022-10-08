@@ -151,6 +151,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="SrcApplication\Scene\GameScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\MonkeyScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="SrcApplication\Scene\GameScene.h" />
     <ClInclude Include="SrcApplication\Scene\MonkeyScene.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
