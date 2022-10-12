@@ -2,25 +2,29 @@
 #include "Object3D.h"
 #include "Parameters.h"
 #include <PlayerBullet.h>
-
-enum class Side {
-    Clock,
-    CounterClock
-};
+#include <PlayerOption.h>
+#include <ModelManager.h>
 
 class Player :
     public Object3D
 {
 public:
-    Player() { Object3D::Object3D(); };
+    Player() { 
+        Object3D::Object3D();
+    };
+
+    void Init();
 
     void Update();
     void Draw();
     
     int attackTimer = PlayerParams::attackTime[0];
 
-    int x = 0;
-    Side facing = Side::Clock;
+    float x = 0.f;
+    enum class Side {
+        Clock,
+        CounterClock
+    } facing = Side::Clock;
 
     enum class State {
         Move,
@@ -33,6 +37,7 @@ public:
     //ƒvƒŒƒCƒ„[‚ğ‰Šú‰»‚µ‚ÄCurrent‚Éİ’è
     static Player* Create();
 private:
+    PlayerOption opti = PlayerOption();
 
     static unique_ptr<Player> current;
 

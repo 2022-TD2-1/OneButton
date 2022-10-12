@@ -9,6 +9,9 @@ void GameScene::Init()
 {
 	wTextureManager::Init();
 	ModelManager::LoadAllModels();
+	wTextureManager::LoadTexture("Resources/white.png", "white");
+
+	player.Init();
 
 	player.model = ModelManager::Get("Cube");
 	player.position = { 0,0,0 };

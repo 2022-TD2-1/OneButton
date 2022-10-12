@@ -1,6 +1,11 @@
 #include "Player.h"
 #include "Input.h"
 
+void Player::Init()
+{
+	opti.model = ModelManager::Get("Cube");
+}
+
 void Player::Update()
 {
 	//キーが押されている間は停止状態に、そうでないなら移動
@@ -20,12 +25,15 @@ void Player::Update()
 			x--;
 		}
 	}
-	//キーが押されたら進行方向を反転
+	//キーが押されたら分身を自分の座標に移動
 	if (Input::Key::Triggered(DIK_SPACE))
 	{
-		facing = facing == Side::CounterClock ?
-			Side::Clock :
-			Side::CounterClock;
+		opti.x = this->x;
+	}
+	//キーが離されたら自分を分身の座標に移動
+	if (Input::Key::Released(DIK_SPACE))
+	{
+		this->x = opti.x;
 	}
 
 	//移動総量から回転後の位置を計算
@@ -36,11 +44,14 @@ void Player::Update()
 	//回転後の位置に移動して自身の行列を更新
 	this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
 	UpdateMatrix();
+
+	opti.Update();
 }
 
 void Player::Draw()
 {
-	Object3D::Draw();
+	Object3D::Draw("white");
+	opti.Draw();
 }
 
 Player* Player::GetCurrent()

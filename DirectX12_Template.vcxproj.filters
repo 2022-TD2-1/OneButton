@@ -264,6 +264,9 @@
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>Application\ソースファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerOption.cpp">
+      <Filter>Application\ソースファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -405,6 +408,9 @@
       <Filter>Application\ヘッダーファイル\Managers</Filter>
     </ClInclude>
     <ClInclude Include="PlayerBullet.h">
+      <Filter>Application\ヘッダーファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerOption.h">
       <Filter>Application\ヘッダーファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
