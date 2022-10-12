@@ -45,13 +45,13 @@ void Player::Draw()
 
 Player* Player::GetCurrent()
 {
-	return &current;
+	return current.get();
 }
 
 Player* Player::Create()
 {
-	current = Player();
-	return &current;
+	current = unique_ptr<Player>();
+	return current.get();
 }
 
 void Player::UpdateAllBullets()
@@ -72,4 +72,4 @@ void Player::DrawAllBullets()
 	}
 }
 
-Player Player::current;
+unique_ptr<Player> Player::current = nullptr;

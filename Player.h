@@ -34,7 +34,7 @@ public:
     static Player* Create();
 private:
 
-    static Player current;
+    static unique_ptr<Player> current;
 
     //’eŠÖ˜A
 private:
