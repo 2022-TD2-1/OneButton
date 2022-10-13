@@ -273,6 +273,9 @@
     <ClCompile Include="CircleCollider.cpp">
       <Filter>Application\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\ResultScene.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -424,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="CircleCollider.h">
       <Filter>Application\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Scene\ResultScene.h">
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
