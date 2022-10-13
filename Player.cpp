@@ -61,7 +61,7 @@ Player* Player::GetCurrent()
 
 Player* Player::Create()
 {
-	current = unique_ptr<Player>();
+	current = unique_ptr<Player>(new Player());
 	return current.get();
 }
 

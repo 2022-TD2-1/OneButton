@@ -7,21 +7,24 @@ void PlayerOption::Update()
 	//TODO: 疑似プログラムを書く
 	if (Input::Key::Released(DIK_SPACE))
 	{
-		state = State::Attack;
+		ChangeState(State::Attack);
 	}
 	else if(Input::Key::Triggered(DIK_SPACE))
 	{
-		state = State::Move;
+		ChangeState(State::Move);
 	}
 
 	void (PlayerOption:: * PUpdtArray[]) () =
 	{
 		&PlayerOption::MoveUpdate,
 		&PlayerOption::AttackUpdate,
-		&PlayerOption::BackUpdate
+		&PlayerOption::BackUpdate,
+		&PlayerOption::InvisUpdate
 	};
 
 	(this->*PUpdtArray[(int)state])();
+
+	stateTimer[(int)state]++;
 
 	//ステートごとのアップデートを呼ぶ
 	//Moveならxをspeed分増加
@@ -39,7 +42,7 @@ void PlayerOption::Update()
 void PlayerOption::Draw()
 {
 	(*this->brightnessCB.contents) = Float4{0.5f, 1.0f, 1.0f, 1.0f};
-	Object3D::Draw("white");
+	if(state != State::Invis)Object3D::Draw("white");
 }
 
 void PlayerOption::MoveUpdate()
@@ -50,9 +53,42 @@ void PlayerOption::MoveUpdate()
 void PlayerOption::AttackUpdate()
 {
 	//TODO: 攻撃処理に変更
-	this->state = State::Back;
+	if (stateTimer[(int)State::Attack] > PlayerParams::attackTime)
+	{
+		ChangeState(State::Back);
+	}
 }
 
 void PlayerOption::BackUpdate()
 {
+	//TODO: プレイヤーに向かう処理に変更
+	if (stateTimer[(int)State::Back] > PlayerParams::backTime)
+	{
+		ChangeState(State::Invis);
+	}
+}
+
+void PlayerOption::InvisUpdate()
+{
+}
+
+void PlayerOption::ChangeState(State next)
+{
+	state = next;
+	stateTimer[(int)next] = 0;
+
+	switch (next)
+	{
+	case PlayerOption::State::Move:
+		break;
+	case PlayerOption::State::Attack:
+		break;
+	case PlayerOption::State::Back:
+		break;
+	case PlayerOption::State::Invis:
+
+		break;
+	default:
+		break;
+	}
 }

@@ -3,6 +3,7 @@
 void ModelManager::LoadAllModels()
 {
 	RegisterModel("cube", "Cube");
+	RegisterModel("sphere", "Sphere");
 }
 
 Model* ModelManager::Get(string key)

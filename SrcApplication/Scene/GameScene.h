@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Input.h"
 #include <Player.h>
+#include <Boss.h>
 using namespace Input;
 
 class GameScene :
@@ -21,8 +22,11 @@ public:
     void DrawSprite() override;
 
 private:
-    Player player;
+    Player* player;
 
     Camera camera;
+
+    Boss* boss;
+
 };
 

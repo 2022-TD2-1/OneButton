@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="FrameRate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelManager.cpp" />
@@ -194,6 +196,8 @@
     <ClCompile Include="SrcEngine\Windows\wWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="FrameRate.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Parameters.h" />

@@ -20,11 +20,16 @@ public:
     enum class State {
         Move,
         Attack,
-        Back
-    } state = State::Attack;
+        Back,
+        Invis
+    } state = State::Invis;
 
     void MoveUpdate();
     void AttackUpdate();
     void BackUpdate();
+    void InvisUpdate();
+
+    int stateTimer[4] = {};
+    void ChangeState(State next);
 };
 
