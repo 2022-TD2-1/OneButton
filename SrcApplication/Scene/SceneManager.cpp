@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include "GameScene.h"
 #include "TestScene.h"
+#include "TitleScene.h"
 #include "Input.h"
 #include "MonkeyScene.h"
 #include "FrameRate.h"
@@ -19,6 +20,11 @@ void SceneManager::Update()
 	{
 		Transition<GameScene>();
 	}
+	if (Input::Key::Triggered(DIK_0))
+	{
+		Transition<TitleScene>();
+	}
+
 }
 
 void SceneManager::Draw3D()
