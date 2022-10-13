@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "TestScene.h"
 #include "TitleScene.h"
+#include "ResultScene.h"
 #include "Input.h"
 #include "MonkeyScene.h"
 #include "FrameRate.h"
@@ -23,6 +24,10 @@ void SceneManager::Update()
 	if (Input::Key::Triggered(DIK_0))
 	{
 		Transition<TitleScene>();
+	}
+	if (Input::Key::Triggered(DIK_9))
+	{
+		Transition<ResultScene>();
 	}
 
 }
