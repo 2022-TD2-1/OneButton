@@ -22,7 +22,7 @@ public:
 
 private:
 	Camera camera;
-
+	//テスト用画像
 	Sprite testSprite;
 
 };
