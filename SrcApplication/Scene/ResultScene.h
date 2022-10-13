@@ -25,5 +25,13 @@ private:
 	//テスト用画像
 	Sprite testSprite;
 
+	//何を選択しているか
+	enum class Menu {
+		Continue,
+		Title
+	}isSelect = Menu::Continue;
+	//決定フラグ
+	bool isReturn = false;
+
 };
 
