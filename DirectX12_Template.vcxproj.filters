@@ -267,6 +267,12 @@
     <ClCompile Include="PlayerOption.cpp">
       <Filter>Application\ソースファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Application\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Application\ソースファイル</Filter>
+    </ClCompile>
     <ClCompile Include="SrcApplication\Scene\ResultScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
@@ -415,6 +421,12 @@
     </ClInclude>
     <ClInclude Include="PlayerOption.h">
       <Filter>Application\ヘッダーファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Application\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="SrcApplication\Scene\ResultScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>

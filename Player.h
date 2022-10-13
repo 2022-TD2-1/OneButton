@@ -17,8 +17,6 @@ public:
 
     void Update();
     void Draw();
-    
-    int attackTimer = PlayerParams::attackTime[0];
 
     float x = 0.f;
     enum class Side {
@@ -36,8 +34,9 @@ public:
 
     //ƒvƒŒƒCƒ„[‚ğ‰Šú‰»‚µ‚ÄCurrent‚Éİ’è
     static Player* Create();
-private:
+
     PlayerOption opti = PlayerOption();
+private:
 
     static unique_ptr<Player> current;
 
