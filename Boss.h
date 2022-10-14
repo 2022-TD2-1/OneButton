@@ -26,6 +26,8 @@ public:
 
     void UpdateCol();
 
+    void MoveTo(Vec3 goal, float speed);
+
     CircleCollider col;
 
 private:

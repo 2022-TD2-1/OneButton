@@ -63,6 +63,7 @@ void Boss::Hit(PlayerOption* other)
 
 void Boss::CenterUpdate()
 {
+	MoveTo(Vec3(0, 0, 0), 0.1f);
 	*this->brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f };
 }
 
@@ -76,6 +77,17 @@ void Boss::UpdateCol()
 	this->col.x = this->position.x;
 	this->col.y = this->position.y;
 	this->col.r = this->scale.x;
+}
+
+void Boss::MoveTo(Vec3 goal, float speed)
+{
+	Vec3 dir = goal - this->position;
+	if (dir.GetSquaredLength() < speed * speed)
+	{
+		position = goal;
+		return;
+	}
+	this->position = (Vec3)this->position + dir.SetLength(speed);
 }
 
 Boss* Boss::Create()
