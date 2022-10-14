@@ -44,7 +44,8 @@ void PlayerOption::Draw()
 
 void PlayerOption::MoveUpdate()
 {
-	x+= 1.5f;
+	power += 0.01f;
+	x += 1.5f * power;
 	if (col.Collide(Boss::GetCurrent()->col))
 	{
 		Boss::GetCurrent()->Hit(this);
@@ -56,6 +57,7 @@ void PlayerOption::MoveUpdate()
 	moveTemp *= Matrix::RotZ(DegToRad(x * PlayerParams::degPerMove));
 	//回転後の位置に移動して自身の行列を更新
 	this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
+	this->scale = Vec3((power - 1.0f) * 0.5f + 1.0f, (power - 1.0f) * 0.5f + 1.0f, (power - 1.0f) * 0.5f + 1.0f);
 }
 
 void PlayerOption::AttackUpdate()
@@ -96,6 +98,7 @@ void PlayerOption::ChangeState(State next)
 	switch (next)
 	{
 	case PlayerOption::State::Move:
+		power = 1.f;
 		break;
 	case PlayerOption::State::Attack:
 		attackStartedPos = this->position;

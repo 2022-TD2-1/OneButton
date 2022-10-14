@@ -35,6 +35,8 @@ public:
 
     CircleCollider col;
 
+    float power = 1.0f;
+
     Vec3 attackStartedPos;
 };
 

@@ -24,6 +24,8 @@ public:
     void CenterUpdate();
     void DownUpdate();
 
+    void UpdateCol();
+
     CircleCollider col;
 
 private:

@@ -22,6 +22,8 @@ void Boss::Update()
 	this->col.x = this->position.x;
 	this->col.y = this->position.y;
 	this->col.r = this->scale.x;
+
+	UpdateMatrix();
 }
 
 void Boss::Draw()
@@ -37,6 +39,19 @@ void Boss::Hit(PlayerOption* other)
 	{
 		health -= 10;
 		//kbˆ—
+		float kbPower = 1.0f * other->power * other->power;
+		Vec3 dir = (Vec3)this->position - other->position;
+		dir.SetLength(min(kbPower, 8.0f));
+		this->position = dir;
+
+		float l = ((Vec3)this->position).GetSquaredLength();
+
+		if (((Vec3)this->position).GetSquaredLength() >= 8.0f * 8.0f - 0.1f)
+		{
+			this->state = State::Down;
+		}
+		UpdateMatrix();
+		this->UpdateCol();
 	}
 
 	else if (other->state == PlayerOption::State::Move)
@@ -48,10 +63,19 @@ void Boss::Hit(PlayerOption* other)
 
 void Boss::CenterUpdate()
 {
+	*this->brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f };
 }
 
 void Boss::DownUpdate()
 {
+	*this->brightnessCB.contents = { 1.0f, 0.0f, 0.0f, 1.0f };
+}
+
+void Boss::UpdateCol()
+{
+	this->col.x = this->position.x;
+	this->col.y = this->position.y;
+	this->col.r = this->scale.x;
 }
 
 Boss* Boss::Create()

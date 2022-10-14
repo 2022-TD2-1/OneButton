@@ -38,7 +38,7 @@ void GameScene::Init()
 void GameScene::Update()
 {
 	player->Update();
-
+	boss->Update();
 	camera.UpdateMatrix();
 }
 
