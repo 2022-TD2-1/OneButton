@@ -31,6 +31,9 @@ void PlayerOption::Update()
 	//ステートごとのアップデートを呼ぶ
 	//Moveならxをspeed分増加
 	UpdateMatrix();
+	this->col.x = position.x;
+	this->col.y = position.y;
+	this->col.r = scale.x;
 }
 
 void PlayerOption::Draw()
@@ -64,11 +67,11 @@ void PlayerOption::AttackUpdate()
 		ChangeState(State::Back);
 	}
 
-	//if (col.Collide(Boss::GetCurrent()->col))
-	//{
-	//	Boss::GetCurrent()->Hit(this);
-	//	ChangeState(State::Back);
-	//}
+	if (col.Collide(Boss::GetCurrent()->col))
+	{
+		Boss::GetCurrent()->Hit(this);
+		ChangeState(State::Back);
+	}
 }
 
 void PlayerOption::BackUpdate()
