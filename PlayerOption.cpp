@@ -1,6 +1,8 @@
 #include "PlayerOption.h"
 #include "Input.h"
 #include "Parameters.h"
+#include <Boss.h>
+#include <Player.h>
 
 void PlayerOption::Update()
 {
@@ -28,14 +30,6 @@ void PlayerOption::Update()
 
 	//ステートごとのアップデートを呼ぶ
 	//Moveならxをspeed分増加
-	
-	//移動総量から回転後の位置を計算
-	Matrix moveTemp = Matrix::Identity();
-	moveTemp *= Matrix::Translation({ PlayerParams::circleR, 0.f, 0.f });
-	moveTemp *= Matrix::RotZ(DegToRad(x * PlayerParams::degPerMove));
-
-	//回転後の位置に移動して自身の行列を更新
-	this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
 	UpdateMatrix();
 }
 
@@ -48,20 +42,39 @@ void PlayerOption::Draw()
 void PlayerOption::MoveUpdate()
 {
 	x+= 1.5f;
+	if (col.Collide(Boss::GetCurrent()->col))
+	{
+		Boss::GetCurrent()->Hit(this);
+	}
+
+	//移動総量から回転後の位置を計算
+	Matrix moveTemp = Matrix::Identity();
+	moveTemp *= Matrix::Translation({ PlayerParams::circleR, 0.f, 0.f });
+	moveTemp *= Matrix::RotZ(DegToRad(x * PlayerParams::degPerMove));
+	//回転後の位置に移動して自身の行列を更新
+	this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
 }
 
 void PlayerOption::AttackUpdate()
 {
 	//TODO: 攻撃処理に変更
+	this->position = Vec3::Lerp(attackStartedPos, Vec3(0,0,0), (float)stateTimer[(int)State::Attack] / PlayerParams::attackTime);
 	if (stateTimer[(int)State::Attack] > PlayerParams::attackTime)
 	{
 		ChangeState(State::Back);
 	}
+
+	//if (col.Collide(Boss::GetCurrent()->col))
+	//{
+	//	Boss::GetCurrent()->Hit(this);
+	//	ChangeState(State::Back);
+	//}
 }
 
 void PlayerOption::BackUpdate()
 {
 	//TODO: プレイヤーに向かう処理に変更
+	this->position = Vec3::Lerp(this->position, Player::GetCurrent()->position, (float)stateTimer[(int)State::Back] / PlayerParams::backTime);
 	if (stateTimer[(int)State::Back] > PlayerParams::backTime)
 	{
 		ChangeState(State::Invis);
@@ -82,6 +95,7 @@ void PlayerOption::ChangeState(State next)
 	case PlayerOption::State::Move:
 		break;
 	case PlayerOption::State::Attack:
+		attackStartedPos = this->position;
 		break;
 	case PlayerOption::State::Back:
 		break;

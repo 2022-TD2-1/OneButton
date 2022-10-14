@@ -12,9 +12,9 @@ public:
     void Update();
     void Draw();
 
-    void Hit(PlayerOption other);
+    void Hit(PlayerOption* other);
 
-    int health;
+    int health = 10000;
 
     enum class State {
         Center,
@@ -24,6 +24,7 @@ public:
     void CenterUpdate();
     void DownUpdate();
 
+    CircleCollider col;
 
 private:
     static unique_ptr<Boss> current;

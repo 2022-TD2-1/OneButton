@@ -1,5 +1,6 @@
 #pragma once
 #include "Object3D.h"
+#include <CircleCollider.h>
 class PlayerOption :
     public Object3D
 {
@@ -31,5 +32,9 @@ public:
 
     int stateTimer[4] = {};
     void ChangeState(State next);
+
+    CircleCollider col;
+
+    Vec3 attackStartedPos;
 };
 

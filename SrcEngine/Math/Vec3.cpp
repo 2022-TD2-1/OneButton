@@ -173,6 +173,12 @@ Vec3 Vec3::Cross(const Vec3& v2) const
 	return Vec3(y*v2.z - z*v2.y, z*v2.x - x*v2.z, x*v2.y - y*v2.x);
 }
 
+Vec3 Vec3::Lerp(const Vec3& start, const Vec3& end, const float t)
+{
+	Vec3 diff = end - start;
+	return start + diff * t;
+}
+
 Vec3::operator Float3() const
 {
 	return Float3{ x, y, z };

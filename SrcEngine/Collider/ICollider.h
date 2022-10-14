@@ -1,6 +1,6 @@
 #pragma once
 class ICollider
 {
-public:/*
-	virtual bool Collide(const ICollider& other) const = 0;*/
+public:
+	bool Collide(const ICollider& other) { return false; };
 };

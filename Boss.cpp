@@ -11,8 +11,6 @@ void Boss::Init()
 
 void Boss::Update()
 {
-
-
 	void (Boss:: * BUpdtArray[]) () =
 	{
 		&Boss::CenterUpdate,
@@ -20,6 +18,10 @@ void Boss::Update()
 	};
 
 	(this->*BUpdtArray[(int)state])();
+
+	this->col.x = this->position.x;
+	this->col.y = this->position.y;
+	this->col.r = this->scale.x;
 }
 
 void Boss::Draw()
@@ -27,17 +29,19 @@ void Boss::Draw()
 	Object3D::Draw("white");
 }
 
-void Boss::Hit(PlayerOption other)
+void Boss::Hit(PlayerOption* other)
 {
 	this->health -= PlayerParams::damage;
 
-	if (other.state == PlayerOption::State::Attack)
+	if (other->state == PlayerOption::State::Attack)
 	{
+		health -= 10;
 		//kbˆ—
 	}
 
-	else if (other.state == PlayerOption::State::Move)
+	else if (other->state == PlayerOption::State::Move)
 	{
+		health -= 15;
 		//kbˆ—
 	}
 }

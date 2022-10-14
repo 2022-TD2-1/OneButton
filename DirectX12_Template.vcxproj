@@ -150,6 +150,7 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="FrameRate.cpp" />
+    <ClCompile Include="IBossAttack.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -195,11 +196,13 @@
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\wWindow.cpp" />
+    <ClCompile Include="TestBossAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boss.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="FrameRate.h" />
+    <ClInclude Include="IBossAttack.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="Player.h" />
@@ -248,6 +251,7 @@
     <ClInclude Include="SrcEngine\Scene\IScene.h" />
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\wWindow.h" />
+    <ClInclude Include="TestBossAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">

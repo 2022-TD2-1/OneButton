@@ -130,6 +130,12 @@
     <Filter Include="Application\ヘッダーファイル\Managers">
       <UniqueIdentifier>{ec361b67-3edb-4dba-b278-2d4c1dd847ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Application\ヘッダーファイル\Boss">
+      <UniqueIdentifier>{1b786f67-10a3-4159-868b-b193aaf4a790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\ソースファイル\Boss">
+      <UniqueIdentifier>{5c7047f7-f23f-40b0-bc22-0f03b08445f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -267,14 +273,20 @@
     <ClCompile Include="PlayerOption.cpp">
       <Filter>Application\ソースファイル\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>Application\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="CircleCollider.cpp">
       <Filter>Application\ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="SrcApplication\Scene\ResultScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="IBossAttack.cpp">
+      <Filter>Application\ソースファイル\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Application\ソースファイル\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="TestBossAttack.cpp">
+      <Filter>Application\ソースファイル\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -422,14 +434,20 @@
     <ClInclude Include="PlayerOption.h">
       <Filter>Application\ヘッダーファイル\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>Application\ヘッダーファイル</Filter>
-    </ClInclude>
     <ClInclude Include="CircleCollider.h">
       <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="SrcApplication\Scene\ResultScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="IBossAttack.h">
+      <Filter>Application\ヘッダーファイル\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Application\ヘッダーファイル\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBossAttack.h">
+      <Filter>Application\ヘッダーファイル\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
