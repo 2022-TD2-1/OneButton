@@ -22,8 +22,15 @@ public:
 
 private:
 	Camera camera;
-	//テスト用画像
-	Sprite testSprite;
+	
+	//クリア時間を入れる変数
+	float testTime = 76.31f;
+	//表示する4つの数字を入れる変数
+	float displayNum[4];
+	//数字画像
+	Sprite numSprite[10];
+	//小数点画像
+	Sprite dotSprite;
 
 	//何を選択しているか
 	enum class Menu {
