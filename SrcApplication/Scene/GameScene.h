@@ -27,6 +27,7 @@ private:
     Camera camera;
 
     Boss* boss;
-
+    
+    Object3D guide;
 };
 
