@@ -25,6 +25,10 @@ private:
 	//テスト用画像
 	Sprite testSprite;
 
+	//数字画像
+	Sprite numSprite[10];
+	Sprite testnumSprite;
+
 	//何を選択しているか
 	enum class Menu {
 		Continue,
