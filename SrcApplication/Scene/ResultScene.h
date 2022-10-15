@@ -24,7 +24,7 @@ private:
 	Camera camera;
 	
 	//クリア時間を入れる変数
-	float testTime = 03.31f;
+	float clearTime = 03.31f;
 	//表示する4つの数字を入れる変数
 	float displayNum[4];
 	//表示させる画像
@@ -34,7 +34,10 @@ private:
 	//小数点画像
 	Sprite dotSprite;
 
-	void UpdateNum();
+	void UpdateNum();	//数字を更新する
+
+	int rank;
+	void Rank();		//クリアタイムに応じたランク
 
 	//何を選択しているか
 	enum class Menu {

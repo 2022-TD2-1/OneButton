@@ -48,10 +48,10 @@ void ResultScene::Update()
 
 	//デバッグ
 	if (Input::Key::Triggered(DIK_W)) {
-		testTime++;
+		clearTime++;
 	}
 	if (Input::Key::Triggered(DIK_S)) {
-		testTime--;
+		clearTime--;
 	}
 
 	UpdateNum();
@@ -65,7 +65,7 @@ void ResultScene::Update()
 	}
 	dotSprite.UpdateMatrix();
 
-
+	Rank();
 }
 
 void ResultScene::DrawBack()
@@ -94,11 +94,11 @@ void ResultScene::UpdateNum()
 {
 	
 	//時間がマイナスにならないように
-	if (testTime <= 0) {
-		testTime = 0;
+	if (clearTime <= 0) {
+		clearTime = 0;
 	}
 	//時間を代入する
-	int time = (testTime * 100);
+	int time = (clearTime * 100);
 	displayNum[0] = (time % 10000) / 1000;
 	displayNum[1] = (time % 1000) / 100;
 	displayNum[2] = (time % 100) / 10;
@@ -129,4 +129,15 @@ void ResultScene::UpdateNum()
 		}
 	}
 
+}
+
+void ResultScene::Rank()
+{
+	if (clearTime <= 30) {		//A
+		rank = 0;
+	}
+	else if (clearTime <= 50) {	//B
+		rank = 1;
+	}
+	//以下適当に
 }
