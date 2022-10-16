@@ -72,6 +72,18 @@ void Boss::DownUpdate()
 	*this->brightnessCB.contents = { 1.0f, 0.0f, 0.0f, 1.0f };
 }
 
+void Boss::P1Update()
+{
+}
+
+void Boss::P2Update()
+{
+}
+
+void Boss::P3Update()
+{
+}
+
 void Boss::IdleUpdate()
 {
 }

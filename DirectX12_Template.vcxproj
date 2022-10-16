@@ -197,6 +197,7 @@
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\wWindow.cpp" />
     <ClCompile Include="TestBossAttack.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boss.h" />
@@ -252,6 +253,7 @@
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\wWindow.h" />
     <ClInclude Include="TestBossAttack.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">
