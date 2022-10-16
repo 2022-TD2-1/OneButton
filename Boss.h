@@ -2,6 +2,7 @@
 #include "Object3D.h"
 #include <PlayerOption.h>
 #include <IBossAttack.h>
+#include "Timer.h"
 class Boss :
     public Object3D
 {
@@ -19,7 +20,8 @@ public:
 
     enum class State {
         Center,
-        Down
+        Down,
+        SumStates
     } state = State::Center;
 
     enum class AttackType {
@@ -28,6 +30,7 @@ public:
         Bar1,
         Bar2,
         AoE,
+        SumTypes
     };
 
     //ダウン、非ダウンの処理
@@ -57,6 +60,11 @@ public:
     CircleCollider col;
 
     list<unique_ptr<IBossAttack>> bossAttacks;
+
+    Timer attackTimer[(int)AttackType::SumTypes];
+    Timer phaseTimer[4];
+    Timer stateTimer[(int)State::SumStates];
+
 private:
     static unique_ptr<Boss> current;
 
