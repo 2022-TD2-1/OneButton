@@ -72,6 +72,50 @@ void Boss::DownUpdate()
 	*this->brightnessCB.contents = { 1.0f, 0.0f, 0.0f, 1.0f };
 }
 
+void Boss::IdleUpdate()
+{
+}
+
+void Boss::BulletsUpdate()
+{
+}
+
+void Boss::Bar1Update()
+{
+}
+
+void Boss::Bar2Update()
+{
+}
+
+void Boss::AoEUpdate()
+{
+}
+
+void Boss::UpdateAllAttacks()
+{
+	for (auto itr = bossAttacks.begin(); itr != bossAttacks.end();)
+	{
+		(* itr)->Update();
+		if (( * itr)->del)
+		{
+			itr = bossAttacks.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
+}
+
+void Boss::DrawAllAttacks()
+{
+	for (auto& attack : bossAttacks)
+	{
+		attack->Draw();
+	}
+}
+
 void Boss::UpdateCol()
 {
 	this->col.x = this->position.x;

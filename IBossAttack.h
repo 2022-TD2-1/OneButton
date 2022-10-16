@@ -5,7 +5,10 @@ class IBossAttack
 {
 public:
 	ICollider col;
-};
 
-static list<IBossAttack> bossAttacks;
+	virtual void Update() = 0;
+	virtual void Draw() = 0;
+
+	bool del = false;
+};
 

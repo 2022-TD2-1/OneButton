@@ -45,7 +45,7 @@ void PlayerOption::Draw()
 void PlayerOption::MoveUpdate()
 {
 	power += 0.01f;
-	x += 1.5f * power;
+	x -= 1.5f * power;
 	if (col.Collide(Boss::GetCurrent()->col))
 	{
 		Boss::GetCurrent()->Hit(this);

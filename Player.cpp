@@ -18,11 +18,11 @@ void Player::Update()
 		state = State::Move;
 		if (facing == Side::Clock)
 		{
-			x++;
+			x--;
 		}
 		else
 		{
-			x--;
+			x++;
 		}
 	}
 	//キーが押されたら分身を自分の座標に移動
