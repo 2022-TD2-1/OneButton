@@ -267,9 +267,6 @@
     <ClCompile Include="ModelManager.cpp">
       <Filter>Application\ソースファイル\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
-      <Filter>Application\ソースファイル\Player</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerOption.cpp">
       <Filter>Application\ソースファイル\Player</Filter>
     </ClCompile>
@@ -290,6 +287,12 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ApUtil.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="BossBullet.cpp">
+      <Filter>Application\ソースファイル\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -431,9 +434,6 @@
     <ClInclude Include="ModelManager.h">
       <Filter>Application\ヘッダーファイル\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBullet.h">
-      <Filter>Application\ヘッダーファイル\Player</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerOption.h">
       <Filter>Application\ヘッダーファイル\Player</Filter>
     </ClInclude>
@@ -454,6 +454,12 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ApUtil.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BossBullet.h">
+      <Filter>Application\ヘッダーファイル\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

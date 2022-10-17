@@ -15,6 +15,14 @@ namespace PlayerParams {
 	constexpr int attackTime = 30;
 }
 
+namespace BossParams {
+	constexpr float bulletSpeed = 0.05f;
+	//’e–‹‚Ì”­ŽËŠÔŠu(ƒ~ƒŠ•b)
+	constexpr float bulletCD = 500;
+	//’e–‹‚Ì”­ŽËŠÔŠu(Šp“x)
+	constexpr float bulletDeg = 30;
+}
+
 namespace CommonParams {
 	namespace Win {
 		constexpr int width = 1280;

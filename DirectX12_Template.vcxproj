@@ -154,7 +154,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerBullet.cpp" />
+    <ClCompile Include="BossBullet.cpp" />
     <ClCompile Include="PlayerOption.cpp" />
     <ClCompile Include="SrcApplication\Scene\GameScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\MonkeyScene.cpp" />
@@ -198,6 +198,7 @@
     <ClCompile Include="SrcEngine\Windows\wWindow.cpp" />
     <ClCompile Include="TestBossAttack.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="ApUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boss.h" />
@@ -207,7 +208,7 @@
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerBullet.h" />
+    <ClInclude Include="BossBullet.h" />
     <ClInclude Include="PlayerOption.h" />
     <ClInclude Include="SrcApplication\Scene\GameScene.h" />
     <ClInclude Include="SrcApplication\Scene\MonkeyScene.h" />
@@ -254,6 +255,7 @@
     <ClInclude Include="SrcEngine\Windows\wWindow.h" />
     <ClInclude Include="TestBossAttack.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="ApUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">

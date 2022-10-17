@@ -17,9 +17,12 @@
 #include "TextDrawer.h"
 #include "GPipelineManager.h"
 #include <Parameters.h>
+#include <chrono>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+	//乱数初期化
+	srand(std::chrono::system_clock::now().time_since_epoch().count());
 	/*デバッグ有効化*/
 #ifdef  _DEBUG
 	ID3D12Debug1* debugController;

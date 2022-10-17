@@ -29,7 +29,6 @@ void SceneManager::Update()
 	{
 		Transition<ResultScene>();
 	}
-
 }
 
 void SceneManager::Draw3D()

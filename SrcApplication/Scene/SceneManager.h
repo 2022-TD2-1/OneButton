@@ -14,4 +14,3 @@ public:
 
 	unique_ptr<IScene> currentScene = nullptr;
 };
-

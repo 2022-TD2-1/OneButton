@@ -65,22 +65,4 @@ Player* Player::Create()
 	return current.get();
 }
 
-void Player::UpdateAllBullets()
-{
-	for (auto itr = bullets.begin(); itr != bullets.end();)
-	{
-		itr->Update();
-		if (itr->del) itr = bullets.erase(itr);
-		else itr++;
-	}
-}
-
-void Player::DrawAllBullets()
-{
-	for (auto& bullet : bullets)
-	{
-		bullet.Draw();
-	}
-}
-
 unique_ptr<Player> Player::current = nullptr;

@@ -1,7 +1,6 @@
 #pragma once
 #include "Object3D.h"
 #include "Parameters.h"
-#include <PlayerBullet.h>
 #include <PlayerOption.h>
 #include <ModelManager.h>
 
@@ -39,12 +38,5 @@ public:
 private:
 
     static unique_ptr<Player> current;
-
-    //’eŠÖ˜A
-private:
-    vector<PlayerBullet> bullets;
-
-    void UpdateAllBullets();
-    void DrawAllBullets();
 };
 

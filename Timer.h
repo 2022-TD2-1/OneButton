@@ -11,6 +11,7 @@ public:
 	void Reset();
 	double Check();
 	void Start();
+	void Subtract(double time);
 
 	void Update();
 

@@ -31,7 +31,7 @@ public:
         Bar2,
         AoE,
         SumTypes
-    };
+    } attackType = AttackType::Idle;
 
     //ダウン、非ダウンの処理
     void CenterUpdate();
@@ -64,6 +64,10 @@ public:
     Timer attackTimer[(int)AttackType::SumTypes];
     Timer phaseTimer[4];
     Timer stateTimer[(int)State::SumStates];
+
+    Timer bulletTimer;
+
+    int phase = 0;
 
 private:
     static unique_ptr<Boss> current;

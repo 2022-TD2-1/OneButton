@@ -17,7 +17,12 @@ double Timer::Check()
 
 void Timer::Start()
 {
-	startTime = currentTime;
+	startTime = currentTime = std::chrono::system_clock::now();
+}
+
+void Timer::Subtract(double time)
+{
+	startTime = startTime + std::chrono::milliseconds((int)time);
 }
 
 void Timer::Update()
