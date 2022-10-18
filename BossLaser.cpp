@@ -13,12 +13,13 @@ void BossLaser::Update()
 
 	if (timer.Check() > readyTime)
 	{
-		centerRad = (timer.Check() - 1000) * PIf / 1800;
+		centerRad = defRad + (timer.Check() - 1000) * PIf / 1800;
 		this->rotation.z = centerRad;
 		*this->brightnessCB.contents = { 1.0f, 0.3f, 0.3f, 1.0f };
 	}
 	else
 	{
+		this->rotation.z = defRad;
 		float flashyTime = timer.Check() > readyTime / 2 ?
 			readyTime - timer.Check() :
 			timer.Check();

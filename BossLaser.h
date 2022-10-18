@@ -6,7 +6,7 @@ class BossLaser :
     public IBossAttack, public Object3D
 {
 public:
-    BossLaser(float centerRad) :centerRad(centerRad) {
+    BossLaser(float centerRad) :defRad(centerRad) {
         timer.Start(); 
         model = ModelManager::Get("Cube");
         this->scale.x = length*2;
@@ -14,6 +14,7 @@ public:
 
     void Update() override;
     void Draw() override;
+    float defRad;
 
     float centerRad;
 
