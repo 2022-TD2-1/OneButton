@@ -122,10 +122,28 @@ void Boss::P1Update()
 
 void Boss::P2Update()
 {
+	phaseTimer[0].Update();
+	if (attackType == AttackType::Idle)
+	{
+		if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+		{
+			phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+			ChangeAttack((AttackType)ApUtil::RNG(1, 2, true));
+		}
+	}
 }
 
 void Boss::P3Update()
 {
+	phaseTimer[0].Update();
+	if (attackType == AttackType::Idle)
+	{
+		if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+		{
+			phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+			ChangeAttack((AttackType)ApUtil::RNG(1, 2, true));
+		}
+	}
 }
 
 void Boss::IdleUpdate()
