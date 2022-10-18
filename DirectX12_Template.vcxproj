@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossCrossLaser.cpp" />
     <ClCompile Include="BossLaser.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="FrameRate.cpp" />
@@ -203,8 +204,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossCrossLaser.h" />
     <ClInclude Include="BossLaser.h" />
     <ClInclude Include="CircleCollider.h" />
+    <ClInclude Include="Easing.h" />
     <ClInclude Include="FrameRate.h" />
     <ClInclude Include="IBossAttack.h" />
     <ClInclude Include="ModelManager.h" />

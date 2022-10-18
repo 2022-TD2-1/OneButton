@@ -2,7 +2,7 @@
 #include "Essentials.h"
 #include <ICollider.h>
 #include <Object3D.h>
-class IBossAttack : public Object3D
+class IBossAttack 
 {
 public:
 	unique_ptr<ICollider> col;

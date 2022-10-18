@@ -53,6 +53,11 @@ public:
     void UpdateAllAttacks();
     void DrawAllAttacks();
 
+    //ó‘Ô‘JˆÚ‚²‚Æ‚Ì‰Šú‰»ˆ—
+    void ChangeState(State next);
+    void ChangeAttack(AttackType next);
+    void ChangePhase(int next);
+
     void UpdateCol();
 
     void MoveTo(Vec3 goal, float speed);

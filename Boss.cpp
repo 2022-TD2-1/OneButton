@@ -3,6 +3,7 @@
 #include "ModelManager.h"
 #include <ApUtil.h>
 #include "BossBullet.h"
+#include "BossLaser.h"
 unique_ptr<Boss> Boss::current = nullptr;
 
 void Boss::Init()
@@ -111,12 +112,10 @@ void Boss::P1Update()
 	phaseTimer[0].Update();
 	if (attackType == AttackType::Idle)
 	{
-		phaseTimer[0].Update();
-
-		if (phaseTimer[0].Check() >= 1000.0)
+		if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
 		{
 			phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-			this->attackType = (AttackType)ApUtil::RNG(1, 3, true);
+			ChangeAttack((AttackType)ApUtil::RNG(1, 2, true));
 		}
 	}
 }
@@ -131,6 +130,7 @@ void Boss::P3Update()
 
 void Boss::IdleUpdate()
 {
+	attackTimer[(int)AttackType::Idle].Update();
 }
 
 void Boss::BulletsUpdate()
@@ -149,10 +149,23 @@ void Boss::BulletsUpdate()
 	else {
 		int a = 0;
 	}
+
+	//bulletó‘Ô‚ÌŒp‘±ŽžŠÔ
+	if (timer->Check() > 3000.0)
+	{
+		ChangeAttack(AttackType::Idle);
+	}
 }
 
 void Boss::Bar1Update()
 {
+	Timer* timer = &attackTimer[(int)AttackType::Bar1];
+	timer->Update();
+
+	if (timer->Check() > BossLaser::totalTime)
+	{
+		ChangeAttack(AttackType::Idle);
+	}
 }
 
 void Boss::Bar2Update()
@@ -184,6 +197,63 @@ void Boss::DrawAllAttacks()
 	for (auto& attack : bossAttacks)
 	{
 		attack->Draw();
+	}
+}
+
+void Boss::ChangeState(State next)
+{
+	state = next;
+	stateTimer[(int)next].Start();
+
+	switch (next)
+	{
+	case Boss::State::Center:
+		break;
+	case Boss::State::Down:
+		break;
+	case Boss::State::SumStates:
+		break;
+	default:
+		break;
+	}
+}
+
+void Boss::ChangeAttack(AttackType next)
+{
+	attackType = next;
+	attackTimer[(int)next].Start();
+
+	switch (next)
+	{
+	case Boss::AttackType::Idle:
+		break;
+	case Boss::AttackType::Bullets:
+		break;
+	case Boss::AttackType::Bar1:
+		bossAttacks.emplace_back(new BossLaser((float)ApUtil::RNG(1, 360) * PI / 180));
+		break;
+	case Boss::AttackType::Bar2:
+		break;
+	case Boss::AttackType::AoE:
+		break;
+	case Boss::AttackType::SumTypes:
+		break;
+	default:
+		break;
+	}
+}
+
+void Boss::ChangePhase(int next)
+{
+	phase = next;
+	phaseTimer[next].Start();
+
+	switch (next)
+	{
+	case 1:
+		break;
+	default:
+		break;
 	}
 }
 

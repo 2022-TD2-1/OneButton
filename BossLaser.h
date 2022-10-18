@@ -3,9 +3,14 @@
 #include <Timer.h>
 #include <ModelManager.h>
 class BossLaser :
-    public IBossAttack
+    public IBossAttack, public Object3D
 {
-    BossLaser(float centerRad) :centerRad(centerRad) { timer.Start(); model = ModelManager::Get("Cube"); };
+public:
+    BossLaser(float centerRad) :centerRad(centerRad) {
+        timer.Start(); 
+        model = ModelManager::Get("Cube");
+        this->scale.x = length*2;
+    };
 
     void Update() override;
     void Draw() override;
@@ -15,6 +20,8 @@ class BossLaser :
     Timer timer;
 
     const int readyTime = 1000;
-    const int totalTime = 4000;
+    static const int totalTime = 4000;
+
+    float length = 8.0f;
 };
 
