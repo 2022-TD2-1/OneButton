@@ -33,6 +33,9 @@ private:
 	Sprite numSprite[10];
 	//小数点画像
 	Sprite dotSprite;
+	//テキスト画像
+	Sprite menuTxt[2];
+	Sprite selectSprite;
 
 	void UpdateNum();	//数字を更新する
 

@@ -77,9 +77,14 @@ public:
 
     int phase = 0;
 
+    //ボスが真ん中にいる秒数
+    const int MaxBackCoolTime = 120;
+    int backCoolTime = MaxBackCoolTime;
+    
+
 private:
     static unique_ptr<Boss> current;
-
+    //HPバー
     Hpbar hpBar_;
 
 public:

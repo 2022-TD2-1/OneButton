@@ -78,7 +78,7 @@ void Boss::Hit(PlayerOption* other)
 
 	if (other->state == PlayerOption::State::Attack)
 	{
-		health -= 1.f;
+		health -= 2.f;
 		//kb処理
 		float kbPower = 1.0f * other->power * other->power;
 		Vec3 dir = (Vec3)this->position - other->position;
@@ -97,7 +97,7 @@ void Boss::Hit(PlayerOption* other)
 
 	else if (other->state == PlayerOption::State::Move)
 	{
-		health -= 0.5f;
+		health -= 1.f;
 		//kb処理
 	}
 }
@@ -111,6 +111,14 @@ void Boss::CenterUpdate()
 void Boss::DownUpdate()
 {
 	*this->brightnessCB.contents = { 1.0f, 0.0f, 0.0f, 1.0f };
+	backCoolTime--;
+	//ゼロになったら
+	if (backCoolTime <= 0) {
+		//真ん中に戻っていく
+		state = State::Center;
+		//カウントリセット
+		backCoolTime = MaxBackCoolTime;
+	}
 }
 
 void Boss::P1Update()

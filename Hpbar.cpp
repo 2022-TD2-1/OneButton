@@ -15,7 +15,9 @@ void Hpbar::Ini(float maxHp)
 
 void Hpbar::Update(float nowHp)
 {
+	//現在HPでスケールを変化させる
 	hpBar_.scale = { (float)(nowHp / 10),1,1 };
+	//数値が０を下回らないようにする
 	if (hpBar_.scale.x <= 0) {
 		hpBar_.scale.x = 0;
 	}
@@ -24,7 +26,6 @@ void Hpbar::Update(float nowHp)
 
 void Hpbar::Draw()
 {
-	Float4 color{ 0.0f, 0.0f, 1.0f, 1.0f };
-	(hpBar_.brightnessCB.contents) = &color;
+	
 	hpBar_.Draw("white");
 }

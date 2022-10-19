@@ -1,3 +1,4 @@
+#include <Parameters.h>
 #include "ResultScene.h"
 
 void ResultScene::Init()
@@ -16,6 +17,25 @@ void ResultScene::Init()
 	dotSprite = Sprite("Resources/point.png", "point");
 #pragma endregion
 
+	menuTxt[0] = Sprite("Resources/continueTxt.png", "continue");
+	menuTxt[1] = Sprite("Resources/titleTxt.png", "title");
+	menuTxt[0].position = {
+		CommonParams::Win::width / 2,
+		500,
+		0
+	};
+	menuTxt[1].position = {
+		CommonParams::Win::width / 2,
+		600,
+		0
+	};
+	selectSprite = Sprite("Resources/think.png", "select");
+	selectSprite.position = {
+		400,
+		menuTxt[0].position.y,
+		0
+	};
+	selectSprite.scale = { 0.1,0.1,0.1 };
 	UpdateNum();
 }
 
@@ -25,10 +45,22 @@ void ResultScene::Update()
 	if (Input::Key::Triggered(DIK_UP))
 	{
 		isSelect = Menu::Continue;	//もう一度ボス戦へ
+		//セレクト画像の座標
+		selectSprite.position = {
+		400,
+		menuTxt[0].position.y,
+		0
+		};
 	}
 	else if (Input::Key::Triggered(DIK_DOWN))
 	{
 		isSelect = Menu::Title;		//タイトルに戻る
+		//セレクト画像の座標
+		selectSprite.position = {
+		400,
+		menuTxt[1].position.y,
+		0
+		};
 	}
 	//決定
 	if (Input::Key::Triggered(DIK_SPACE)) {
@@ -47,14 +79,16 @@ void ResultScene::Update()
 	}
 
 	//デバッグ
-	if (Input::Key::Triggered(DIK_W)) {
+	if (Input::Key::Triggered(DIK_1)) {
 		clearTime++;
 	}
-	if (Input::Key::Triggered(DIK_S)) {
+	if (Input::Key::Triggered(DIK_2)) {
 		clearTime--;
 	}
 
 	UpdateNum();
+
+	
 
 	//スプライト更新
 	for (int i = 0; i < 10; i++) {
@@ -62,9 +96,12 @@ void ResultScene::Update()
 		if (i < 4) {
 			displayNumSprite[i].UpdateMatrix();
 		}
+		if (i < 2) {
+			menuTxt[i].UpdateMatrix();
+		}
 	}
 	dotSprite.UpdateMatrix();
-
+	selectSprite.UpdateMatrix();
 	Rank();
 }
 
@@ -84,7 +121,12 @@ void ResultScene::DrawSprite()
 	for (int i = 0; i < 4; i++) {
 		//数字を描画
 		displayNumSprite[i].Draw();
+
+		if (i < 2) {
+			menuTxt[i].Draw();
+		}
 	}
+	selectSprite.Draw();
 	//小数点を描画
 	dotSprite.Draw();
 
