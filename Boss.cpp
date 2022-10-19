@@ -61,6 +61,16 @@ void Boss::Update()
 	UpdateMatrix();
 
 	UpdateAllAttacks();
+
+	//エフェクト更新
+	for (std::unique_ptr<HitEffect>& effect : hitEffect) {
+		effect->Update();
+	}
+	//エフェクトをデリートする
+	hitEffect.remove_if([](std::unique_ptr<HitEffect>& effect)
+		{
+			return effect->GetAllDead();
+		});
 }
 
 void Boss::Draw()
@@ -70,6 +80,10 @@ void Boss::Draw()
 	DrawAllAttacks();
 
 	hpBar_.Draw();
+	//エフェクト描画
+	for (std::unique_ptr<HitEffect>& effect : hitEffect) {
+		effect->Draw();
+	}
 }
 
 void Boss::Hit(PlayerOption* other)
@@ -93,6 +107,10 @@ void Boss::Hit(PlayerOption* other)
 		}
 		UpdateMatrix();
 		this->UpdateCol();
+
+		std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
+		newEffect->Ini(position,*other);
+		hitEffect.emplace_back(std::move(newEffect));
 	}
 
 	else if (other->state == PlayerOption::State::Move)

@@ -3,7 +3,7 @@
 #include <PlayerOption.h>
 #include <IBossAttack.h>
 #include "Timer.h"
-
+#include <HitEffect.h>
 #include "Hpbar.h"
 class Boss :
     public Object3D
@@ -86,6 +86,8 @@ private:
     static unique_ptr<Boss> current;
     //HPバー
     Hpbar hpBar_;
+    //ヒット時エフェクト
+    std::list< std::unique_ptr<HitEffect>> hitEffect;
 
 public:
     static Boss* Create();
