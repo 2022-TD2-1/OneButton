@@ -152,6 +152,7 @@
     <ClCompile Include="BossLaser.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="FrameRate.cpp" />
+    <ClCompile Include="Hpbar.cpp" />
     <ClCompile Include="IBossAttack.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelManager.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Easing.h" />
     <ClInclude Include="FrameRate.h" />
+    <ClInclude Include="Hpbar.h" />
     <ClInclude Include="IBossAttack.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Parameters.h" />

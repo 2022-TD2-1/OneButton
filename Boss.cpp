@@ -15,10 +15,14 @@ void Boss::Init()
 	for (auto& tm : attackTimer) tm.Start();
 	for (auto& tm : stateTimer) tm.Start();
 	bulletTimer.Start();
+
+	hpBar_.Ini(maxHealth);
 }
 
 void Boss::Update()
 {
+	hpBar_.Update(health);
+
 	void (Boss:: * BUpdtArray[]) () =
 	{
 		&Boss::CenterUpdate,
@@ -64,15 +68,17 @@ void Boss::Draw()
 	Object3D::Draw("white");
 
 	DrawAllAttacks();
+
+	hpBar_.Draw();
 }
 
 void Boss::Hit(PlayerOption* other)
 {
-	this->health -= PlayerParams::damage;
+	//this->health -= PlayerParams::damage;
 
 	if (other->state == PlayerOption::State::Attack)
 	{
-		health -= 10;
+		health -= 1.f;
 		//kbˆ—
 		float kbPower = 1.0f * other->power * other->power;
 		Vec3 dir = (Vec3)this->position - other->position;
@@ -91,7 +97,7 @@ void Boss::Hit(PlayerOption* other)
 
 	else if (other->state == PlayerOption::State::Move)
 	{
-		health -= 15;
+		health -= 0.5f;
 		//kbˆ—
 	}
 }

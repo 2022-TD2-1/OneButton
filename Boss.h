@@ -3,6 +3,8 @@
 #include <PlayerOption.h>
 #include <IBossAttack.h>
 #include "Timer.h"
+
+#include "Hpbar.h"
 class Boss :
     public Object3D
 {
@@ -16,7 +18,8 @@ public:
 
     void Hit(PlayerOption* other);
 
-    int health = 10000;
+    const float maxHealth = 350;
+    float health = maxHealth;
 
     enum class State {
         Center,
@@ -76,6 +79,8 @@ public:
 
 private:
     static unique_ptr<Boss> current;
+
+    Hpbar hpBar_;
 
 public:
     static Boss* Create();
