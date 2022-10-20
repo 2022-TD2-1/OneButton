@@ -2,7 +2,7 @@
 
 namespace PlayerParams {
 	//移動量1につき何度移動するか
-	constexpr float degPerMove = 2;
+	constexpr float degPerMove = 1.25f;
 
 	//回転半径
 	constexpr float circleR = 8;
@@ -23,7 +23,7 @@ namespace BossParams {
 	constexpr float bulletDeg = 30;
 
 	//レーザーの速度
-	constexpr float laserSpeed = PIf / 1800;
+	constexpr float laserSpeed = 3.141592f / 1800 * 1.25/2;
 }
 
 namespace CommonParams {
