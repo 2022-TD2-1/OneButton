@@ -4,6 +4,10 @@
 #include <Boss.h>
 #include <Player.h>
 
+void PlayerOption::Ini() {
+	position = { 100,100,0 };
+}
+
 void PlayerOption::Update()
 {
 	//TODO: ‹^—ƒvƒƒOƒ‰ƒ€‚ğ‘‚­

@@ -6,6 +6,7 @@ void Player::Init()
 	opti.model = ModelManager::Get("Player");
 	this->scale = { .5f, .5f, .5f };
 	opti.scale = { .5f, .5f, .5f };
+	opti.Ini();
 }
 
 void Player::Update()
