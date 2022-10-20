@@ -44,6 +44,8 @@ void Player::Update()
 	moveTemp *= Matrix::Translation({ PlayerParams::circleR, 0.f, 0.f });
 	moveTemp *= Matrix::RotZ(DegToRad(x * PlayerParams::degPerMove));
 
+	this->rotation.z = DegToRad(x * PlayerParams::degPerMove + 90);
+
 	//回転後の位置に移動して自身の行列を更新
 	this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
 	UpdateMatrix();

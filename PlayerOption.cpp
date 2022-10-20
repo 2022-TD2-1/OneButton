@@ -24,6 +24,7 @@ void PlayerOption::Update()
 
 	//ステートごとのアップデートを呼ぶ
 	//Moveならxをspeed分増加
+	this->rotation.z = DegToRad(x * PlayerParams::degPerMove + 90);
 	UpdateMatrix();
 	this->col.x = position.x;
 	this->col.y = position.y;
