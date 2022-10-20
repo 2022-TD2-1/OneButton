@@ -1,5 +1,8 @@
 #include "BossLaser.h"
 #include "Easing.h"
+#include <ApUtil.h>
+#include <Parameters.h>
+#include <Player.h>
 
 void BossLaser::Update()
 {
@@ -16,6 +19,9 @@ void BossLaser::Update()
 		centerRad = defRad + (timer.Check() - 1000) * PIf / 1800;
 		this->rotation.z = centerRad;
 		*this->brightnessCB.contents = { 1.0f, 0.3f, 0.3f, 1.0f };
+
+		UpdateCollisionPos();
+		CheckCol();
 	}
 	else
 	{
@@ -36,4 +42,27 @@ void BossLaser::Update()
 void BossLaser::Draw()
 {
 	Object3D::Draw("white");
+}
+
+void BossLaser::UpdateCollisionPos()
+{
+	col[0].x = ApUtil::ConvertRadDistToX(PlayerParams::circleR, centerRad);
+	col[0].y = ApUtil::ConvertRadDistToY(PlayerParams::circleR, centerRad);
+	col[0].r = 0.5f;
+
+	col[1].x = ApUtil::ConvertRadDistToX(-PlayerParams::circleR, centerRad);
+	col[1].y = ApUtil::ConvertRadDistToY(-PlayerParams::circleR, centerRad);
+	col[1].r = 0.5f;
+}
+
+void BossLaser::CheckCol()
+{
+	for (auto c : col)
+	{
+		if (c.Collide(Player::GetCurrent()->col))
+		{
+			//ƒvƒŒƒCƒ„[‚Æ“–‚½‚Á‚Ä‚¢‚½Žž
+			Player::GetCurrent()->Damage(this->laserDamage);
+		}
+	}
 }

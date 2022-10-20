@@ -22,7 +22,7 @@ void GameScene::Init()
 	player = Player::Create();
 	player->Init();
 
-	player->model = ModelManager::Get("Cube");
+	player->model = ModelManager::Get("Player");
 	player->position = { 0,0,0 };
 
 	boss = Boss::Create();
@@ -43,6 +43,10 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
+	if (Input::Key::Triggered(DIK_K))
+	{
+		player->health = 1;
+	}
 	player->Update();
 	boss->Update();
 	camera.UpdateMatrix();
@@ -68,5 +72,8 @@ void GameScene::DrawSprite()
 	dbgstrop.size = 24;
 	string debugstr = "PlayerOption::State = ";
 	debugstr += to_string((int)player->opti.state);
+	debugstr += "\n";
+	debugstr += "Player::Health = ";
+	debugstr += to_string(player->health);
 	TextDrawer::DrawString(debugstr, 100, 100, Align::TopLeft, dbgstrop);
 }

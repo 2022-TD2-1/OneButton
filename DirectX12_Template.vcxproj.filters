@@ -473,12 +473,6 @@
     <ClInclude Include="BossBullet.h">
       <Filter>Application\ヘッダーファイル\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="BossLaser.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="BossCrossLaser.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Easing.h">
       <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
@@ -487,6 +481,12 @@
     </ClInclude>
     <ClInclude Include="HitEffect.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BossLaser.h">
+      <Filter>Application\ヘッダーファイル\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossCrossLaser.h">
+      <Filter>Application\ヘッダーファイル\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

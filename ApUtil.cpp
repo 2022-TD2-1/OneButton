@@ -37,3 +37,13 @@ double ApUtil::ConvertDegDistToY(double dist, double deg)
 {
 	return dist * sin(3.1415926 / 180 * deg);
 }
+
+double ApUtil::ConvertRadDistToX(double dist, double rad)
+{
+	return dist * cos(rad);
+}
+
+double ApUtil::ConvertRadDistToY(double dist, double rad)
+{
+	return dist * sin(rad);
+}

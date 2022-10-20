@@ -1,6 +1,7 @@
 #pragma once
 #include "IBossAttack.h"
 #include "ModelManager.h"
+#include "CircleCollider.h"
 
 class BossBullet:
 	public IBossAttack, public Object3D
@@ -12,6 +13,8 @@ public:
 
 	const int MaxDeathCoolTime = 640;
 	int deathCoolTime = MaxDeathCoolTime;
+
+	CircleCollider col;
 
 	void Update();
 	void Draw();

@@ -57,7 +57,7 @@ void PlayerOption::MoveUpdate()
 	moveTemp *= Matrix::RotZ(DegToRad(x * PlayerParams::degPerMove));
 	//回転後の位置に移動して自身の行列を更新
 	this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
-	this->scale = Vec3((power - 1.0f) * 0.5f + 1.0f, (power - 1.0f) * 0.5f + 1.0f, (power - 1.0f) * 0.5f + 1.0f);
+	this->scale = Vec3((power - 1.0f) * 0.25f + .5f, (power - 1.0f) * 0.25f + .5f, (power - 1.0f) * 0.25f + .5f);
 }
 
 void PlayerOption::AttackUpdate()

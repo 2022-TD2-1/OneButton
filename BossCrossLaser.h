@@ -5,8 +5,10 @@ class BossCrossLaser :
     public IBossAttack
 {
 public:
+    BossCrossLaser(float rad) {
+    };
     void Update() override;
     void Draw() override;
 
-    BossLaser laser[2];
+   // BossLaser laser[2];
 };

@@ -1,4 +1,5 @@
 #include "BossBullet.h"
+#include <Player.h>
 
 void BossBullet::Update()
 {
@@ -10,6 +11,17 @@ void BossBullet::Update()
 
 	position += velocity;
 	UpdateMatrix();
+
+	//当たり判定の座標更新
+	col.x = this->position.x;
+	col.y = this->position.y;
+	col.r = this->scale.x;
+
+	//当たっていたらダメージ
+	if (col.Collide(Player::GetCurrent()->col))
+	{
+		Player::GetCurrent()->Damage(1);
+	}
 }
 
 void BossBullet::Draw()

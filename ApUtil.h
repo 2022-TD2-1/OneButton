@@ -19,4 +19,7 @@ namespace ApUtil {
 
 	double ConvertDegDistToX(double dist, double deg);
 	double ConvertDegDistToY(double dist, double deg);
+
+	double ConvertRadDistToX(double dist, double rad);
+	double ConvertRadDistToY(double dist, double rad);
 }

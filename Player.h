@@ -17,6 +17,10 @@ public:
     void Update();
     void Draw();
 
+    //HPŒn
+    void Damage(int damage);
+    int health = 5000;
+
     float x = 0.f;
     enum class Side {
         Clock,
@@ -33,6 +37,10 @@ public:
 
     //ƒvƒŒƒCƒ„[‚ğ‰Šú‰»‚µ‚ÄCurrent‚Éİ’è
     static Player* Create();
+
+    CircleCollider col;
+
+    void UpdateCollisionPos();
 
     PlayerOption opti = PlayerOption();
 private:

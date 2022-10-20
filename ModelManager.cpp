@@ -5,6 +5,7 @@ void ModelManager::LoadAllModels()
 	RegisterModel("cube", "Cube");
 	RegisterModel("sphere", "Sphere");
 	RegisterModel("pane", "Pane");
+	RegisterModel("player", "Player");
 }
 
 Model* ModelManager::Get(string key)

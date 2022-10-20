@@ -33,7 +33,7 @@ public:
     int stateTimer[4] = {};
     void ChangeState(State next);
 
-    CircleCollider col;
+    CircleCollider col = CircleCollider(99999, 99999, 0);
 
     float power = 1.0f;
 

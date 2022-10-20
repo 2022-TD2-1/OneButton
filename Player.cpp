@@ -3,7 +3,9 @@
 
 void Player::Init()
 {
-	opti.model = ModelManager::Get("Cube");
+	opti.model = ModelManager::Get("Player");
+	this->scale = { .5f, .5f, .5f };
+	opti.scale = { .5f, .5f, .5f };
 }
 
 void Player::Update()
@@ -44,14 +46,20 @@ void Player::Update()
 	//回転後の位置に移動して自身の行列を更新
 	this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
 	UpdateMatrix();
+	UpdateCollisionPos();
 
 	opti.Update();
 }
 
 void Player::Draw()
 {
-	Object3D::Draw("white");
+	Object3D::Draw();
 	opti.Draw();
+}
+
+void Player::Damage(int damage)
+{
+	health -= damage;
 }
 
 Player* Player::GetCurrent()
@@ -63,6 +71,13 @@ Player* Player::Create()
 {
 	current = unique_ptr<Player>(new Player());
 	return current.get();
+}
+
+void Player::UpdateCollisionPos()
+{
+	col.x = position.x;
+	col.y = position.y;
+	col.r = scale.x;
 }
 
 unique_ptr<Player> Player::current = nullptr;

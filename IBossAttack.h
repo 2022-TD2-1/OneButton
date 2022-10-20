@@ -5,7 +5,7 @@
 class IBossAttack 
 {
 public:
-	unique_ptr<ICollider> col;
+	//unique_ptr<ICollider> col;
 
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
