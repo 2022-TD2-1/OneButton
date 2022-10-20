@@ -21,6 +21,9 @@ namespace BossParams {
 	constexpr float bulletCD = 500;
 	//弾幕の発射間隔(角度)
 	constexpr float bulletDeg = 30;
+
+	//レーザーの速度
+	constexpr float laserSpeed = PIf / 1800;
 }
 
 namespace CommonParams {
