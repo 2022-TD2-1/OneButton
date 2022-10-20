@@ -3,10 +3,7 @@
 
 void Player::Init()
 {
-	opti.model = ModelManager::Get("Player");
 	this->scale = { .5f, .5f, .5f };
-	opti.scale = { .5f, .5f, .5f };
-	opti.Ini();
 }
 
 void Player::Update()
@@ -28,15 +25,16 @@ void Player::Update()
 			x++;
 		}
 	}
-	//キーが押されたら分身を自分の座標に移動
+	//キーが押されたら分身を自分の座標に追加
 	if (Input::Key::Triggered(DIK_SPACE))
 	{
-		opti.x = this->x;
+		opti.emplace_back();
+		opti.back().x = this->x;
 	}
 	//キーが離されたら自分を分身の座標に移動
 	if (Input::Key::Released(DIK_SPACE))
 	{
-		this->x = opti.x;
+		this->x = opti.back().x;
 	}
 
 	//移動総量から回転後の位置を計算
@@ -49,13 +47,36 @@ void Player::Update()
 	UpdateMatrix();
 	UpdateCollisionPos();
 
-	opti.Update();
+	if (Input::Key::Released(DIK_SPACE))
+	{
+		opti.back().ChangeState(PlayerOption::State::Attack);
+	}
+	else if (Input::Key::Triggered(DIK_SPACE))
+	{
+		opti.back().ChangeState(PlayerOption::State::Move);
+	}
+	for (auto itr = opti.begin(); itr != opti.end();)
+	{
+		itr->Update();
+
+		if (itr->state == PlayerOption::State::Back)
+		{
+			itr = opti.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
 }
 
 void Player::Draw()
 {
 	Object3D::Draw();
-	opti.Draw();
+	for (auto itr = opti.begin(); itr != opti.end(); itr++)
+	{
+		itr->Draw();
+	}
 }
 
 void Player::Damage(int damage)

@@ -42,9 +42,8 @@ public:
 
     void UpdateCollisionPos();
 
-    PlayerOption opti = PlayerOption();
+    list<PlayerOption> opti;
 private:
-
     static unique_ptr<Player> current;
 };
 

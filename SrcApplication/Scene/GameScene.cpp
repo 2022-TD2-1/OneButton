@@ -87,9 +87,7 @@ void GameScene::DrawSprite()
 	StringOptions dbgstrop;
 	dbgstrop.fontOptions.resolution = 24;
 	dbgstrop.size = 24;
-	string debugstr = "PlayerOption::State = ";
-	debugstr += to_string((int)player->opti.state);
-	debugstr += "\n";
+	string debugstr;
 	debugstr += "Player::Health = ";
 	debugstr += to_string(player->health);
 	TextDrawer::DrawString(debugstr, 100, 100, Align::TopLeft, dbgstrop);

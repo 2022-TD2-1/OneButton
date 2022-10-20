@@ -1,11 +1,16 @@
 #pragma once
 #include "Object3D.h"
 #include <CircleCollider.h>
+#include <ModelManager.h>
 class PlayerOption :
 	public Object3D
 {
 public:
-	PlayerOption() { Object3D::Object3D(); };
+	PlayerOption() { 
+		Object3D::Object3D(); 
+		model = ModelManager::Get("Player");
+		scale = { .5f, .5f, .5f };
+	};
 
 	void Ini();
 	void Update();

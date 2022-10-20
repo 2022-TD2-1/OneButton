@@ -10,16 +10,6 @@ void PlayerOption::Ini() {
 
 void PlayerOption::Update()
 {
-	//TODO: ‹^—ƒvƒƒOƒ‰ƒ€‚ğ‘‚­
-	if (Input::Key::Released(DIK_SPACE))
-	{
-		ChangeState(State::Attack);
-	}
-	else if(Input::Key::Triggered(DIK_SPACE))
-	{
-		ChangeState(State::Move);
-	}
-
 	void (PlayerOption:: * PUpdtArray[]) () =
 	{
 		&PlayerOption::MoveUpdate,
