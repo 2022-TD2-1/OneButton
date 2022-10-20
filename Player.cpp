@@ -1,4 +1,5 @@
 #include "Player.h"
+
 #include "Input.h"
 
 void Player::Init()
@@ -88,6 +89,22 @@ void Player::Update()
 	//ダメージを受けたときに点滅する
 	if (coolTime % 6 == 0)color_ = { 0.5f, 1.0f, 1.0f, 1.0f };
 	else color_ = { 0.5f, 1.0f, 1.0f, 0.0f };
+
+	//スペースを押していない間生成する
+	if (!Input::Key::Down(DIK_SPACE)) {
+		std::unique_ptr<TraceEffect> newEffect = std::make_unique<TraceEffect>();
+		newEffect->Ini(position);
+		trsEffect_.emplace_back(std::move(newEffect));
+	}
+	//エフェクト更新
+	for (std::unique_ptr<TraceEffect>& effect : trsEffect_) {
+		effect->Update();
+	}
+	//エフェクトをデリートする
+	trsEffect_.remove_if([](std::unique_ptr<TraceEffect>& effect)
+		{
+			return effect->GetDead();
+		});
 }
 
 void Player::Draw()
@@ -100,6 +117,11 @@ void Player::Draw()
 	}
 	for (int i = 0; i < maxhealth; i++) {
 		hpObj[i].Draw("white");
+	}
+
+	//エフェクト更新
+	for (std::unique_ptr<TraceEffect>& effect : trsEffect_) {
+		effect->Draw();
 	}
 }
 

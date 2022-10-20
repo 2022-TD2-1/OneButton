@@ -204,6 +204,7 @@
     <ClCompile Include="TestBossAttack.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="ApUtil.cpp" />
+    <ClCompile Include="TraceEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boss.h" />
@@ -267,6 +268,7 @@
     <ClInclude Include="TestBossAttack.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="ApUtil.h" />
+    <ClInclude Include="TraceEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">
