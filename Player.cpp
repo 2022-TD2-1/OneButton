@@ -4,6 +4,15 @@
 void Player::Init()
 {
 	this->scale = { .5f, .5f, .5f };
+	for (int i = 0; i < maxhealth; i++) {
+		hpObj[i].model = ModelManager::Get("Sphere");
+		hpObj[i].position.x = 0 - 5 + (5 * i);
+		hpObj[i].position.y = -10;
+		hpObj[i].position.z = 0;
+		hpObj[i].rotation = { 0,0,0 };
+		hpObj[i].scale = { 1,1,1 };
+		hpObj[i].UpdateMatrix();
+	}
 }
 
 void Player::Update()
@@ -88,6 +97,9 @@ void Player::Draw()
 	for (auto itr = opti.begin(); itr != opti.end(); itr++)
 	{
 		itr->Draw();
+	}
+	for (int i = 0; i < maxhealth; i++) {
+		hpObj[i].Draw("white");
 	}
 }
 
