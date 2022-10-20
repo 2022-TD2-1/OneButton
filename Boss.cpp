@@ -4,6 +4,8 @@
 #include <ApUtil.h>
 #include "BossBullet.h"
 #include "BossLaser.h"
+#include <SceneManager.h>
+#include <ResultScene.h>
 unique_ptr<Boss> Boss::current = nullptr;
 
 void Boss::Init()

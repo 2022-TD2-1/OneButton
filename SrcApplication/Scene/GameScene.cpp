@@ -4,7 +4,8 @@
 #include "wSwapChainManager.h"
 #include "TextDrawer.h"
 #include <ModelManager.h>
-
+#include "SceneManager.h"
+#include <ResultScene.h>
 void GameScene::Init()
 {
 	wTextureManager::Init();
@@ -43,13 +44,29 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
-	if (Input::Key::Triggered(DIK_K))
+	if (Input::Key::Triggered(DIK_S))
 	{
 		player->health = 1;
+	}
+	if (Input::Key::Triggered(DIK_K))
+	{
+		boss->health = 1;
 	}
 	player->Update();
 	boss->Update();
 	camera.UpdateMatrix();
+
+	if (boss->health <= 0)
+	{
+		SceneManager::Transition<ResultScene>();
+		return;
+	}
+
+	if (player->health <= 0)
+	{
+		SceneManager::Transition<ResultScene>();
+		return;
+	}
 }
 
 void GameScene::DrawBack()

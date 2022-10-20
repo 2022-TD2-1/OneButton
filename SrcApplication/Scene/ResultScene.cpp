@@ -1,5 +1,8 @@
 #include <Parameters.h>
 #include "ResultScene.h"
+#include <SceneManager.h>
+#include <TitleScene.h>
+#include <GameScene.h>
 
 void ResultScene::Init()
 {
@@ -70,11 +73,13 @@ void ResultScene::Update()
 	if (isReturn == true) {
 		//コンティニューを選択した場合
 		if (isSelect == Menu::Continue) {
-
+			SceneManager::Transition<GameScene>();
+			return;
 		}
 		//タイトルを選択した場合
 		else if (isSelect == Menu::Title) {
-
+			SceneManager::Transition<TitleScene>();
+			return;
 		}
 	}
 

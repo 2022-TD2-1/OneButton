@@ -4,13 +4,14 @@
 class SceneManager
 {
 public:
-	void Init();
-	void Update();
-	void Draw3D();
-	void DrawSprite();
-	void DrawBack();
+	static void Init();
+	static void Update();
+	static void Draw3D();
+	static void DrawSprite();
+	static void DrawBack();
 
-	template <class NextScene> void Transition();
+	template <class NextScene> 
+	static void Transition();
 
-	unique_ptr<IScene> currentScene = nullptr;
+	static unique_ptr<IScene> currentScene;
 };

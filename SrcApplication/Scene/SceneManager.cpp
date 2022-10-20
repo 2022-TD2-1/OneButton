@@ -54,3 +54,5 @@ template <class NextScene> void SceneManager::Transition()
 	currentScene->Init();
 	FrameRate::InitMark();
 }
+
+unique_ptr<IScene> SceneManager::currentScene = nullptr;
