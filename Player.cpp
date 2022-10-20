@@ -34,7 +34,9 @@ void Player::Update()
 	//キーが離されたら自分を分身の座標に移動
 	if (Input::Key::Released(DIK_SPACE))
 	{
-		this->x = opti.back().x;
+		if (opti.size() > 0) {
+			this->x = opti.back().x;
+		}
 	}
 
 	//移動総量から回転後の位置を計算
@@ -49,7 +51,9 @@ void Player::Update()
 
 	if (Input::Key::Released(DIK_SPACE))
 	{
-		opti.back().ChangeState(PlayerOption::State::Attack);
+		if (opti.size() > 0) {
+			opti.back().ChangeState(PlayerOption::State::Attack);
+		}
 	}
 	else if (Input::Key::Triggered(DIK_SPACE))
 	{
