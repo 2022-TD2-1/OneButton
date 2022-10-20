@@ -23,6 +23,11 @@ void Boss::Init()
 
 void Boss::Update()
 {
+	if (testTime >= 0) {
+		testTime--;
+		position = { 0,0,0 };
+	}
+
 	hpBar_.Update(health);
 
 	void (Boss:: * BUpdtArray[]) () =

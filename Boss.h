@@ -89,6 +89,9 @@ private:
     //ヒット時エフェクト
     std::list< std::unique_ptr<HitEffect>> hitEffect;
 
+    //パワーコード
+    int testTime = 10;
+
 public:
     static Boss* Create();
     static Boss* GetCurrent();
