@@ -19,10 +19,12 @@ public:
 
     //HPŒn
     void Damage(int damage);
+    static const int maxhealth = 3;
     int health = 5000;
     const int maxCoolTime = 80;
     int coolTime = 0;
     Float4 color_;
+    Object3D hpObj[maxhealth];
 
     float x = 0.f;
     enum class Side {
