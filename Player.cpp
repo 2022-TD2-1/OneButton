@@ -68,10 +68,16 @@ void Player::Update()
 			itr++;
 		}
 	}
+
+	if (coolTime > 0)coolTime--;
+	//ダメージを受けたときに点滅する
+	if (coolTime % 6 == 0)color_ = { 0.5f, 1.0f, 1.0f, 1.0f };
+	else color_ = { 0.5f, 1.0f, 1.0f, 0.0f };
 }
 
 void Player::Draw()
 {
+	(*this->brightnessCB.contents) = color_;
 	Object3D::Draw();
 	for (auto itr = opti.begin(); itr != opti.end(); itr++)
 	{
@@ -81,7 +87,10 @@ void Player::Draw()
 
 void Player::Damage(int damage)
 {
-	health -= damage;
+	if (coolTime <= 0) {
+		health -= damage;
+		coolTime = maxCoolTime;
+	}
 }
 
 Player* Player::GetCurrent()

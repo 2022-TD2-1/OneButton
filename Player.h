@@ -20,6 +20,9 @@ public:
     //HPŒn
     void Damage(int damage);
     int health = 5000;
+    const int maxCoolTime = 80;
+    int coolTime = 0;
+    Float4 color_;
 
     float x = 0.f;
     enum class Side {
