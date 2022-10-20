@@ -10,10 +10,11 @@ public:
 
 	Vec3 velocity;
 
+	const int MaxDeathCoolTime = 640;
+	int deathCoolTime = MaxDeathCoolTime;
+
 	void Update();
 	void Draw();
 
-	//íœ‚·‚é‚È‚çtrue
-	bool del = false;
 };
 

@@ -15,10 +15,14 @@ void Boss::Init()
 	for (auto& tm : attackTimer) tm.Start();
 	for (auto& tm : stateTimer) tm.Start();
 	bulletTimer.Start();
+
+	hpBar_.Ini(maxHealth);
 }
 
 void Boss::Update()
 {
+	hpBar_.Update(health);
+
 	void (Boss:: * BUpdtArray[]) () =
 	{
 		&Boss::CenterUpdate,
@@ -57,6 +61,16 @@ void Boss::Update()
 	UpdateMatrix();
 
 	UpdateAllAttacks();
+
+	//エフェクト更新
+	for (std::unique_ptr<HitEffect>& effect : hitEffect) {
+		effect->Update();
+	}
+	//エフェクトをデリートする
+	hitEffect.remove_if([](std::unique_ptr<HitEffect>& effect)
+		{
+			return effect->GetAllDead();
+		});
 }
 
 void Boss::Draw()
@@ -64,15 +78,21 @@ void Boss::Draw()
 	Object3D::Draw("white");
 
 	DrawAllAttacks();
+
+	hpBar_.Draw();
+	//エフェクト描画
+	for (std::unique_ptr<HitEffect>& effect : hitEffect) {
+		effect->Draw();
+	}
 }
 
 void Boss::Hit(PlayerOption* other)
 {
-	this->health -= PlayerParams::damage;
+	//this->health -= PlayerParams::damage;
 
 	if (other->state == PlayerOption::State::Attack)
 	{
-		health -= 10;
+		health -= 2.f;
 		//kb処理
 		float kbPower = 1.0f * other->power * other->power;
 		Vec3 dir = (Vec3)this->position - other->position;
@@ -87,11 +107,15 @@ void Boss::Hit(PlayerOption* other)
 		}
 		UpdateMatrix();
 		this->UpdateCol();
+
+		std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
+		newEffect->Ini(position,*other);
+		hitEffect.emplace_back(std::move(newEffect));
 	}
 
 	else if (other->state == PlayerOption::State::Move)
 	{
-		health -= 15;
+		health -= 1.f;
 		//kb処理
 	}
 }
@@ -105,6 +129,14 @@ void Boss::CenterUpdate()
 void Boss::DownUpdate()
 {
 	*this->brightnessCB.contents = { 1.0f, 0.0f, 0.0f, 1.0f };
+	backCoolTime--;
+	//ゼロになったら
+	if (backCoolTime <= 0) {
+		//真ん中に戻っていく
+		state = State::Center;
+		//カウントリセット
+		backCoolTime = MaxBackCoolTime;
+	}
 }
 
 void Boss::P1Update()

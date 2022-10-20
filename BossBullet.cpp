@@ -2,6 +2,12 @@
 
 void BossBullet::Update()
 {
+	deathCoolTime--;
+	if (deathCoolTime <= 0) {
+		this->del = true;
+	}
+
+
 	position += velocity;
 	UpdateMatrix();
 }
