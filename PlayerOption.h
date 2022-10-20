@@ -7,6 +7,7 @@ class PlayerOption :
 public:
     PlayerOption() { Object3D::Object3D(); };
 
+    void Ini();
     void Update();
     void Draw();
 
@@ -34,6 +35,7 @@ public:
     void ChangeState(State next);
 
     CircleCollider col;
+    
 
     float power = 1.0f;
 
