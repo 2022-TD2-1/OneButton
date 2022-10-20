@@ -11,7 +11,7 @@ unique_ptr<Boss> Boss::current = nullptr;
 void Boss::Init()
 {
 	Object3D::Object3D();
-	this->model = ModelManager::Get("Sphere");
+	this->model = ModelManager::Get("Boss");
 
 	for (auto& tm : phaseTimer) tm.Start();
 	for (auto& tm : attackTimer) tm.Start();
@@ -82,7 +82,7 @@ void Boss::Update()
 
 void Boss::Draw()
 {
-	Object3D::Draw("white");
+	Object3D::Draw();
 
 	DrawAllAttacks();
 
