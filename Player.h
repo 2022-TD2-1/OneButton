@@ -3,6 +3,7 @@
 #include "Parameters.h"
 #include <PlayerOption.h>
 #include <ModelManager.h>
+#include "TraceEffect.h"
 
 class Player :
     public Object3D
@@ -38,5 +39,7 @@ public:
 private:
 
     static unique_ptr<Player> current;
+
+    std::list< std::unique_ptr<TraceEffect>> traEffect_;
 };
 

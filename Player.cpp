@@ -46,12 +46,31 @@ void Player::Update()
 	UpdateMatrix();
 
 	opti.Update();
+
+	//エフェクト生成
+	std::unique_ptr<TraceEffect> newEffect = std::make_unique<TraceEffect>();
+	newEffect->Ini(position);
+	traEffect_.emplace_back(std::move(newEffect));
+
+	//エフェクト描画
+	for (std::unique_ptr<TraceEffect>& effect : traEffect_) {
+		effect->Update();
+	}
+	//エフェクトをデリートする
+	traEffect_.remove_if([](std::unique_ptr<TraceEffect>& effect)
+		{
+			return effect->GetDead();
+		});
 }
 
 void Player::Draw()
 {
 	Object3D::Draw("white");
 	opti.Draw();
+	//エフェクト描画
+	for (std::unique_ptr<TraceEffect>& effect : traEffect_) {
+		effect->Draw();
+	}
 }
 
 Player* Player::GetCurrent()
