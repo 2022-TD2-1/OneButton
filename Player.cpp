@@ -4,7 +4,7 @@
 void Player::Init()
 {
 	opti.model = ModelManager::Get("Cube");
-	opti.Ini();
+	//opti.Ini();
 }
 
 void Player::Update()
