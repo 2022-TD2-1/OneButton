@@ -43,7 +43,7 @@ public:
 
     ProjectionMode projectionMode = ProjectionMode::Perspective;
 
-    void ShakeSetTime(int time, float base, float power);
+    void ShakeSet(int time, float base, float power);
     float basePower;
     float power_;
 

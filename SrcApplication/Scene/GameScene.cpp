@@ -73,7 +73,7 @@ void GameScene::Update()
 
 	if (Input::Key::Triggered(DIK_M))
 	{
-		camera.ShakeSetTime(60,1,1);
+		camera.ShakeSet(60,1,1);
 	}
 
 	camera.Shake();

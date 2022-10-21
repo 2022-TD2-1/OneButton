@@ -11,7 +11,7 @@ void Camera::SetRenderSize(UINT w, UINT h)
 	renderHeight = h;
 }
 
-void Camera::ShakeSetTime(int time, float base, float power)
+void Camera::ShakeSet(int time, float base, float power)
 {
 	shakeTime = time;
 	maxShakeTime = shakeTime;
@@ -34,13 +34,13 @@ void Camera::Shake()
 			dist = { -basePower * (power_ * 0.8f) , basePower * (power_ * 0.8f) };
 		}
 		else if (shakeTime > maxShakeTime * 0.6f) {
-			dist = { -basePower * (power_ * 0.6f), basePower * (power_ * 0.6f) };
+			dist = { -basePower * (power_ * 0.5f), basePower * (power_ * 0.5f) };
 		}
 		else if (shakeTime > maxShakeTime * 0.4f) {
-			dist = { -basePower * (power_ * 0.4f), basePower * (power_ * 0.4f) };
+			dist = { -basePower * (power_ * 0.2f), basePower * (power_ * 0.2f) };
 		}
 		else if (shakeTime > maxShakeTime * 0.2f) {
-			dist = { -basePower * (power_ * 0.2f), basePower * (power_ * 0.2f) };
+			dist = { -basePower * (power_ * 0.05f), basePower * (power_ * 0.05f) };
 		}
 		std::uniform_real_distribution<float> transDistX(dist.x, dist.y);
 		std::uniform_real_distribution<float> transDistY(dist.x, dist.y);
