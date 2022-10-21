@@ -26,9 +26,7 @@ void GameScene::Init()
 	player->model = ModelManager::Get("Player");
 	player->position = { 0,0,0 };
 
-	boss = Boss::Create();
-	boss->Init();
-
+	
 	camera.projectionMode = ProjectionMode::Perspective;
 	camera.position = { 0, 0, -12.5 };
 	camera.targetMode = CameraTargetMode::LookTo;
@@ -40,6 +38,11 @@ void GameScene::Init()
 	camera.fov = PIf/2;
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
+	camera.OriginalPosSet();
+
+	boss = Boss::Create();
+	boss->Init(&camera);
+
 }
 
 void GameScene::Update()
@@ -67,6 +70,13 @@ void GameScene::Update()
 		SceneManager::Transition<ResultScene>();
 		return;
 	}
+
+	if (Input::Key::Triggered(DIK_M))
+	{
+		camera.ShakeSetTime(60,1,1);
+	}
+
+	camera.Shake();
 }
 
 void GameScene::DrawBack()

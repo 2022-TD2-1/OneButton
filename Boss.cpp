@@ -8,7 +8,7 @@
 #include <ResultScene.h>
 unique_ptr<Boss> Boss::current = nullptr;
 
-void Boss::Init()
+void Boss::Init(Camera* camera)
 {
 	Object3D::Object3D();
 	this->model = ModelManager::Get("Boss");
@@ -19,6 +19,8 @@ void Boss::Init()
 	bulletTimer.Start();
 
 	hpBar_.Ini(maxHealth);
+
+	camera_ = camera;
 }
 
 void Boss::Update()
@@ -118,6 +120,8 @@ void Boss::Hit(PlayerOption* other)
 		std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
 		newEffect->Ini(position,*other);
 		hitEffect.emplace_back(std::move(newEffect));
+		//カメラシェイク  
+		camera_->ShakeSetTime(20 * other->power,0.3,other->power);
 	}
 
 	else if (other->state == PlayerOption::State::Move)

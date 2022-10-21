@@ -1,3 +1,4 @@
+#include <random>
 #include "Camera.h"
 
 Camera::Camera()
@@ -8,6 +9,61 @@ void Camera::SetRenderSize(UINT w, UINT h)
 {
 	renderWidth = w;
 	renderHeight = h;
+}
+
+void Camera::ShakeSetTime(int time, float base, float power)
+{
+	shakeTime = time;
+	maxShakeTime = shakeTime;
+	basePower = base;
+	power_ = power;
+}
+
+void Camera::Shake()
+{
+	Vec3 shakeDist{};
+	Vec2 dist;
+	if (shakeTime > 0) {
+		shakeTime--;
+		//乱数シード生成器
+		std::random_device seed_gen;
+		//メルセンヌ・ツイスターの乱数エンジン
+		std::mt19937_64 engine(seed_gen());
+		//振動の大きさ
+		if (shakeTime > maxShakeTime * 0.8f) {
+			dist = { -basePower * (power_ * 0.8f) , basePower * (power_ * 0.8f) };
+		}
+		else if (shakeTime > maxShakeTime * 0.6f) {
+			dist = { -basePower * (power_ * 0.6f), basePower * (power_ * 0.6f) };
+		}
+		else if (shakeTime > maxShakeTime * 0.4f) {
+			dist = { -basePower * (power_ * 0.4f), basePower * (power_ * 0.4f) };
+		}
+		else if (shakeTime > maxShakeTime * 0.2f) {
+			dist = { -basePower * (power_ * 0.2f), basePower * (power_ * 0.2f) };
+		}
+		std::uniform_real_distribution<float> transDistX(dist.x, dist.y);
+		std::uniform_real_distribution<float> transDistY(dist.x, dist.y);
+
+		shakeDist.x = transDistX(engine);
+		shakeDist.y = transDistX(engine);
+
+		position = originalPos + shakeDist;
+	}
+	else {
+		//元の座標を代入する
+		position = originalPos;
+	}
+
+	
+
+	UpdateMatrix();
+
+}
+
+void Camera::OriginalPosSet()
+{
+	originalPos = position;
 }
 
 void Camera::Set(Camera& camera)

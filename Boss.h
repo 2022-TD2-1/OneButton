@@ -5,13 +5,14 @@
 #include "Timer.h"
 #include <HitEffect.h>
 #include "Hpbar.h"
+#include <Camera.h>
 class Boss :
     public Object3D
 {
 public:
     Boss(){};
 
-    void Init();
+    void Init(Camera* camera);
 
     void Update();
     void Draw();
@@ -91,6 +92,8 @@ private:
 
     //パワーコード
     int testTime = 10;
+
+    Camera* camera_ = nullptr;
 
 public:
     static Boss* Create();
