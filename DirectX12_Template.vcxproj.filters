@@ -312,6 +312,9 @@
     <ClCompile Include="TraceEffect.cpp">
       <Filter>Application\ソースファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerHP.cpp">
+      <Filter>Application\ソースファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -498,6 +501,9 @@
       <Filter>Application\ヘッダーファイル\Boss</Filter>
     </ClInclude>
     <ClInclude Include="TraceEffect.h">
+      <Filter>Application\ヘッダーファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHP.h">
       <Filter>Application\ヘッダーファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
