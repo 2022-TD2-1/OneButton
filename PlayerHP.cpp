@@ -41,6 +41,6 @@ void PlayerHP::Update()
 
 void PlayerHP::Draw()
 {
-	(*hpObj.brightnessCB.contents) = Float4{ 1.0f, 0.5f, 1.0f, 0.4f };
+	(*hpObj.brightnessCB.contents) = Float4{ 0.4f, 0.4f, 1.0f, 0.7f };
 	hpObj.Draw("white");
 }
