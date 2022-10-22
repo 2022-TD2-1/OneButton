@@ -29,5 +29,7 @@ private:
     Boss* boss;
     
     Object3D guide;
+
+    Object3D SkyDome;
 };
 

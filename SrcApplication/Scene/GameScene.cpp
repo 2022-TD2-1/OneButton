@@ -43,6 +43,10 @@ void GameScene::Init()
 	boss = Boss::Create();
 	boss->Init(&camera);
 
+	SkyDome.model = ModelManager::Get("Skysphere");
+	SkyDome.position = { 0,0,0 };
+	SkyDome.scale = { 30,30,30 };
+	SkyDome.UpdateMatrix();
 }
 
 void GameScene::Update()
@@ -90,6 +94,8 @@ void GameScene::Draw3D()
 	player->Draw();
 	boss->Draw();
 	guide.Draw("CircleGuide");
+
+	SkyDome.Draw();
 }
 
 void GameScene::DrawSprite()

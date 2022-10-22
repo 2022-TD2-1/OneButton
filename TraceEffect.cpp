@@ -46,8 +46,6 @@ void TraceEffect::Update()
 		isDead = true;
 	}
 
-	obj.position += moveSpd_;
-
 	obj.UpdateMatrix();
 }
 
