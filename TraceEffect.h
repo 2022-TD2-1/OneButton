@@ -4,7 +4,7 @@ class TraceEffect
 {
 public:
 public:
-	void Ini(Vec3 pos);
+	void Ini(Vec3 pos,Vec3 moveSpd);
 
 	void Update();
 	void Draw();
@@ -14,7 +14,7 @@ private:
 
 	Vec3 sclSpeed;
 	
-
+	Vec3 moveSpd_;
 
 	bool isDead = false;
 };

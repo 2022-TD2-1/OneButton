@@ -121,11 +121,16 @@ void Player::Update()
 	}
 
 	//スペースを押していない間生成する(プレイヤーの移動跡)
-	if (!Input::Key::Down(DIK_SPACE)) {
+	//if (!Input::Key::Down(DIK_SPACE)) {
+		Vec3 newPos = (Vec3( 0, 0, 0 ) - position).Norm() * 0.4f;
+		Vec3 moveVec = -(Vec3(0, 0, 0) - position).Norm();
+		newPos.x = position.x - newPos.x;
+		newPos.y = position.y - newPos.y;
+		newPos.z = position.z - newPos.z;
 		std::unique_ptr<TraceEffect> newEffect = std::make_unique<TraceEffect>();
-		newEffect->Ini(position);
+		newEffect->Ini(newPos, moveVec);
 		trsEffect_.emplace_back(std::move(newEffect));
-	}
+	//}
 	//エフェクト更新
 	for (std::unique_ptr<TraceEffect>& effect : trsEffect_) {
 		effect->Update();
