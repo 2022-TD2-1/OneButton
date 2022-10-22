@@ -56,6 +56,9 @@ public:
 	Vec3 Cross(const Vec3& v2) const;
 
 	static Vec3 Lerp(const Vec3& start, const Vec3& end, const float t);
+	//t Œo‰ßŠÔ    bÅ‰‚ÌˆÊ’u    cˆÚ“®—Ê    dˆÚ“®ŠÔ
+	static float easeOutBack(float t, float b, float c, float d);
+	static float easeInOutBack(float t, float b, float c, float d);
 
 	operator Float3() const;
 	operator Vec2() const;

@@ -1,18 +1,16 @@
 #include "Player.h"
+
 #include "Input.h"
 #include "Boss.h"
 
 void Player::Init()
 {
 	this->scale = { .5f, .5f, .5f };
-	for (int i = 0; i < maxhealth; i++) {
-		hpObj[i].model = ModelManager::Get("Sphere");
-		hpObj[i].position.x = 0 - 5 + (5 * i);
-		hpObj[i].position.y = -10;
-		hpObj[i].position.z = 0;
-		hpObj[i].rotation = { 0,0,0 };
-		hpObj[i].scale = { 1,1,1 };
-		hpObj[i].UpdateMatrix();
+	
+
+	for (int i = 0; i < 3; i++) {
+		hps_.emplace_back();
+		hps_.back().Ini(0 - 5 + (5 * i));
 	}
 
 	bulletTimer.Start();
@@ -95,7 +93,22 @@ void Player::Update()
 		}
 	}
 
-	if (coolTime > 0)coolTime--;
+	if (coolTime > 0) {
+		coolTime--;
+	}
+	//HPオブジェクト更新
+	for (auto& itr : hps_)
+	{
+		if (itr.GetActive() == true) {
+			itr.Update();
+		}
+	}
+	//エフェクトをデリートする
+	hps_.remove_if([](PlayerHP& effect)
+		{
+			return effect.GetDead();
+		});
+
 	//ダメージを受けたときに点滅する
 	if (coolTime % 6 == 0)color_ = { 0.5f, 1.0f, 1.0f, 1.0f };
 	else color_ = { 0.5f, 1.0f, 1.0f, 0.0f };
@@ -108,6 +121,25 @@ void Player::Update()
 	{
 		bulletTimer.Start();
 	}
+
+	//スペースを押していない間生成する(プレイヤーの移動跡)
+	if (!Input::Key::Down(DIK_SPACE)) {
+		std::unique_ptr<TraceEffect> newEffect = std::make_unique<TraceEffect>();
+		newEffect->Ini(position);
+		trsEffect_.emplace_back(std::move(newEffect));
+	}
+	//エフェクト更新
+	for (std::unique_ptr<TraceEffect>& effect : trsEffect_) {
+		effect->Update();
+	}
+	//エフェクトをデリートする
+	trsEffect_.remove_if([](std::unique_ptr<TraceEffect>& effect)
+		{
+			return effect->GetDead();
+		});
+
+	
+}
 
 	UpdateAllBullets();
 }
@@ -122,8 +154,15 @@ void Player::Draw()
 	{
 		itr->Draw();
 	}
-	for (int i = 0; i < maxhealth; i++) {
-		hpObj[i].Draw("white");
+	//HPオブジェクト描画
+	for (auto& itr : hps_)
+	{
+		itr.Draw();
+	}
+
+	//エフェクト更新
+	for (std::unique_ptr<TraceEffect>& effect : trsEffect_) {
+		effect->Draw();
 	}
 }
 
@@ -132,6 +171,7 @@ void Player::Damage(int damage)
 	if (coolTime <= 0) {
 		health -= damage;
 		coolTime = maxCoolTime;
+		hps_.back().SetActive();
 	}
 }
 

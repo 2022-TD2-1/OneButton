@@ -161,6 +161,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="BossBullet.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
+    <ClCompile Include="PlayerHP.cpp" />
     <ClCompile Include="PlayerOption.cpp" />
     <ClCompile Include="SrcApplication\Scene\GameScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\MonkeyScene.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="TestBossAttack.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="ApUtil.cpp" />
+    <ClCompile Include="TraceEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boss.h" />
@@ -222,6 +224,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="BossBullet.h" />
     <ClInclude Include="PlayerBullet.h" />
+    <ClInclude Include="PlayerHP.h" />
     <ClInclude Include="PlayerOption.h" />
     <ClInclude Include="SrcApplication\Scene\GameScene.h" />
     <ClInclude Include="SrcApplication\Scene\MonkeyScene.h" />
@@ -269,6 +272,7 @@
     <ClInclude Include="TestBossAttack.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="ApUtil.h" />
+    <ClInclude Include="TraceEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">

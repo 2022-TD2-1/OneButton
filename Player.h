@@ -3,6 +3,8 @@
 #include "Parameters.h"
 #include <PlayerOption.h>
 #include <ModelManager.h>
+#include "TraceEffect.h"
+#include "PlayerHP.h"
 #include <PlayerBullet.h>
 #include <Timer.h>
 
@@ -22,11 +24,12 @@ public:
     //HP系
     void Damage(int damage);
     static const int maxhealth = 3;
-    int health = 5000;
+    int health = 3;
     const int maxCoolTime = 80;
     int coolTime = 0;
+    list<PlayerHP> hps_;    //hpオブジェ
     Float4 color_;
-    Object3D hpObj[maxhealth];
+    
 
     float x = 0.f;
     enum class Side {
@@ -62,5 +65,7 @@ private:
     list<PlayerBullet> bullets;
 
     void RegisterBullet(Vec3 vel);
+
+    std::list<unique_ptr<TraceEffect>> trsEffect_;
 };
 

@@ -309,6 +309,12 @@
     <ClCompile Include="BossAoE.cpp">
       <Filter>Application\ソースファイル\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="TraceEffect.cpp">
+      <Filter>Application\ソースファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHP.cpp">
+      <Filter>Application\ソースファイル\Player</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>Application\ソースファイル\Player</Filter>
     </ClCompile>
@@ -496,6 +502,12 @@
     </ClInclude>
     <ClInclude Include="BossAoE.h">
       <Filter>Application\ヘッダーファイル\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="TraceEffect.h">
+      <Filter>Application\ヘッダーファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHP.h">
+      <Filter>Application\ヘッダーファイル\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerBullet.h">
       <Filter>Application\ヘッダーファイル\Player</Filter>
