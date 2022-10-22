@@ -81,6 +81,8 @@ void GameScene::Update()
 	}
 
 	camera.Shake();
+	SkyDome.rotation += {0.00025f, 0.0002f, 0.0001f};
+	SkyDome.UpdateMatrix();
 }
 
 void GameScene::DrawBack()
