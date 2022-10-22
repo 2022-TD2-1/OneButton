@@ -14,5 +14,9 @@ private:
 	Object3D hpObj;
 	bool isActive;
 	bool isDead = false;
+
+	Vec3 prePos;
+	Vec3 preScl;
+	float t;
 };
 

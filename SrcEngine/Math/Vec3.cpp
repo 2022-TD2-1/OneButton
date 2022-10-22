@@ -179,6 +179,19 @@ Vec3 Vec3::Lerp(const Vec3& start, const Vec3& end, const float t)
 	return start + diff * t;
 }
 
+float Vec3::easeOutBack(float t, float b, float c, float d)
+{
+	return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
+}
+
+float Vec3::easeInOutBack(float t, float b, float c, float d)
+{
+	float s = 1.70158f;
+	if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525f)) + 1) * t - s)) + b;
+	float postFix = t -= 2;
+	return c / 2 * ((postFix)*t * (((s *= (1.525f)) + 1) * t + s) + 2) + b;
+}
+
 Vec3::operator Float3() const
 {
 	return Float3{ x, y, z };

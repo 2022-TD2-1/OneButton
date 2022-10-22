@@ -10,32 +10,30 @@ void PlayerHP::Ini(float posX)
 	hpObj.rotation = { 0,0,0 };
 	hpObj.scale = { 1,1,1 };
 	hpObj.UpdateMatrix();
+
+	prePos = hpObj.position;
+	preScl = hpObj.scale;
 }
 
 void PlayerHP::Update()
 {
-	if (hpObj.position.y <= -6) {
-		hpObj.position.y += 0.2;
 
-		if (hpObj.scale.x <= 2.5f) {
-			hpObj.scale += {0.05, 0.05, 0.05};
-		}
-	}
-	else {
-		if (hpObj.scale.x > 0) {
-			hpObj.scale.x -= 0.1;
-			hpObj.scale.y -= 0.1;
-			hpObj.scale.z -= 0.1;
-		}
-		else if (hpObj.scale.x <= 0) {
-			hpObj.scale.x =0;
-			hpObj.scale.y =0;
-			hpObj.scale.z =0;
+	t += 1;
 
-			isDead = true;
-		}
+	if (t < 60) {
+		hpObj.position.y = Vec3::easeOutBack(t, prePos.y, 5, 60);
 	}
-	
+
+	if (t < 120) {
+		hpObj.scale.x = Vec3::easeInOutBack(t, preScl.x, -10, 120);
+		hpObj.scale.y = Vec3::easeInOutBack(t, preScl.y, -10, 120);
+		hpObj.scale.z = Vec3::easeInOutBack(t, preScl.z, -10, 120);
+	}
+
+	if (hpObj.scale.x <= 0) {
+		isDead = true;
+	}
+
 	hpObj.UpdateMatrix();
 }
 
