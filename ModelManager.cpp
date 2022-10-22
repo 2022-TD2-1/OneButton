@@ -7,6 +7,8 @@ void ModelManager::LoadAllModels()
 	RegisterModel("pane", "Pane");
 	RegisterModel("player", "Player");
 	RegisterModel("boss", "Boss");
+	RegisterModel("heart", "Heart");
+
 }
 
 Model* ModelManager::Get(string key)

@@ -10,7 +10,7 @@ void Player::Init()
 
 	for (int i = 0; i < 3; i++) {
 		hps_.emplace_back();
-		hps_.back().Ini(0 - 5 + (5 * i));
+		hps_.back().Ini(0 - 20 + (3 * i));
 	}
 
 	bulletTimer.Start();

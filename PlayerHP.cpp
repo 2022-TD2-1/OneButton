@@ -3,12 +3,12 @@
 
 void PlayerHP::Ini(float posX)
 {
-	hpObj.model = ModelManager::Get("Sphere");
+	hpObj.model = ModelManager::Get("Heart");
 	hpObj.position.x = posX;
 	hpObj.position.y = -10;
 	hpObj.position.z = 0;
 	hpObj.rotation = { 0,0,0 };
-	hpObj.scale = { 1,1,1 };
+	hpObj.scale = { 0.7f,0.7f,0.7f };
 	hpObj.UpdateMatrix();
 
 	prePos = hpObj.position;
@@ -25,10 +25,12 @@ void PlayerHP::Update()
 	}
 
 	if (t < 120) {
-		hpObj.scale.x = Vec3::easeInOutBack(t, preScl.x, -10, 120);
-		hpObj.scale.y = Vec3::easeInOutBack(t, preScl.y, -10, 120);
-		hpObj.scale.z = Vec3::easeInOutBack(t, preScl.z, -10, 120);
+		hpObj.scale.x = Vec3::easeInOutBack(t, preScl.x, -8, 120);
+		hpObj.scale.y = Vec3::easeInOutBack(t, preScl.y, -8, 120);
+		hpObj.scale.z = Vec3::easeInOutBack(t, preScl.z, -8, 120);
 	}
+
+	hpObj.rotation += { 0,0.3f,0 };
 
 	if (hpObj.scale.x <= 0) {
 		isDead = true;
