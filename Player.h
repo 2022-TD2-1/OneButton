@@ -4,6 +4,7 @@
 #include <PlayerOption.h>
 #include <ModelManager.h>
 #include "TraceEffect.h"
+#include "PlayerHP.h"
 
 class Player :
     public Object3D
@@ -21,11 +22,12 @@ public:
     //HP系
     void Damage(int damage);
     static const int maxhealth = 3;
-    int health = 5000;
+    int health = 3;
     const int maxCoolTime = 80;
     int coolTime = 0;
+    list<PlayerHP> hps_;    //hpオブジェ
     Float4 color_;
-    Object3D hpObj[maxhealth];
+    
 
     float x = 0.f;
     enum class Side {
