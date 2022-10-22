@@ -38,14 +38,25 @@ void LimitedTimer::Reset()
 void LimitedTimer::Update()
 {
 	Timer::Update();
+	OnTime();
 }
 
-bool LimitedTimer::IsTime()
+void LimitedTimer::Start()
+{
+	Timer::Start();
+}
+
+void LimitedTimer::SetOnTimeFunction(std::function<void(void)> onTime)
+{
+	this->onTime = onTime;
+}
+
+void LimitedTimer::OnTime()
 {
 	if ( this->Check() > time )
 	{
 		int diff = this->Check() - time;
 		startTime = currentTime + std::chrono::milliseconds(diff);
+		onTime();
 	}
-	return false;
 }

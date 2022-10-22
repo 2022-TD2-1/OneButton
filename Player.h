@@ -3,12 +3,14 @@
 #include "Parameters.h"
 #include <PlayerOption.h>
 #include <ModelManager.h>
+#include <PlayerBullet.h>
+#include <Timer.h>
 
 class Player :
     public Object3D
 {
 public:
-    Player() { 
+    Player() {
         Object3D::Object3D();
     };
 
@@ -50,5 +52,15 @@ public:
     list<PlayerOption> opti;
 private:
     static unique_ptr<Player> current;
+
+private:
+    void UpdateAllBullets();
+    void DrawAllBullets();
+
+    LimitedTimer bulletTimer = LimitedTimer((double)500.0f);
+    float bulletSpeed = 0.08f;
+    list<PlayerBullet> bullets;
+
+    void RegisterBullet(Vec3 vel);
 };
 

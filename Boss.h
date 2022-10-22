@@ -16,7 +16,10 @@ public:
     void Update();
     void Draw();
 
+    //•ªg‚É“–‚½‚Á‚½ê‡
     void Hit(PlayerOption* other);
+    //’Êí’e‚É“–‚½‚Á‚½ê‡
+    void Hit();
 
     const float maxHealth = 350;
     float health = maxHealth;

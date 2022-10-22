@@ -116,7 +116,7 @@ void Boss::Hit(PlayerOption* other)
 		this->UpdateCol();
 
 		std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
-		newEffect->Ini(position,*other);
+		newEffect->Ini(position, *other);
 		hitEffect.emplace_back(std::move(newEffect));
 	}
 
@@ -125,6 +125,11 @@ void Boss::Hit(PlayerOption* other)
 		health -= 1.f;
 		//kbèàóù
 	}
+}
+
+void Boss::Hit()
+{
+	health -= 1.f;
 }
 
 void Boss::CenterUpdate()

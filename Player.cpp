@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Input.h"
+#include "Boss.h"
 
 void Player::Init()
 {
@@ -13,6 +14,14 @@ void Player::Init()
 		hpObj[i].scale = { 1,1,1 };
 		hpObj[i].UpdateMatrix();
 	}
+
+	bulletTimer.Start();
+	bulletTimer.SetOnTimeFunction(
+		[&, this](void)
+		{
+			RegisterBullet(((Vec3)Boss::GetCurrent()->position - position).SetLength(bulletSpeed));
+		}
+	);
 }
 
 void Player::Update()
@@ -21,6 +30,8 @@ void Player::Update()
 	if (Input::Key::Down(DIK_SPACE))
 	{
 		state = State::Stop;
+
+		RegisterBullet(((Vec3)Boss::GetCurrent()->position - position).SetLength(bulletSpeed));
 	}
 	else
 	{
@@ -88,10 +99,23 @@ void Player::Update()
 	//ダメージを受けたときに点滅する
 	if (coolTime % 6 == 0)color_ = { 0.5f, 1.0f, 1.0f, 1.0f };
 	else color_ = { 0.5f, 1.0f, 1.0f, 0.0f };
+
+	if (this->state == State::Move)
+	{
+		bulletTimer.Update();
+	}
+	if (this->state == State::Stop)
+	{
+		bulletTimer.Start();
+	}
+
+	UpdateAllBullets();
 }
 
 void Player::Draw()
 {
+	DrawAllBullets();
+
 	(*this->brightnessCB.contents) = color_;
 	Object3D::Draw();
 	for (auto itr = opti.begin(); itr != opti.end(); itr++)
@@ -127,6 +151,33 @@ void Player::UpdateCollisionPos()
 	col.x = position.x;
 	col.y = position.y;
 	col.r = scale.x;
+}
+
+void Player::UpdateAllBullets()
+{
+	for (auto itr = bullets.begin(); itr != bullets.end();)
+	{
+		itr->Update();
+
+		if (itr->del)
+		{
+			itr = bullets.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
+}
+
+void Player::DrawAllBullets()
+{
+	for (auto b : bullets) b.Draw();
+}
+
+void Player::RegisterBullet(Vec3 vel)
+{
+	bullets.emplace_back(vel);
 }
 
 unique_ptr<Player> Player::current = nullptr;

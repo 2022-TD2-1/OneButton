@@ -1,5 +1,6 @@
 #pragma once
 #include <chrono>
+#include <functional>
 
 //時間をミリ秒単位で測るタイマー
 class Timer
@@ -27,10 +28,12 @@ public:
 	LimitedTimer(double time);
 
 	void Reset();
-	void Start();
 	void Update();
-	bool IsTime();
+	void Start();
+	void SetOnTimeFunction(std::function<void(void)> onTime);
+	void OnTime();
 
 private:
 	double time;
+	std::function<void(void)> onTime;
 };
