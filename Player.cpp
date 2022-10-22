@@ -28,8 +28,6 @@ void Player::Update()
 	if (Input::Key::Down(DIK_SPACE))
 	{
 		state = State::Stop;
-
-		RegisterBullet(((Vec3)Boss::GetCurrent()->position - position).SetLength(bulletSpeed));
 	}
 	else
 	{
@@ -137,9 +135,6 @@ void Player::Update()
 		{
 			return effect->GetDead();
 		});
-
-	
-}
 
 	UpdateAllBullets();
 }
