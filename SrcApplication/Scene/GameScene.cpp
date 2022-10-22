@@ -14,8 +14,8 @@ void GameScene::Init()
 	wTextureManager::LoadTexture("Resources/CircleGuide.png", "CircleGuide");
 
 	guide.model = ModelManager::Get("Pane");
-	guide.rotation.x  = -PIf/2;
-	guide.scale = { PlayerParams::circleR *2, PlayerParams::circleR * 2, PlayerParams::circleR * 2 };
+	guide.rotation.x = -PIf / 2;
+	guide.scale = { PlayerParams::circleR * 2, PlayerParams::circleR * 2, PlayerParams::circleR * 2 };
 	guide.UpdateMatrix();
 
 	Light::directional.direction = Vec3(0, 0, 1);
@@ -26,16 +26,16 @@ void GameScene::Init()
 	player->model = ModelManager::Get("Player");
 	player->position = { 0,0,0 };
 
-	
+
 	camera.projectionMode = ProjectionMode::Perspective;
 	camera.position = { 0, 0, -12.5 };
 	camera.targetMode = CameraTargetMode::LookTo;
-	camera.rotation= { 0, 0, 0 };
+	camera.rotation = { 0, 0, 0 };
 
 	camera.renderWidth = CommonParams::Win::width;
 	camera.renderHeight = CommonParams::Win::height;
 
-	camera.fov = PIf/2;
+	camera.fov = PIf / 2;
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
 	camera.OriginalPosSet();
@@ -73,7 +73,7 @@ void GameScene::Update()
 
 	if (Input::Key::Triggered(DIK_M))
 	{
-		camera.ShakeSet(60,1,1);
+		camera.ShakeSet(60, 1, 1);
 	}
 
 	camera.Shake();
@@ -84,7 +84,7 @@ void GameScene::DrawBack()
 }
 
 void GameScene::Draw3D()
-{	
+{
 	Camera::Set(camera);
 
 	player->Draw();
@@ -101,4 +101,15 @@ void GameScene::DrawSprite()
 	debugstr += "Player::Health = ";
 	debugstr += to_string(player->health);
 	TextDrawer::DrawString(debugstr, 100, 100, Align::TopLeft, dbgstrop);
+
+	if (player->opti.size() > 0) {
+		string debugscl;
+		debugscl += "opti::scale = ";
+		debugscl += to_string(player->opti.back().scale.x);
+		TextDrawer::DrawString(debugscl, 100, 140, Align::TopLeft, dbgstrop);
+		string debugpw;
+		debugpw += "opti::power = ";
+		debugpw += to_string(player->opti.back().power);
+		TextDrawer::DrawString(debugpw, 100, 180, Align::TopLeft, dbgstrop);
+	}
 }
