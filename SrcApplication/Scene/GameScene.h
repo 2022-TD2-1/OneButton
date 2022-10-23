@@ -12,27 +12,32 @@
 using namespace Input;
 
 class GameScene :
-    public IScene
+	public IScene
 {
 public:
-    ~GameScene() {};
-    void Init() override;
-    void Update() override;
-    void DrawBack() override;
-    void Draw3D() override;
-    void DrawSprite() override;
+	~GameScene() {};
+	void Init() override;
+	void Update() override;
+	void DrawBack() override;
+	void Draw3D() override;
+	void DrawSprite() override;
 
 private:
-    Player* player;
+	Player* player;
 
-    Camera camera;
+	Camera camera;
 
-    Boss* boss;
-    
-    Object3D guide;
+	Boss* boss;
 
-    Object3D SkyDome;
+	Object3D guide;
 
-    TitleObj titleObj;
+	Object3D SkyDome;
+
+	TitleObj* titleObj;
+
+	enum GameState {
+		Title_,
+		Gamescene_
+	}gameState = Title_;
 };
 

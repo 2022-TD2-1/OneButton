@@ -1,6 +1,8 @@
 #include "ModelManager.h"
 #include "TitleObj.h"
 
+unique_ptr<TitleObj> TitleObj::current = nullptr;
+
 void TitleObj::Ini()
 {
 	model = ModelManager::Get("Sphere");
@@ -27,4 +29,18 @@ void TitleObj::Draw()
 
 void TitleObj::Hit(PlayerOption* other)
 {
+	health--;
+}
+
+
+
+TitleObj* TitleObj::Create()
+{
+	current = unique_ptr<TitleObj>(new TitleObj);
+	return current.get();
+}
+
+TitleObj* TitleObj::GetCurrent()
+{
+	return current.get();
 }

@@ -15,7 +15,7 @@ void GameScene::Init()
 
 	guide.model = ModelManager::Get("Rail");
 	guide.position = { 0,0,0 };
-	guide.scale = { 3,3,3 };
+	guide.scale = { 8,8,8 };
 	guide.rotation = { 0,0,0 };
 	guide.UpdateMatrix();
 
@@ -50,7 +50,8 @@ void GameScene::Init()
 	SkyDome.scale = { 30,30,30 };
 	SkyDome.UpdateMatrix();
 
-	titleObj.Ini();
+	titleObj = TitleObj::Create();
+	titleObj->Ini();
 }
 
 void GameScene::Update()
@@ -66,6 +67,8 @@ void GameScene::Update()
 	player->Update();
 	boss->Update();
 	camera.UpdateMatrix();
+
+	titleObj->Update();
 
 	if (boss->health <= 0)
 	{
@@ -99,11 +102,11 @@ void GameScene::Draw3D()
 
 	player->Draw();
 	boss->Draw();
-	guide.Draw();
+	guide.Draw("white");
 
 	SkyDome.Draw();
 
-	titleObj.Draw();
+	titleObj->Draw();
 }
 
 void GameScene::DrawSprite()
