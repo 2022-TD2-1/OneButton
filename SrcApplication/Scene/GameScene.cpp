@@ -54,6 +54,7 @@ void GameScene::Init()
 	titleObj->Ini(&camera);
 	spaceObj.model = ModelManager::Get("Space");
 	spaceObj.position = { 0,-10,0 };
+	spaceObj.scale = { 2,2,2 };
 	
 	spaceObj.UpdateMatrix();
 }
