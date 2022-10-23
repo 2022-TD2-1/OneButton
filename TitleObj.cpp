@@ -5,7 +5,7 @@ void TitleObj::Ini()
 {
 	model = ModelManager::Get("Sphere");
 	position = { 0,0,0 };
-	scale = { 1,1,1 };
+	scale = { 2,2,2 };
 
 	UpdateMatrix();
 }

@@ -27,7 +27,7 @@ void GameScene::Init()
 	player->model = ModelManager::Get("Player");
 	player->position = { 0,0,0 };
 
-
+#pragma region ƒJƒƒ‰‰Šú‰»
 	camera.projectionMode = ProjectionMode::Perspective;
 	camera.position = { 0, 0, -12.5 };
 	camera.targetMode = CameraTargetMode::LookTo;
@@ -40,6 +40,7 @@ void GameScene::Init()
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
 	camera.OriginalPosSet();
+#pragma endregion
 
 	boss = Boss::Create();
 	boss->Init(&camera);
@@ -48,6 +49,8 @@ void GameScene::Init()
 	SkyDome.position = { 0,0,0 };
 	SkyDome.scale = { 30,30,30 };
 	SkyDome.UpdateMatrix();
+
+	titleObj.Ini();
 }
 
 void GameScene::Update()
@@ -99,6 +102,8 @@ void GameScene::Draw3D()
 	guide.Draw();
 
 	SkyDome.Draw();
+
+	titleObj.Draw();
 }
 
 void GameScene::DrawSprite()

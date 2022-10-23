@@ -8,6 +8,7 @@
 #include "Input.h"
 #include <Player.h>
 #include <Boss.h>
+#include <TitleObj.h>
 using namespace Input;
 
 class GameScene :
@@ -31,5 +32,7 @@ private:
     Object3D guide;
 
     Object3D SkyDome;
+
+    TitleObj titleObj;
 };
 
