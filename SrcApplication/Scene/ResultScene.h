@@ -50,5 +50,7 @@ private:
 	//Œˆ’èƒtƒ‰ƒO
 	bool isReturn = false;
 
+	Object3D skyDome;
+
 };
 

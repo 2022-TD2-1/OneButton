@@ -39,6 +39,27 @@ void ResultScene::Init()
 		0
 	};
 	selectSprite.scale = { 0.1,0.1,0.1 };
+
+	skyDome.model = ModelManager::Get("Skysphere");
+	skyDome.position = { 0,0,0 };
+	skyDome.scale = { 30,30,30 };
+	skyDome.UpdateMatrix();
+
+#pragma region ÉJÉÅÉâèâä˙âª
+	camera.projectionMode = ProjectionMode::Perspective;
+	camera.position = { 0, 0, -12.5 };
+	camera.targetMode = CameraTargetMode::LookTo;
+	camera.rotation = { 0, 0, 0 };
+
+	camera.renderWidth = CommonParams::Win::width;
+	camera.renderHeight = CommonParams::Win::height;
+
+	camera.fov = PIf / 2;
+	camera.nearZ = 0.1f;
+	camera.farZ = 1000.0f;
+	camera.OriginalPosSet();
+#pragma endregion
+
 	UpdateNum();
 }
 
@@ -108,6 +129,8 @@ void ResultScene::Update()
 	dotSprite.UpdateMatrix();
 	selectSprite.UpdateMatrix();
 	Rank();
+	skyDome.rotation += {0.00025f, 0.0002f, 0.0001f};
+	skyDome.UpdateMatrix();
 }
 
 void ResultScene::DrawBack()
@@ -116,6 +139,8 @@ void ResultScene::DrawBack()
 
 void ResultScene::Draw3D()
 {
+	Camera::Set(camera);
+	skyDome.Draw();
 }
 
 void ResultScene::DrawSprite()

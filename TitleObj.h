@@ -26,7 +26,7 @@ private:
 	
 	Hpbar hpBar_;
 
-	int health = 150;
+	int health = 1;
 
 	bool isDead = false;
 
