@@ -4,7 +4,7 @@ class Hpbar
 {
 public:
 
-	void Ini(float maxHp);
+	void Ini(float maxHp, Vec3 pos);
 	void Update(float nowHp);
 	void Draw();
 

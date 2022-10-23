@@ -3,8 +3,8 @@
 #include <PlayerOption.h>
 #include <IBossAttack.h>
 #include "Timer.h"
-#include <HitEffect.h>
 #include "Hpbar.h"
+#include <HitEffect.h>
 #include <Camera.h>
 class Boss :
     public Object3D
@@ -85,7 +85,7 @@ public:
     const int MaxBackCoolTime = 120;
     int backCoolTime = MaxBackCoolTime;
     
-
+    int isActive = false;
 private:
     static unique_ptr<Boss> current;
     //HPÉoÅ[
@@ -97,6 +97,8 @@ private:
     int testTime = 10;
 
     Camera* camera_ = nullptr;
+
+    
 
 public:
     static Boss* Create();

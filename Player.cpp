@@ -14,12 +14,14 @@ void Player::Init()
 	}
 
 	bulletTimer.Start();
+
 	bulletTimer.SetOnTimeFunction(
 		[&, this](void)
 		{
 			RegisterBullet(((Vec3)Boss::GetCurrent()->position - position).SetLength(bulletSpeed));
 		}
 	);
+
 }
 
 void Player::Update()
@@ -31,6 +33,7 @@ void Player::Update()
 	}
 	//生きているとき
 	else if (health > 0) {
+
 		//キーが押されている間は停止状態に、そうでないなら移動
 		if (Input::Key::Down(DIK_SPACE))
 		{
@@ -62,18 +65,6 @@ void Player::Update()
 			}
 		}
 
-		//移動総量から回転後の位置を計算
-		Matrix moveTemp = Matrix::Identity();
-		moveTemp *= Matrix::Translation({ PlayerParams::circleR, 0.f, 0.f });
-		moveTemp *= Matrix::RotZ(DegToRad(x * PlayerParams::degPerMove));
-
-		this->rotation.z = DegToRad(x * PlayerParams::degPerMove + 90);
-
-		//回転後の位置に移動して自身の行列を更新
-		this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
-		UpdateMatrix();
-		UpdateCollisionPos();
-
 		if (Input::Key::Released(DIK_SPACE))
 		{
 			if (opti.size() > 0) {
@@ -98,22 +89,37 @@ void Player::Update()
 			}
 		}
 
+		//移動総量から回転後の位置を計算
+		Matrix moveTemp = Matrix::Identity();
+		moveTemp *= Matrix::Translation({ PlayerParams::circleR, 0.f, 0.f });
+		moveTemp *= Matrix::RotZ(DegToRad(x * PlayerParams::degPerMove));
+
+		this->rotation.z = DegToRad(x * PlayerParams::degPerMove + 90);
+
+		//回転後の位置に移動して自身の行列を更新
+		this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
+		UpdateMatrix();
+		UpdateCollisionPos();
+
+
 		if (coolTime > 0) {
 			coolTime--;
 		}
-		
+
 
 		//ダメージを受けたときに点滅する
 		if (coolTime % 6 == 0)color_ = { 0.5f, 1.0f, 1.0f, 1.0f };
 		else color_ = { 0.5f, 1.0f, 1.0f, 0.0f };
 
-		if (this->state == State::Move)
-		{
-			bulletTimer.Update();
-		}
-		if (this->state == State::Stop)
-		{
-			bulletTimer.Start();
+		if (Boss::GetCurrent()->isActive) {
+			if (this->state == State::Move)
+			{
+				bulletTimer.Update();
+			}
+			if (this->state == State::Stop)
+			{
+				bulletTimer.Start();
+			}
 		}
 
 		prePos = position;

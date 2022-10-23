@@ -77,10 +77,12 @@ void PlayerOption::AttackUpdate()
 		Boss::GetCurrent()->Hit(this);
 		ChangeState(State::Back);
 	}
-
-	if (col.Collide(TitleObj::GetCurrent()->col)) {
-		TitleObj::GetCurrent()->Hit(this);
-		ChangeState(State::Back);
+	//タイトルオブジェが生きているときだけ
+	if (TitleObj::GetCurrent()->GetDead() == false) {
+		if (col.Collide(TitleObj::GetCurrent()->col)) {
+			TitleObj::GetCurrent()->Hit(this);
+			ChangeState(State::Back);
+		}
 	}
 }
 

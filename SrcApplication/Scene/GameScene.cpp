@@ -51,42 +51,51 @@ void GameScene::Init()
 	SkyDome.UpdateMatrix();
 
 	titleObj = TitleObj::Create();
-	titleObj->Ini();
+	titleObj->Ini(&camera);
 }
 
 void GameScene::Update()
 {
-	if (Input::Key::Triggered(DIK_S))
-	{
-		player->health = 0;
-	}
-	if (Input::Key::Triggered(DIK_K))
-	{
-		boss->health = 1;
-	}
 	player->Update();
-	boss->Update();
 	camera.UpdateMatrix();
-
-	titleObj->Update();
-
-	if (boss->health <= 0)
-	{
-		SceneManager::Transition<ResultScene>();
-		return;
+	if (gameState == GameState::Title_) {
+		titleObj->Update();
+		if (titleObj->GetDead()) {
+			//タイトルオブジェを倒したらゲームシーンへ移る
+			gameState = GameState::Gamescene_;
+		}
 	}
+	//ゲーム
+	if (gameState == GameState::Gamescene_) {
+		if (Input::Key::Triggered(DIK_S))
+		{
+			player->health = 0;
+		}
+		if (Input::Key::Triggered(DIK_K))
+		{
+			boss->health = 1;
+		}
+		boss->Update();
 
-	if (player->isDead == true)
-	{
-		SceneManager::Transition<ResultScene>();
-		return;
+		if (boss->health <= 0)
+		{
+			SceneManager::Transition<ResultScene>();
+			return;
+		}
+
+		if (player->isDead == true)
+		{
+			SceneManager::Transition<ResultScene>();
+			return;
+		}
+
+		if (Input::Key::Triggered(DIK_M))
+		{
+			camera.ShakeSet(60, 1, 1);
+		}
+
+		
 	}
-
-	if (Input::Key::Triggered(DIK_M))
-	{
-		camera.ShakeSet(60, 1, 1);
-	}
-
 	camera.Shake();
 	SkyDome.rotation += {0.00025f, 0.0002f, 0.0001f};
 	SkyDome.UpdateMatrix();
@@ -101,12 +110,14 @@ void GameScene::Draw3D()
 	Camera::Set(camera);
 
 	player->Draw();
-	boss->Draw();
 	guide.Draw("white");
-
 	SkyDome.Draw();
-
-	titleObj->Draw();
+	if (gameState == GameState::Title_) {
+		titleObj->Draw();
+	}
+	if (gameState == GameState::Gamescene_) {
+		boss->Draw();
+	}
 }
 
 void GameScene::DrawSprite()

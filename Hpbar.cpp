@@ -1,11 +1,11 @@
 #include <ModelManager.h>
 #include "Hpbar.h"
 
-void Hpbar::Ini(float maxHp)
+void Hpbar::Ini(float maxHp,Vec3 pos)
 {
 	//HPÉoÅ[ÇÃèâä˙âª
 	hpBar_.model = ModelManager::Get("Cube");
-	hpBar_.position = { 0,10,0 };
+	hpBar_.position = pos;
 	hpBar_.scale = { 5,1,1 };
 	hpBar_.rotation = { 0,0,0 };
 	hpBar_.UpdateMatrix();

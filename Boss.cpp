@@ -19,68 +19,86 @@ void Boss::Init(Camera* camera)
 	for (auto& tm : stateTimer) tm.Start();
 	bulletTimer.Start();
 
-	hpBar_.Ini(maxHealth);
+	hpBar_.Ini(maxHealth,Vec3(0,10,0));
+	position.z = -20;
 
  	camera_ = camera;
 }
 
 void Boss::Update()
 {
-	if (testTime >= 0) {
-		testTime--;
-		position = { 0,0,0 };
+	if (isActive == false) {
+		if (position.z < 0) {
+			position.z += 0.1;
+		}
+		else {
+			position.z = 0;
+			isActive = true;
+			//カメラシェイク
+			camera_->ShakeSet(40 , 0.7,3);
+		}
+
+	}
+	else if (isActive == true) {
+		if (testTime >= 0) {
+			testTime--;
+			position = { 0,0,0 };
+		}
+
+		
+
+		void (Boss:: * BUpdtArray[]) () =
+		{
+			&Boss::CenterUpdate,
+			&Boss::DownUpdate
+		};
+
+		(this->*BUpdtArray[(int)state])();
+
+		void (Boss:: * BUpdtArray2[]) () =
+		{
+			&Boss::P1Update,
+			&Boss::P2Update,
+			&Boss::P3Update
+		};
+
+		(this->*BUpdtArray2[(int)phase])();
+
+		if (state != State::Down)
+		{
+
+			void (Boss:: * BUpdtArray3[]) () =
+			{
+				&Boss::IdleUpdate,
+				&Boss::BulletsUpdate,
+				&Boss::Bar1Update,/*
+				&Boss::Bar2Update,*/
+				&Boss::AoEUpdate
+			};
+
+			(this->*BUpdtArray3[(int)attackType])();
+		}
+
+		UpdateAllAttacks();
+
+		//エフェクト更新
+		for (std::unique_ptr<HitEffect>& effect : hitEffect) {
+			effect->Update();
+		}
+		//エフェクトをデリートする
+		hitEffect.remove_if([](std::unique_ptr<HitEffect>& effect)
+			{
+				return effect->GetAllDead();
+			});
 	}
 
 	hpBar_.Update(health);
 
-	void (Boss:: * BUpdtArray[]) () =
-	{
-		&Boss::CenterUpdate,
-		&Boss::DownUpdate
-	};
-
-	(this->*BUpdtArray[(int)state])();
-
-	void (Boss:: * BUpdtArray2[]) () =
-	{
-		&Boss::P1Update,
-		&Boss::P2Update,
-		&Boss::P3Update
-	};
-
-	(this->*BUpdtArray2[(int)phase])();
-
-	if (state != State::Down)
-	{
-
-		void (Boss:: * BUpdtArray3[]) () =
-		{
-			&Boss::IdleUpdate,
-			&Boss::BulletsUpdate,
-			&Boss::Bar1Update,/*
-			&Boss::Bar2Update,*/
-			&Boss::AoEUpdate
-		};
-
-		(this->*BUpdtArray3[(int)attackType])();
-	}
-
 	this->col.x = this->position.x;
 	this->col.y = this->position.y;
 	this->col.r = this->scale.x;
+
 	UpdateMatrix();
-
-	UpdateAllAttacks();
-
-	//エフェクト更新
-	for (std::unique_ptr<HitEffect>& effect : hitEffect) {
-		effect->Update();
-	}
-	//エフェクトをデリートする
-	hitEffect.remove_if([](std::unique_ptr<HitEffect>& effect)
-		{
-			return effect->GetAllDead();
-		});
 }
 
 void Boss::Draw()
@@ -99,36 +117,36 @@ void Boss::Draw()
 void Boss::Hit(PlayerOption* other)
 {
 	//this->health -= PlayerParams::damage;
-
-	if (other->state == PlayerOption::State::Attack)
-	{
-		health -= 2.f;
-		//kb処理
-		float kbPower = 1.0f * other->power * other->power;
-		Vec3 dir = (Vec3)this->position - other->position;
-		dir.SetLength(min(kbPower, 8.0f));
-		this->position = dir;
-
-		float l = ((Vec3)this->position).GetSquaredLength();
-
-		if (((Vec3)this->position).GetSquaredLength() >= 8.0f * 8.0f - 0.1f)
+	if (isActive == true) {
+		if (other->state == PlayerOption::State::Attack)
 		{
-			this->state = State::Down;
+			health -= 2.f;
+			//kb処理
+			float kbPower = 1.0f * other->power * other->power;
+			Vec3 dir = (Vec3)this->position - other->position;
+			dir.SetLength(min(kbPower, 8.0f));
+			this->position = dir;
+
+			float l = ((Vec3)this->position).GetSquaredLength();
+
+			if (((Vec3)this->position).GetSquaredLength() >= 8.0f * 8.0f - 0.1f)
+			{
+				this->state = State::Down;
+			}
+			UpdateMatrix();
+			this->UpdateCol();
+
+			std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
+			newEffect->Ini(position, other->power);
+			hitEffect.emplace_back(std::move(newEffect));
+			//カメラシェイク
+			camera_->ShakeSet(20 * other->power, 0.3, other->power);
 		}
-		UpdateMatrix();
-		this->UpdateCol();
-
-		std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
-		newEffect->Ini(position, other->power);
-		hitEffect.emplace_back(std::move(newEffect));
-		//カメラシェイク
-		camera_->ShakeSet(20 * other->power,0.3,other->power);
-	}
-
-	else if (other->state == PlayerOption::State::Move)
-	{
-		health -= 1.f;
-		//kb処理
+		else if (other->state == PlayerOption::State::Move)
+		{
+			health -= 1.f;
+			//kb処理
+		}
 	}
 }
 
