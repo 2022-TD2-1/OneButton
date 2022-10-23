@@ -136,6 +136,12 @@
     <Filter Include="Application\ソースファイル\Boss">
       <UniqueIdentifier>{5c7047f7-f23f-40b0-bc22-0f03b08445f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Application\ソースファイル\Title">
+      <UniqueIdentifier>{57968222-3ac5-4d1c-b722-f4b010b8b797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\ヘッダーファイル\Title">
+      <UniqueIdentifier>{13985c56-f04a-44bb-a31b-50236b556401}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -317,6 +323,9 @@
     </ClCompile>
     <ClCompile Include="HitEffect.cpp">
       <Filter>Application\ソースファイル\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleObj.cpp">
+      <Filter>Application\ソースファイル\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -511,6 +520,9 @@
     </ClInclude>
     <ClInclude Include="HitEffect.h">
       <Filter>Application\ヘッダーファイル\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleObj.h">
+      <Filter>Application\ヘッダーファイル\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
