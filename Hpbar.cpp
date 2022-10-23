@@ -26,6 +26,6 @@ void Hpbar::Update(float nowHp)
 
 void Hpbar::Draw()
 {
-	
+	(*hpBar_.brightnessCB.contents) = Float4{ 0.7f, 0.3f, 0.3f, 1.0f };
 	hpBar_.Draw("white");
 }

@@ -300,9 +300,6 @@
     <ClCompile Include="BossCrossLaser.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Hpbar.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="HitEffect.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
@@ -317,6 +314,9 @@
     </ClCompile>
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>Application\ソースファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Hpbar.cpp">
+      <Filter>Application\ソースファイル\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -488,9 +488,6 @@
     <ClInclude Include="Easing.h">
       <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Hpbar.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="HitEffect.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
@@ -511,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="PlayerBullet.h">
       <Filter>Application\ヘッダーファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Hpbar.h">
+      <Filter>Application\ヘッダーファイル\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

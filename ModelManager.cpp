@@ -9,6 +9,7 @@ void ModelManager::LoadAllModels()
 	RegisterModel("boss", "Boss");
 	RegisterModel("heart", "Heart");
 	RegisterModel("skysphere", "Skysphere");
+	RegisterModel("bullet", "Bullet");
 
 }
 

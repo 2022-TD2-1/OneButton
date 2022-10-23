@@ -25,7 +25,8 @@ void PlayerBullet::Update()
 
 void PlayerBullet::Draw()
 {
-	Object3D::Draw();
+	(*brightnessCB.contents) = Float4{ 0.5f, 1.0f, 1.0f, 1.0f };
+	Object3D::Draw("white");
 }
 
 PlayerBullet::PlayerBullet(Vec3 vel) : vel(vel) {

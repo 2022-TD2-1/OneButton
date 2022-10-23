@@ -3,6 +3,7 @@
 
 void BossBullet::Update()
 {
+	model = ModelManager::Get("Bullet");
 	deathCoolTime--;
 	if (deathCoolTime <= 0) {
 		this->del = true;
