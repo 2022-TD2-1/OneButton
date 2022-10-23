@@ -52,6 +52,10 @@ void GameScene::Init()
 
 	titleObj = TitleObj::Create();
 	titleObj->Ini(&camera);
+	spaceObj.model = ModelManager::Get("Space");
+	spaceObj.position = { 0,-10,0 };
+	
+	spaceObj.UpdateMatrix();
 }
 
 void GameScene::Update()
@@ -118,6 +122,8 @@ void GameScene::Draw3D()
 	if (gameState == GameState::Gamescene_) {
 		boss->Draw();
 	}
+
+	spaceObj.Draw();
 }
 
 void GameScene::DrawSprite()

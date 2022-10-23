@@ -11,6 +11,7 @@ void ModelManager::LoadAllModels()
 	RegisterModel("skysphere", "Skysphere");
 	RegisterModel("bullet", "Bullet");
 	RegisterModel("rail", "Rail");
+	RegisterModel("space", "Space");
 }
 
 Model* ModelManager::Get(string key)
