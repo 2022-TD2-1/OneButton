@@ -39,7 +39,7 @@ void PlayerOption::Draw()
 
 void PlayerOption::MoveUpdate()
 {
-	if (power <= 2.9f ) {
+	if (power <= 2.83f ) {
 		(*this->brightnessCB.contents) = Float4{ 0.5f, 1.0f, 1.0f, 1.0f };
 		power += 0.01f;
 	}

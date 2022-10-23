@@ -25,7 +25,7 @@ public:
     void Damage(int damage);
     static const int maxhealth = 3;
     int health = 3;
-    const int maxCoolTime = 80;
+    const int maxCoolTime = 120;
     int coolTime = 0;
     list<PlayerHP> hps_;    //hpオブジェ
     Float4 color_;

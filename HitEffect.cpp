@@ -51,6 +51,9 @@ void HitEffect::Ini(Vec3 pos, PlayerOption other)
 		int time = timeDist(engine);
 		aliveTime[i] = time;
 		isAlive[i] = true;
+		//F‚ğƒ‰ƒ“ƒ_ƒ€‚É
+		std::uniform_real_distribution<float> colorDist(0.4f, 0.8f);
+		colorBlue[i] = colorDist(engine);
 	}
 }
 
@@ -86,6 +89,8 @@ void HitEffect::Update()
 void HitEffect::Draw()
 {
 	for (int i = 0; i < maxNum; i++) {
+		(*obj_[i].brightnessCB.contents) = Float4{ 0.3f, 0.7f, colorBlue[i], 1.0f };
+
 		if (isAlive[i] == true) {
 			obj_[i].Draw("white");
 		}

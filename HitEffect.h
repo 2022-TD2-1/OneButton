@@ -19,7 +19,8 @@ private:
 	int aliveTime[maxNum];
 	bool isAlive[maxNum];	//エフェクトが生きているか
 	int deadCount;
-
+	
+	float colorBlue[maxNum];
 
 	bool isAllDead = false;
 };
