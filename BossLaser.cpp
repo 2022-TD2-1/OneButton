@@ -28,13 +28,9 @@ void BossLaser::Update()
 		centerRad = defRad + (timer.Check()) * BossParams::laserSpeed;
 		this->rotation.z = centerRad;
 		*this->brightnessCB.contents = { 1.0f, 0.3f, 0.3f, 1.0f };
-		float flashyTime = timer.Check() > readyTime / 2 ?
-			readyTime - timer.Check() :
-			timer.Check();
+		float flashyTime = sin(timer.Check() / 80);
 
-		float flashyNum = timer.Check() <= readyTime / 2 ?
-			EaseInQuint(flashyTime * 2 / readyTime) :
-			EaseOutQuint(flashyTime * 2 / readyTime);
+		float flashyNum = cos(timer.Check() / 80);
 
 		*this->brightnessCB.contents = {1.0f, flashyNum, flashyNum, 0.5f};
 	}

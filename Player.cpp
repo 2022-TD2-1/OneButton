@@ -184,8 +184,6 @@ void Player::Draw()
 		}
 	}
 
-	
-
 	//エフェクト描画
 	for (std::unique_ptr<HitEffect>& effect : deadEffect) {
 		effect->Draw();

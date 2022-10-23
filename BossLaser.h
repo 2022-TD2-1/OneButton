@@ -21,7 +21,7 @@ public:
 
     Timer timer;
 
-    const int readyTime = 1000;
+    const int readyTime = 2000;
     static const int totalTime = 4000;
 
     float length = 8.0f;
