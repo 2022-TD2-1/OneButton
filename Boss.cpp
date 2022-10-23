@@ -27,6 +27,7 @@ void Boss::Init(Camera* camera)
 
 void Boss::Update()
 {
+	//“oê‰‰o‚Ì
 	if (isActive == false) {
 		if (position.z < 0) {
 			position.z += 0.1;
@@ -39,13 +40,12 @@ void Boss::Update()
 		}
 
 	}
+	//ƒQ[ƒ€‚ªn‚Ü‚Á‚½
 	else if (isActive == true) {
 		if (testTime >= 0) {
 			testTime--;
 			position = { 0,0,0 };
 		}
-
-		
 
 		void (Boss:: * BUpdtArray[]) () =
 		{
