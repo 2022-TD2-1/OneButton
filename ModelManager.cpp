@@ -10,7 +10,7 @@ void ModelManager::LoadAllModels()
 	RegisterModel("heart", "Heart");
 	RegisterModel("skysphere", "Skysphere");
 	RegisterModel("bullet", "Bullet");
-
+	RegisterModel("rail", "Rail");
 }
 
 Model* ModelManager::Get(string key)

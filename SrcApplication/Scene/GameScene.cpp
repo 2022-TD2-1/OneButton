@@ -13,9 +13,10 @@ void GameScene::Init()
 	wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/CircleGuide.png", "CircleGuide");
 
-	guide.model = ModelManager::Get("Pane");
-	guide.rotation.x = -PIf / 2;
-	guide.scale = { PlayerParams::circleR * 2, PlayerParams::circleR * 2, PlayerParams::circleR * 2 };
+	guide.model = ModelManager::Get("Rail");
+	guide.position = { 0,0,0 };
+	guide.scale = { 3,3,3 };
+	guide.rotation = { 0,0,0 };
 	guide.UpdateMatrix();
 
 	Light::directional.direction = Vec3(0, 0, 1);
@@ -95,7 +96,7 @@ void GameScene::Draw3D()
 
 	player->Draw();
 	boss->Draw();
-	guide.Draw("CircleGuide");
+	guide.Draw();
 
 	SkyDome.Draw();
 }
