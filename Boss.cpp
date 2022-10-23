@@ -118,7 +118,7 @@ void Boss::Hit(PlayerOption* other)
 		this->UpdateCol();
 
 		std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
-		newEffect->Ini(position, *other);
+		newEffect->Ini(position, other->power);
 		hitEffect.emplace_back(std::move(newEffect));
 		//カメラシェイク
 		camera_->ShakeSet(20 * other->power,0.3,other->power);

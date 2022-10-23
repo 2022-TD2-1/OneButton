@@ -2,12 +2,12 @@
 #include <ModelManager.h>
 #include "HitEffect.h"
 
-void HitEffect::Ini(Vec3 pos, PlayerOption other)
+void HitEffect::Ini(Vec3 pos, float power)
 {
 	for (int i = 0; i < maxNum; i++) {
 		obj_[i].model = ModelManager::Get("Cube");
 		obj_[i].position = pos;
-		obj_[i].scale = { 0.3f * other.power,0.3f * other.power,0.3f * other.power };
+		obj_[i].scale = { 0.3f * power,0.3f * power,0.3f * power };
 		obj_[i].rotation = { 0,0,0 };
 
 		//乱数シード生成器
@@ -15,8 +15,8 @@ void HitEffect::Ini(Vec3 pos, PlayerOption other)
 		//メルセンヌ・ツイスターの乱数エンジン
 		std::mt19937_64 engine(seed_gen());
 		//移動速度
-		std::uniform_real_distribution<float> transDistX(-0.1f * other.power, 0.1f * other.power);
-		std::uniform_real_distribution<float> transDistY(-0.1f * other.power, 0.1f * other.power);
+		std::uniform_real_distribution<float> transDistX(-0.1f * power, 0.1f * power);
+		std::uniform_real_distribution<float> transDistY(-0.1f * power, 0.1f * power);
 		//std::uniform_real_distribution<float> transDistZ(-50, 50);
 
 		//乱数エンジンを渡し、指定範囲からランダムな数値を得る
@@ -27,9 +27,9 @@ void HitEffect::Ini(Vec3 pos, PlayerOption other)
 		speed_[i] = { x, y, 0 };
 
 		//回転
-		std::uniform_real_distribution<float> rotDistX(-0.05f * other.power, 0.05f * other.power);
-		std::uniform_real_distribution<float> rotDistY(-0.05f * other.power, 0.05f * other.power);
-		std::uniform_real_distribution<float> rotDistZ(-0.05f * other.power, 0.05f * other.power);
+		std::uniform_real_distribution<float> rotDistX(-0.05f * power, 0.05f * power);
+		std::uniform_real_distribution<float> rotDistY(-0.05f * power, 0.05f * power);
+		std::uniform_real_distribution<float> rotDistZ(-0.05f * power, 0.05f * power);
 		float rotx = rotDistX(engine);
 		float roty = rotDistY(engine);
 		float rotz = rotDistZ(engine);

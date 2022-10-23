@@ -4,7 +4,7 @@
 class HitEffect
 {
 public:
-	void Ini(Vec3 pos,PlayerOption other);
+	void Ini(Vec3 pos, float power);
 
 	void Update();
 	void Draw();

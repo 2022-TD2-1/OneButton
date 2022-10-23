@@ -6,66 +6,76 @@
 #include "TraceEffect.h"
 #include "PlayerHP.h"
 #include <PlayerBullet.h>
+#include "HitEffect.h"
 #include <Timer.h>
 
 class Player :
-    public Object3D
+	public Object3D
 {
 public:
-    Player() {
-        Object3D::Object3D();
-    };
+	Player() {
+		Object3D::Object3D();
+	};
 
-    void Init();
+	void Init();
 
-    void Update();
-    void Draw();
+	void Update();
+	void Draw();
 
-    //HP系
-    void Damage(int damage);
-    static const int maxhealth = 3;
-    int health = 3;
-    const int maxCoolTime = 120;
-    int coolTime = 0;
-    list<PlayerHP> hps_;    //hpオブジェ
-    Float4 color_;
-    
+	//HP系
+	void Damage(int damage);
+	static const int maxhealth = 3;
+	int health = 3;
+	const int maxCoolTime = 120;
+	int coolTime = 0;
+	list<PlayerHP> hps_;    //hpオブジェ
+	Float4 color_;
 
-    float x = 0.f;
-    enum class Side {
-        Clock,
-        CounterClock
-    } facing = Side::Clock;
+	bool isDead = false;
+	Vec3 prePos;	//プレイヤーのいた場所を保存する
+	const int maxDeadEffectTime = 600;
+	int deadEffectTime = 0;
+	bool isPlayerDisplay = true;		//プレイヤーを表示するフラグ
+	//ヒット時エフェクト
+	std::list< std::unique_ptr<HitEffect>> deadEffect;
+	void DeadEffect();	//死んだときの演出
 
-    enum class State {
-        Move,
-        Stop
-    } state = State::Move;
 
-    //現在のプレイヤーのインスタンスを取得
-    static Player* GetCurrent();
+	float x = 0.f;
+	enum class Side {
+		Clock,
+		CounterClock
+	} facing = Side::Clock;
 
-    //プレイヤーを初期化してCurrentに設定
-    static Player* Create();
+	enum class State {
+		Move,
+		Stop
+	} state = State::Move;
 
-    CircleCollider col;
+	//現在のプレイヤーのインスタンスを取得
+	static Player* GetCurrent();
 
-    void UpdateCollisionPos();
+	//プレイヤーを初期化してCurrentに設定
+	static Player* Create();
 
-    list<PlayerOption> opti;
+	CircleCollider col;
+
+	void UpdateCollisionPos();
+
+	list<PlayerOption> opti;
 private:
-    static unique_ptr<Player> current;
+	static unique_ptr<Player> current;
 
 private:
-    void UpdateAllBullets();
-    void DrawAllBullets();
+	void UpdateAllBullets();
+	void DrawAllBullets();
 
-    LimitedTimer bulletTimer = LimitedTimer((double)500.0f);
-    float bulletSpeed = 0.08f;
-    list<PlayerBullet> bullets;
+	LimitedTimer bulletTimer = LimitedTimer((double)500.0f);
+	float bulletSpeed = 0.08f;
+	list<PlayerBullet> bullets;
 
-    void RegisterBullet(Vec3 vel);
+	void RegisterBullet(Vec3 vel);
 
-    std::list<unique_ptr<TraceEffect>> trsEffect_;
+	std::list<unique_ptr<TraceEffect>> trsEffect_;
 };
 

@@ -53,7 +53,7 @@ void GameScene::Update()
 {
 	if (Input::Key::Triggered(DIK_S))
 	{
-		player->health = 1;
+		player->health = 0;
 	}
 	if (Input::Key::Triggered(DIK_K))
 	{
@@ -69,7 +69,7 @@ void GameScene::Update()
 		return;
 	}
 
-	if (player->health <= 0)
+	if (player->isDead == true)
 	{
 		SceneManager::Transition<ResultScene>();
 		return;
