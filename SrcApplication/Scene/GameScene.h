@@ -35,6 +35,8 @@ private:
 
 	TitleObj* titleObj;
 
+	Object3D spaceObj;
+
 	enum GameState {
 		Title_,
 		Gamescene_
