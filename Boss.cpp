@@ -6,6 +6,7 @@
 #include "BossLaser.h"
 #include <SceneManager.h>
 #include <ResultScene.h>
+#include <BossAoE.h>
 unique_ptr<Boss> Boss::current = nullptr;
 
 void Boss::Init(Camera* camera)
@@ -56,8 +57,8 @@ void Boss::Update()
 		{
 			&Boss::IdleUpdate,
 			&Boss::BulletsUpdate,
-			&Boss::Bar1Update,
-			&Boss::Bar2Update,
+			&Boss::Bar1Update,/*
+			&Boss::Bar2Update,*/
 			&Boss::AoEUpdate
 		};
 
@@ -163,7 +164,7 @@ void Boss::P1Update()
 		if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
 		{
 			phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-			ChangeAttack((AttackType)ApUtil::RNG(1, 2, true));
+			ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
 		}
 	}
 }
@@ -240,6 +241,13 @@ void Boss::Bar2Update()
 
 void Boss::AoEUpdate()
 {
+	Timer* timer = &attackTimer[(int)AttackType::AoE];
+	timer->Update();
+
+	if (timer->Check() > BossAoE::totalTime)
+	{
+		ChangeAttack(AttackType::Idle);
+	}
 }
 
 void Boss::UpdateAllAttacks()
@@ -297,10 +305,11 @@ void Boss::ChangeAttack(AttackType next)
 		break;
 	case Boss::AttackType::Bar1:
 		bossAttacks.emplace_back(new BossLaser((float)ApUtil::RNG(1, 360) * PI / 180));
-		break;
+		break;/*
 	case Boss::AttackType::Bar2:
-		break;
+		break;*/
 	case Boss::AttackType::AoE:
+		bossAttacks.emplace_back(new BossAoE((float)ApUtil::RNG(1, 360) * PI / 180));
 		break;
 	case Boss::AttackType::SumTypes:
 		break;
