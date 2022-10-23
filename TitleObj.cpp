@@ -6,7 +6,7 @@ unique_ptr<TitleObj> TitleObj::current = nullptr;
 
 void TitleObj::Ini(Camera* camera)
 {
-	model = ModelManager::Get("Sphere");
+	model = ModelManager::Get("Knocker");
 	position = { 0,0,0 };
 	scale = { 2,2,2 };
 

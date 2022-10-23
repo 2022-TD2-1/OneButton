@@ -12,6 +12,7 @@ void ModelManager::LoadAllModels()
 	RegisterModel("bullet", "Bullet");
 	RegisterModel("rail", "Rail");
 	RegisterModel("space", "Space");
+	RegisterModel("knocker", "Knocker");
 }
 
 Model* ModelManager::Get(string key)
