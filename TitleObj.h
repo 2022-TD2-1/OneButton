@@ -11,8 +11,18 @@ public:
 
 	void Hit(PlayerOption* other);
 
-private:
+	int GetHealth() { return health; }
+
+	static TitleObj* Create();
+	static TitleObj* GetCurrent();
 
 	CircleCollider col;
+private:
+	static unique_ptr<TitleObj> current;
+	
+
+	int health = 100;
+
+	
 };
 

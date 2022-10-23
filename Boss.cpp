@@ -21,7 +21,7 @@ void Boss::Init(Camera* camera)
 
 	hpBar_.Ini(maxHealth);
 
-	camera_ = camera;
+ 	camera_ = camera;
 }
 
 void Boss::Update()

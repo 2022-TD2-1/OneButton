@@ -3,6 +3,7 @@
 #include "Parameters.h"
 #include <Boss.h>
 #include <Player.h>
+#include <TitleObj.h>
 
 void PlayerOption::Ini() {
 	position = { 100,100,0 };
@@ -74,6 +75,11 @@ void PlayerOption::AttackUpdate()
 	if (col.Collide(Boss::GetCurrent()->col))
 	{
 		Boss::GetCurrent()->Hit(this);
+		ChangeState(State::Back);
+	}
+
+	if (col.Collide(TitleObj::GetCurrent()->col)) {
+		TitleObj::GetCurrent()->Hit(this);
 		ChangeState(State::Back);
 	}
 }
