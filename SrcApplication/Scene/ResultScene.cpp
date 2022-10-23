@@ -7,17 +7,17 @@
 void ResultScene::Init()
 {
 #pragma region êîéöì«Ç›çûÇ›
-	numSprite[0] = Sprite("Resources/zero.png", "zero");
-	numSprite[1] = Sprite("Resources/one.png", "one");
-	numSprite[2] = Sprite("Resources/two.png", "two");
-	numSprite[3] = Sprite("Resources/three.png", "three");
-	numSprite[4] = Sprite("Resources/four.png", "four");
-	numSprite[5] = Sprite("Resources/five.png", "five");
-	numSprite[6] = Sprite("Resources/six.png", "six");
-	numSprite[7] = Sprite("Resources/seven.png", "seven");
-	numSprite[8] = Sprite("Resources/eight.png", "eight");
-	numSprite[9] = Sprite("Resources/nine.png", "nine");
-	dotSprite = Sprite("Resources/point.png", "point");
+	numSprite[0] = Sprite("Resources/Numbers/zero.png", "zero");
+	numSprite[1] = Sprite("Resources/Numbers/one.png", "one");
+	numSprite[2] = Sprite("Resources/Numbers/two.png", "two");
+	numSprite[3] = Sprite("Resources/Numbers/three.png", "three");
+	numSprite[4] = Sprite("Resources/Numbers/four.png", "four");
+	numSprite[5] = Sprite("Resources/Numbers/five.png", "five");
+	numSprite[6] = Sprite("Resources/Numbers/six.png", "six");
+	numSprite[7] = Sprite("Resources/Numbers/seven.png", "seven");
+	numSprite[8] = Sprite("Resources/Numbers/eight.png", "eight");
+	numSprite[9] = Sprite("Resources/Numbers/nine.png", "nine");
+	dotSprite = Sprite("Resources/Numbers/point.png", "point");
 #pragma endregion
 
 	menuTxt[0] = Sprite("Resources/continueTxt.png", "continue");
