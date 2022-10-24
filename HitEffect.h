@@ -4,7 +4,7 @@
 class HitEffect
 {
 public:
-	void Ini(Vec3 pos, float power);
+	void Ini(Vec3 pos, float power,bool flag = 0);
 
 	void Update();
 	void Draw();
@@ -20,6 +20,8 @@ private:
 	bool isAlive[maxNum];	//エフェクトが生きているか
 	int deadCount;
 	
+	float ColorRed[maxNum];
+	float ColorGreen[maxNum];
 	float colorBlue[maxNum];
 
 	bool isAllDead = false;

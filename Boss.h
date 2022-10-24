@@ -86,6 +86,8 @@ public:
     int backCoolTime = MaxBackCoolTime;
     
     int isActive = false;
+
+    bool isDead = false;
 private:
     static unique_ptr<Boss> current;
     //HPバー
@@ -97,6 +99,15 @@ private:
     int testTime = 10;
 
     Camera* camera_ = nullptr;
+
+   
+    Vec3 prePos;	//ボスのいた場所を保存する
+    const int maxDeadEffectTime = 600;
+    int deadEffectTime = 0;
+    bool isBossDisplay = true;		//ボスを表示するフラグ
+    //ヒット時エフェクト
+    std::list< std::unique_ptr<HitEffect>> deadEffect;
+    void DeadEffect();	//死んだときの演出
 
     
 

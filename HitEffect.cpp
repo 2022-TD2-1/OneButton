@@ -2,7 +2,7 @@
 #include <ModelManager.h>
 #include "HitEffect.h"
 
-void HitEffect::Ini(Vec3 pos, float power)
+void HitEffect::Ini(Vec3 pos, float power, bool flag)
 {
 	for (int i = 0; i < maxNum; i++) {
 		obj_[i].model = ModelManager::Get("Cube");
@@ -53,7 +53,16 @@ void HitEffect::Ini(Vec3 pos, float power)
 		isAlive[i] = true;
 		//F‚ðƒ‰ƒ“ƒ_ƒ€‚É
 		std::uniform_real_distribution<float> colorDist(0.4f, 0.8f);
-		colorBlue[i] = colorDist(engine);
+		if (flag == 0) {
+			colorBlue[i] = colorDist(engine);
+			ColorGreen[i] = 0.7f;
+			ColorRed[i] = 0.3f;
+		}
+		else {
+			colorBlue[i] = 0.2f;
+			ColorGreen[i] = 0.2f;
+			ColorRed[i] = colorDist(engine);
+		}
 	}
 }
 
@@ -74,7 +83,7 @@ void HitEffect::Update()
 				deadCount++;
 				isAlive[i] = false;
 			};
-			if (obj_[i].scale.x <= 0|| obj_[i].scale.y <= 0|| obj_[i].scale.z <= 0) {
+			if (obj_[i].scale.x <= 0 || obj_[i].scale.y <= 0 || obj_[i].scale.z <= 0) {
 				deadCount++;
 				isAlive[i] = false;
 			}
@@ -89,7 +98,7 @@ void HitEffect::Update()
 void HitEffect::Draw()
 {
 	for (int i = 0; i < maxNum; i++) {
-		(*obj_[i].brightnessCB.contents) = Float4{ 0.3f, 0.7f, colorBlue[i], 1.0f };
+		(*obj_[i].brightnessCB.contents) = Float4{ ColorRed[i], ColorGreen[i], colorBlue[i], 1.0f };
 
 		if (isAlive[i] == true) {
 			obj_[i].Draw("white");

@@ -82,7 +82,7 @@ void GameScene::Update()
 		}
 		boss->Update();
 
-		if (boss->health <= 0)
+		if (boss->isDead == true)
 		{
 			SceneManager::Transition<ResultScene>();
 			return;

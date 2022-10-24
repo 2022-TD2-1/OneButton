@@ -6,6 +6,7 @@
 #include "BossLaser.h"
 #include <SceneManager.h>
 #include <ResultScene.h>
+#include <random>
 #include <BossAoE.h>
 unique_ptr<Boss> Boss::current = nullptr;
 
@@ -19,78 +20,85 @@ void Boss::Init(Camera* camera)
 	for (auto& tm : stateTimer) tm.Start();
 	bulletTimer.Start();
 
-	hpBar_.Ini(maxHealth,Vec3(0,10,0));
+	hpBar_.Ini(maxHealth, Vec3(0, 10, 0));
 	position.z = -20;
 
- 	camera_ = camera;
+	camera_ = camera;
 }
 
 void Boss::Update()
 {
-	//登場演出の時
-	if (isActive == false) {
-		if (position.z < 0) {
-			position.z += 0.1;
-		}
-		else {
-			position.z = 0;
-			isActive = true;
-			//カメラシェイク
-			camera_->ShakeSet(40 , 0.7,3);
-		}
-
+	//死んでいるとき
+	if (health <= 0) {
+		DeadEffect();
+		UpdateMatrix();
 	}
-	//ゲームが始まった時
-	else if (isActive == true) {
-		if (testTime >= 0) {
-			testTime--;
-			position = { 0,0,0 };
+	else {
+		//登場演出の時
+		if (isActive == false) {
+			if (position.z < 0) {
+				position.z += 0.1;
+			}
+			else {
+				position.z = 0;
+				isActive = true;
+				//カメラシェイク
+				camera_->ShakeSet(40, 0.7, 3);
+			}
+
 		}
+		//ゲームが始まった時
+		else if (isActive == true) {
+			if (testTime >= 0) {
+				testTime--;
+				position = { 0,0,0 };
+			}
 
-		void (Boss:: * BUpdtArray[]) () =
-		{
-			&Boss::CenterUpdate,
-			&Boss::DownUpdate
-		};
-
-		(this->*BUpdtArray[(int)state])();
-
-		void (Boss:: * BUpdtArray2[]) () =
-		{
-			&Boss::P1Update,
-			&Boss::P2Update,
-			&Boss::P3Update
-		};
-
-		(this->*BUpdtArray2[(int)phase])();
-
-		if (state != State::Down)
-		{
-
-			void (Boss:: * BUpdtArray3[]) () =
+			void (Boss:: * BUpdtArray[]) () =
 			{
-				&Boss::IdleUpdate,
-				&Boss::BulletsUpdate,
-				&Boss::Bar1Update,/*
-				&Boss::Bar2Update,*/
-				&Boss::AoEUpdate
+				&Boss::CenterUpdate,
+				&Boss::DownUpdate
 			};
 
-			(this->*BUpdtArray3[(int)attackType])();
-		}
+			(this->*BUpdtArray[(int)state])();
 
-		UpdateAllAttacks();
-
-		//エフェクト更新
-		for (std::unique_ptr<HitEffect>& effect : hitEffect) {
-			effect->Update();
-		}
-		//エフェクトをデリートする
-		hitEffect.remove_if([](std::unique_ptr<HitEffect>& effect)
+			void (Boss:: * BUpdtArray2[]) () =
 			{
-				return effect->GetAllDead();
-			});
+				&Boss::P1Update,
+				&Boss::P2Update,
+				&Boss::P3Update
+			};
+
+			(this->*BUpdtArray2[(int)phase])();
+
+			if (state != State::Down)
+			{
+
+				void (Boss:: * BUpdtArray3[]) () =
+				{
+					&Boss::IdleUpdate,
+					&Boss::BulletsUpdate,
+					&Boss::Bar1Update,/*
+					&Boss::Bar2Update,*/
+					&Boss::AoEUpdate
+				};
+
+				(this->*BUpdtArray3[(int)attackType])();
+			}
+
+			UpdateAllAttacks();
+
+		}
 	}
+	//エフェクト更新
+	for (std::unique_ptr<HitEffect>& effect : hitEffect) {
+		effect->Update();
+	}
+	//エフェクトをデリートする
+	hitEffect.remove_if([](std::unique_ptr<HitEffect>& effect)
+		{
+			return effect->GetAllDead();
+		});
 
 	hpBar_.Update(health);
 
@@ -99,17 +107,35 @@ void Boss::Update()
 	this->col.r = this->scale.x;
 
 	UpdateMatrix();
+
+	//死んだ際のエフェクト更新
+	for (std::unique_ptr<HitEffect>& effect : deadEffect) {
+		effect->Update();
+	}
+	//死んだ際のエフェクトをデリートする
+	deadEffect.remove_if([](std::unique_ptr<HitEffect>& effect)
+		{
+			return effect->GetAllDead();
+		});
 }
 
 void Boss::Draw()
 {
-	Object3D::Draw();
-
-	DrawAllAttacks();
+	if (isBossDisplay == true) {
+		Object3D::Draw();
+	}
+	if (health > 0) {
+		DrawAllAttacks();
+	}
 
 	hpBar_.Draw();
 	//エフェクト描画
 	for (std::unique_ptr<HitEffect>& effect : hitEffect) {
+		effect->Draw();
+	}
+
+	//エフェクト描画
+	for (std::unique_ptr<HitEffect>& effect : deadEffect) {
 		effect->Draw();
 	}
 }
@@ -117,10 +143,10 @@ void Boss::Draw()
 void Boss::Hit(PlayerOption* other)
 {
 	//this->health -= PlayerParams::damage;
-	if (isActive == true) {
+	if (isActive == true && health > 0) {
 		if (other->state == PlayerOption::State::Attack)
 		{
-			health -= 2.f;
+			health -= 2.f * (other->power * 3);
 			//kb処理
 			float kbPower = 1.0f * other->power * other->power;
 			Vec3 dir = (Vec3)this->position - other->position;
@@ -144,7 +170,7 @@ void Boss::Hit(PlayerOption* other)
 		}
 		else if (other->state == PlayerOption::State::Move)
 		{
-			health -= 1.f;
+			health -= 1.f * other->power;
 			//kb処理
 		}
 	}
@@ -272,8 +298,8 @@ void Boss::UpdateAllAttacks()
 {
 	for (auto itr = bossAttacks.begin(); itr != bossAttacks.end();)
 	{
-		(* itr)->Update();
-		if (( * itr)->del)
+		(*itr)->Update();
+		if ((*itr)->del)
 		{
 			itr = bossAttacks.erase(itr);
 		}
@@ -366,6 +392,43 @@ void Boss::MoveTo(Vec3 goal, float speed)
 		return;
 	}
 	this->position = (Vec3)this->position + dir.SetLength(speed);
+}
+
+void Boss::DeadEffect()
+{
+	if (deadEffectTime < maxDeadEffectTime) {
+		deadEffectTime++;
+	}
+	//プレイヤーが震える
+	if (deadEffectTime <= 120) {
+		//乱数シード生成器
+		std::random_device seed_gen;
+		//メルセンヌ・ツイスターの乱数エンジン
+		std::mt19937_64 engine(seed_gen());
+		//移動速度
+		std::uniform_real_distribution<float> transDistX(-0.2f, 0.2f);
+		std::uniform_real_distribution<float> transDistY(-0.2f, 0.2f);
+		//プレイヤーが震える
+		Vec3 dist = { transDistX(engine),transDistY(engine) ,0 };
+
+		position = prePos + dist;
+	}
+	//爆発して周囲にエフェクトが散らばる
+	else if (deadEffectTime <= 240) {
+		//プレイヤーを消す
+		isBossDisplay = false;
+		if (deadEffectTime % 8 == 0) {
+			std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
+			newEffect->Ini(position, 4,true);
+			deadEffect.emplace_back(std::move(newEffect));
+		}
+	}
+
+	if (deadEffectTime >= 240) {
+		if (deadEffect.size() <= 0) {
+			isDead = true;
+		}
+	}
 }
 
 Boss* Boss::Create()
