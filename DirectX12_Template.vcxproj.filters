@@ -327,6 +327,9 @@
     <ClCompile Include="TitleObj.cpp">
       <Filter>Application\ソースファイル\Title</Filter>
     </ClCompile>
+    <ClCompile Include="CountDown.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -523,6 +526,9 @@
     </ClInclude>
     <ClInclude Include="TitleObj.h">
       <Filter>Application\ヘッダーファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="CountDown.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

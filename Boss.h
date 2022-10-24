@@ -6,6 +6,7 @@
 #include "Hpbar.h"
 #include <HitEffect.h>
 #include <Camera.h>
+#include "CountDown.h"
 class Boss :
     public Object3D
 {
@@ -110,7 +111,7 @@ private:
     void DeadEffect();	//€‚ñ‚¾‚Æ‚«‚Ì‰‰o
 
     
-
+    CountDown countDown_;
 public:
     static Boss* Create();
     static Boss* GetCurrent();

@@ -24,10 +24,13 @@ void Boss::Init(Camera* camera)
 	position.z = -20;
 
 	camera_ = camera;
+
+	countDown_.Ini();
 }
 
 void Boss::Update()
 {
+
 	//死んでいるとき
 	if (health <= 0) {
 		DeadEffect();
@@ -37,14 +40,27 @@ void Boss::Update()
 		//登場演出の時
 		if (isActive == false) {
 			if (position.z < 0) {
-				position.z += 0.1;
+				position.z += 0.1f;
 			}
 			else {
 				position.z = 0;
-				isActive = true;
+				if (countDown_.GetEnd() == false) {
+					//カウントダウンを表示
+					countDown_.SetDisplay();
+				}
+				else if (countDown_.GetEnd() == true) {
+					//カウントダウンが終わったらゲームスタート
+					isActive = true;
+				}
+				countDown_.Update();
+
+			}
+
+			if (position.z >= -0.3f && position.z <= -0.1f) {
 				//カメラシェイク
 				camera_->ShakeSet(40, 0.7, 3);
 			}
+
 
 		}
 		//ゲームが始まった時
@@ -127,6 +143,8 @@ void Boss::Draw()
 	if (health > 0) {
 		DrawAllAttacks();
 	}
+
+	countDown_.Draw();
 
 	hpBar_.Draw();
 	//エフェクト描画
@@ -419,7 +437,7 @@ void Boss::DeadEffect()
 		isBossDisplay = false;
 		if (deadEffectTime % 8 == 0) {
 			std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
-			newEffect->Ini(position, 4,true);
+			newEffect->Ini(position, 4, true);
 			deadEffect.emplace_back(std::move(newEffect));
 		}
 	}
