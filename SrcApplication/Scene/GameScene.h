@@ -22,6 +22,9 @@ public:
 	void Draw3D() override;
 	void DrawSprite() override;
 
+	//別シーンから開始状態を設定
+	void SetState(int state);
+
 private:
 	Player* player;
 

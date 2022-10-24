@@ -148,3 +148,8 @@ void GameScene::DrawSprite()
 		TextDrawer::DrawString(debugpw, 100, 180, Align::TopLeft, dbgstrop);
 	}*/
 }
+
+void GameScene::SetState(int state)
+{
+	gameState = (GameState)state;
+}
