@@ -95,13 +95,13 @@ void ResultScene::Update()
 		//コンティニューを選択した場合
 		if (isSelect == Menu::Continue) {
 			SceneManager::Transition<GameScene>();
-			dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState((int)isSelect);
+			dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(1);
 			return;
 		}
 		//タイトルを選択した場合
 		else if (isSelect == Menu::Title) {
 			SceneManager::Transition<GameScene>();
-			dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState((int)isSelect);
+			dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(0);
 			return;
 		}
 	}

@@ -98,8 +98,6 @@ void GameScene::Update()
 		{
 			camera.ShakeSet(60, 1, 1);
 		}
-
-		
 	}
 	camera.Shake();
 	SkyDome.rotation += {0.00025f, 0.0002f, 0.0001f};
