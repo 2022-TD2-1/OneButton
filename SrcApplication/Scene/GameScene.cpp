@@ -57,6 +57,8 @@ void GameScene::Init()
 	spaceObj.scale = { 2,2,2 };
 	
 	spaceObj.UpdateMatrix();
+
+	
 }
 
 void GameScene::Update()
@@ -81,23 +83,20 @@ void GameScene::Update()
 			boss->health = 1;
 		}
 		boss->Update();
-
+		//リザルトシーンへ移る
 		if (boss->isDead == true)
 		{
 			SceneManager::Transition<ResultScene>();
 			return;
 		}
-
+		//リザルトシーンへ移る
 		if (player->isDead == true)
 		{
 			SceneManager::Transition<ResultScene>();
 			return;
 		}
 
-		if (Input::Key::Triggered(DIK_M))
-		{
-			camera.ShakeSet(60, 1, 1);
-		}
+		
 	}
 	camera.Shake();
 	SkyDome.rotation += {0.00025f, 0.0002f, 0.0001f};
@@ -123,6 +122,8 @@ void GameScene::Draw3D()
 	}
 
 	spaceObj.Draw();
+
+	
 }
 
 void GameScene::DrawSprite()
