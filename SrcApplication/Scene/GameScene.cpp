@@ -129,7 +129,7 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
-	StringOptions dbgstrop;
+	/*StringOptions dbgstrop;
 	dbgstrop.fontOptions.resolution = 24;
 	dbgstrop.size = 24;
 	string debugstr;
@@ -146,5 +146,5 @@ void GameScene::DrawSprite()
 		debugpw += "opti::power = ";
 		debugpw += to_string(player->opti.back().power);
 		TextDrawer::DrawString(debugpw, 100, 180, Align::TopLeft, dbgstrop);
-	}
+	}*/
 }
