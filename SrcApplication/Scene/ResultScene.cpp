@@ -6,6 +6,7 @@
 
 void ResultScene::Init()
 {
+	timer_ = GameTimer::GetInstance();
 #pragma region 数字読み込み
 	numSprite[0] = Sprite("Resources/Numbers/zero.png", "zero");
 	numSprite[1] = Sprite("Resources/Numbers/one.png", "one");
@@ -61,6 +62,8 @@ void ResultScene::Init()
 #pragma endregion
 
 	UpdateNum();
+
+	setTimer = timer_->GetTimer();
 }
 
 void ResultScene::Update()
@@ -92,6 +95,7 @@ void ResultScene::Update()
 	}
 	//決定したら以下の処理をする
 	if (isReturn == true) {
+		timer_->Ini();
 		//コンティニューを選択した場合
 		if (isSelect == Menu::Continue) {
 			SceneManager::Transition<GameScene>();
@@ -114,9 +118,12 @@ void ResultScene::Update()
 		clearTime--;
 	}
 
-	UpdateNum();
+	const int maxT = 500;
+	if (t < maxT)t++;
 
-	
+	clearTime = Vec3::easeOutBack(t, 0, setTimer, maxT);
+
+	UpdateNum();
 
 	//スプライト更新
 	for (int i = 0; i < 10; i++) {
@@ -148,9 +155,9 @@ void ResultScene::Draw3D()
 void ResultScene::DrawSprite()
 {
 
-	const int display[4] =
-	{ displayNum[0],displayNum[1], displayNum[2], displayNum[3], };
-	for (int i = 0; i < 4; i++) {
+	const int display[5] =
+	{ displayNum[0],displayNum[1], displayNum[2], displayNum[3], displayNum[4] };
+	for (int i = 0; i < 5; i++) {
 		//数字を描画
 		displayNumSprite[i].Draw();
 
@@ -168,36 +175,35 @@ void ResultScene::UpdateNum()
 {
 	
 	//時間がマイナスにならないように
-	if (clearTime <= 0) {
-		clearTime = 0;
-	}
+	
 	//時間を代入する
 	int time = (clearTime * 100);
-	displayNum[0] = (time % 10000) / 1000;
-	displayNum[1] = (time % 1000) / 100;
-	displayNum[2] = (time % 100) / 10;
-	displayNum[3] = (time % 10);
+	displayNum[0] = (time % 100000) / 10000;
+	displayNum[1] = (time % 10000) / 1000;
+	displayNum[2] = (time % 1000) / 100;
+	displayNum[3] = (time % 100) / 10;
+	displayNum[4] = (time % 10);
 	
-	const int display[4] =
-	{ displayNum[0],displayNum[1], displayNum[2], displayNum[3] };
-	for (int i = 0; i < 4; i++) {
-		if (i == 2) {
+	const int display[5] =
+	{ displayNum[0],displayNum[1], displayNum[2], displayNum[3], displayNum[4] };
+	for (int i = 0; i < 5; i++) {
+		if (i == 3) {
 			//小数点の座標を代入
-			dotSprite.position.x = 50 + (50 * i);
-			dotSprite.position.y = 50;
+			dotSprite.position.x = 525 + (50 * i);
+			dotSprite.position.y = 300;
 			dotSprite.position.z = 0;
 		}
 
 		//数字の座標を代入
-		if (i <= 1) {
-			numSprite[display[i]].position.x = 50 + (50 * i);
-			numSprite[display[i]].position.y = 50;
+		if (i <= 2) {
+			numSprite[display[i]].position.x = 525 + (50 * i);
+			numSprite[display[i]].position.y = 300;
 			numSprite[display[i]].position.z = 0;
 			displayNumSprite[i] = numSprite[display[i]];	//表示用スプライトに代入
 		}
 		else {
-			numSprite[display[i]].position.x = 50 + (50 * (i + 1));
-			numSprite[display[i]].position.y = 50;
+			numSprite[display[i]].position.x = 525 + (50 * (i + 1));
+			numSprite[display[i]].position.y = 300;
 			numSprite[display[i]].position.z = 0;
 			displayNumSprite[i] = numSprite[display[i]];	//表示用スプライトに代入
 		}

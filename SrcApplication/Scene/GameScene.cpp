@@ -13,6 +13,8 @@ void GameScene::Init()
 	wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/CircleGuide.png", "CircleGuide");
 
+	timer_ = GameTimer::GetInstance();
+
 	guide.model = ModelManager::Get("Rail");
 	guide.position = { 0,0,0 };
 	guide.scale = { 8,8,8 };
@@ -128,15 +130,17 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
-	/*StringOptions dbgstrop;
+	float time = timer_->GetTimer();
+
+	StringOptions dbgstrop;
 	dbgstrop.fontOptions.resolution = 24;
 	dbgstrop.size = 24;
 	string debugstr;
-	debugstr += "Player::Health = ";
-	debugstr += to_string(player->health);
+	debugstr += "timer = ";
+	debugstr += to_string(time);
 	TextDrawer::DrawString(debugstr, 100, 100, Align::TopLeft, dbgstrop);
 
-	if (player->opti.size() > 0) {
+	/*if (player->opti.size() > 0) {
 		string debugscl;
 		debugscl += "opti::scale = ";
 		debugscl += to_string(player->opti.back().scale.x);
