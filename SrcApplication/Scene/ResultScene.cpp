@@ -55,7 +55,10 @@ void ResultScene::Init()
 		rankObj[i].scale = { 2,2,2 };
 		rankObj[i].UpdateMatrix();
 	}
-
+	rankTxtObj.model = ModelManager::Get("Rank");
+	rankTxtObj.position = { 0,5,0 };
+	rankTxtObj.scale = { 1,1,1 };
+	rankTxtObj.UpdateMatrix();
 #pragma region ƒJƒƒ‰‰Šú‰»
 	camera.projectionMode = ProjectionMode::Perspective;
 	camera.position = { 0, 0, -12.5 };
@@ -176,6 +179,7 @@ void ResultScene::Draw3D()
 	skyDome.Draw();
 
 	rankObj[0].Draw("white");
+	rankTxtObj.Draw("white");
 }
 
 void ResultScene::DrawSprite()
@@ -194,7 +198,7 @@ void ResultScene::DrawSprite()
 	selectSprite.Draw();
 	//¬”“_‚ğ•`‰æ
 	dotSprite.Draw();
-
+	
 }
 
 void ResultScene::UpdateNum()

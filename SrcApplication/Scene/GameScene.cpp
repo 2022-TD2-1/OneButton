@@ -14,6 +14,7 @@ void GameScene::Init()
 	wTextureManager::LoadTexture("Resources/CircleGuide.png", "CircleGuide");
 
 	timer_ = GameTimer::GetInstance();
+	timer_->Ini();
 
 	guide.model = ModelManager::Get("Rail");
 	guide.position = { 0,0,0 };

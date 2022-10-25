@@ -21,6 +21,7 @@ void ModelManager::LoadAllModels()
 	RegisterModel("A", "A");
 	RegisterModel("B", "B");
 	RegisterModel("C", "C");
+	RegisterModel("rank", "Rank");
 
 }
 
