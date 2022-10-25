@@ -64,15 +64,18 @@ void ResultScene::Init()
 	UpdateNum();
 
 	setTimer = timer_->GetTimer();
+
+	controlTime = 0;
 }
 
 void ResultScene::Update()
 {
 	const int maxT = 500;
-
-	if (t >= maxT) {
+	if (controlTime < 120) controlTime++;
+	if (t >= maxT && controlTime >= 120) {
+		
 		//メニューセレクト
-		if (Input::Key::Triggered(DIK_UP))
+ 		if (Input::Key::Triggered(DIK_UP))
 		{
 			isSelect = Menu::Continue;	//もう一度ボス戦へ
 			//セレクト画像の座標

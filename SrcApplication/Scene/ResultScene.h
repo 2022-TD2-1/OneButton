@@ -56,6 +56,7 @@ private:
 	Object3D skyDome;
 
 	GameTimer* timer_ = nullptr;
-
+	//‘€ì‚ğó‚¯•t‚¯‚È‚¢ŠÔ
+	int controlTime;
 };
 
