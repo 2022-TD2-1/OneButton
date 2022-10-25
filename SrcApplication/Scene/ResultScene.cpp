@@ -68,57 +68,66 @@ void ResultScene::Init()
 
 void ResultScene::Update()
 {
-	//メニューセレクト
-	if (Input::Key::Triggered(DIK_UP))
-	{
-		isSelect = Menu::Continue;	//もう一度ボス戦へ
-		//セレクト画像の座標
-		selectSprite.position = {
-		400,
-		menuTxt[0].position.y,
-		0
-		};
-	}
-	else if (Input::Key::Triggered(DIK_DOWN))
-	{
-		isSelect = Menu::Title;		//タイトルに戻る
-		//セレクト画像の座標
-		selectSprite.position = {
-		400,
-		menuTxt[1].position.y,
-		0
-		};
-	}
-	//決定
-	if (Input::Key::Triggered(DIK_SPACE)) {
-		isReturn = true;
-	}
-	//決定したら以下の処理をする
-	if (isReturn == true) {
-		timer_->Ini();
-		//コンティニューを選択した場合
-		if (isSelect == Menu::Continue) {
-			SceneManager::Transition<GameScene>();
-			dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(1);
-			return;
-		}
-		//タイトルを選択した場合
-		else if (isSelect == Menu::Title) {
-			SceneManager::Transition<GameScene>();
-			dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(0);
-			return;
-		}
-	}
-
-	//デバッグ
-	if (Input::Key::Triggered(DIK_1)) {
-		clearTime++;
-	}
-	if (Input::Key::Triggered(DIK_2)) {
-		clearTime--;
-	}
-
 	const int maxT = 500;
+
+	if (t >= maxT) {
+		//メニューセレクト
+		if (Input::Key::Triggered(DIK_UP))
+		{
+			isSelect = Menu::Continue;	//もう一度ボス戦へ
+			//セレクト画像の座標
+			selectSprite.position = {
+			400,
+			menuTxt[0].position.y,
+			0
+			};
+		}
+		else if (Input::Key::Triggered(DIK_DOWN))
+		{
+			isSelect = Menu::Title;		//タイトルに戻る
+			//セレクト画像の座標
+			selectSprite.position = {
+			400,
+			menuTxt[1].position.y,
+			0
+			};
+		}
+		//決定
+		if (Input::Key::Triggered(DIK_SPACE)) {
+			isReturn = true;
+		}
+		//決定したら以下の処理をする
+		if (isReturn == true) {
+			timer_->Ini();
+			//コンティニューを選択した場合
+			if (isSelect == Menu::Continue) {
+				SceneManager::Transition<GameScene>();
+				dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(1);
+				return;
+			}
+			//タイトルを選択した場合
+			else if (isSelect == Menu::Title) {
+				SceneManager::Transition<GameScene>();
+				dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(0);
+				return;
+			}
+		}
+
+		//デバッグ
+		if (Input::Key::Triggered(DIK_1)) {
+			clearTime++;
+		}
+		if (Input::Key::Triggered(DIK_2)) {
+			clearTime--;
+		}
+	}
+	else {
+		if (Input::Key::Triggered(DIK_SPACE)) {
+			t = maxT;
+		}
+	}
+
+	
 	if (t < maxT)t++;
 
 	clearTime = Vec3::easeOutBack(t, 0, setTimer, maxT);
