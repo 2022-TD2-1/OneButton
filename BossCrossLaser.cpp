@@ -2,12 +2,12 @@
 
 void BossCrossLaser::Update()
 {
-	//laser[0].Update();
-	//laser[1].Update();
+	laser->front().Update();
+	laser->back().Update();
 }
 
 void BossCrossLaser::Draw()
 {
-	//laser[0].Draw();
-	//laser[1].Draw();
+	laser->front().Draw();
+	laser->back().Draw();
 }

@@ -117,6 +117,8 @@ private:
     
     CountDown countDown_;
     GameTimer* timer_ = nullptr;
+
+    int step = 0;
 public:
     static Boss* Create();
     static Boss* GetCurrent();
