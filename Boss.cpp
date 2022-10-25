@@ -240,10 +240,33 @@ void Boss::P1Update()
 	phaseTimer[0].Update();
 	if (attackType == AttackType::Idle)
 	{
-		if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
+		//ステップ3なら
+		if (step >= 2)
 		{
-			phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-			ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+			if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
+			{
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step = 0;
+			}
+		}
+		else if (step == 1)
+		{
+			if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
+			{//ステップ2なら
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step++;
+			}
+		}
+		else
+		{
+			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
+			{//ステップ1なら
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step++;
+			}
 		}
 	}
 	if (this->health < maxHealth * 3 / 4)
@@ -257,10 +280,42 @@ void Boss::P2Update()
 	phaseTimer[1].Update();
 	if (attackType == AttackType::Idle)
 	{
-		if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+		//ステップ4なら
+		if (step >= 3)
 		{
-			phaseTimer->Subtract(phaseTimer[1].Check() - 1000.0);
-			ChangeAttack((AttackType)ApUtil::RNG(1, 2, true));
+			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+			{
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step = 0;
+			}
+		}
+		else if (step == 2)
+		{
+			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+			{//ステップ3なら
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step++;
+			}
+		}
+		else if (step == 1)
+		{
+			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+			{//ステップ2なら
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step++;
+			}
+		}
+		else
+		{
+			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
+			{//ステップ1なら
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step++;
+			}
 		}
 	}
 	if (this->health < maxHealth / 4)
@@ -274,10 +329,51 @@ void Boss::P3Update()
 	phaseTimer[2].Update();
 	if (attackType == AttackType::Idle)
 	{
-		if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+		//ステップ3なら
+		if (step >= 4)
 		{
-			phaseTimer->Subtract(phaseTimer[2].Check() - 1000.0);
-			ChangeAttack((AttackType)ApUtil::RNG(1, 2, true));
+			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+			{
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step = 0;
+			}
+		}
+		else if (step == 3)
+		{
+			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+			{//ステップ4なら
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step++;
+			}
+		}		
+		else if (step == 2)
+		{
+			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+			{//ステップ3なら
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step++;
+			}
+		}		
+		else if (step == 1)
+		{
+			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+			{//ステップ2なら
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step++;
+			}
+		}
+		else
+		{
+			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
+			{//ステップ1なら
+				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
+				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				step++;
+			}
 		}
 	}
 }
