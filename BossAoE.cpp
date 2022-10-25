@@ -14,28 +14,41 @@ void BossAoE::Update()
 	if (timer.Check() < readyTime)
 	{
 		//—\‰~
-		*this->brightnessCB.contents = { 1.f, 1.f, 1.f, .25f };
+		*this->brightnessCB.contents = { 1.f, 1.f, 1.f, .1f };
+		//UŒ‚
+		*entityObj.brightnessCB.contents = { 1.f, 1.f, 1.f, 1.f };
+
 	}
 	else 
 	{
-		//UŒ‚
-		*this->brightnessCB.contents = { 1.f, 1.f, 1.f, 1.f };
+		if (entityObj.scale.x < PlayerParams::circleR * 3 / 4) {
+			entityObj.scale += {0.05f, 0.05f, 0.05f};
+		}
+
 		if (col.Collide(Player::GetCurrent()->col))
 		{
 			Player::GetCurrent()->Damage(1);
 		}
 	}
 
-	col.r = PlayerParams::circleR * 3 / 4;
+	
+
+	col.r = entityObj.scale.x;
 
 	col.x = position.x;
 	col.y = position.y;
 
-	scale = { col.r, col.r, col.r };
+	scale = { 
+		PlayerParams::circleR * 3 / 4,
+		PlayerParams::circleR * 3 / 4,
+		PlayerParams::circleR * 3 / 4 };
+
+	entityObj.UpdateMatrix();
 	UpdateMatrix();
 }
 
 void BossAoE::Draw()
 {
+	entityObj.Draw();
 	Object3D::Draw();
 }

@@ -243,7 +243,7 @@ void Boss::P1Update()
 		if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
 		{
 			phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-			ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+			ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
 		}
 	}
 	if (this->health < maxHealth * 3 / 4)

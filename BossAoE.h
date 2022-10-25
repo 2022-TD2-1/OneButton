@@ -23,6 +23,11 @@ public:
         UpdateMatrix();
 
         this->timer.Start();
+
+        entityObj.model = model;
+        entityObj.position = position;
+        entityObj.scale = {0,0,0};
+        entityObj.UpdateMatrix();
     };
 
     void Update();
@@ -32,7 +37,9 @@ public:
     float posR = (float)PlayerParams::circleR * 3 / 4;
 
     Timer timer;
-    double readyTime = 1000.0l;
-    const static int totalTime = 3000;
+    double readyTime = 2000.0l;
+    const static int totalTime = 5000;
+
+    Object3D entityObj;
 };
 
