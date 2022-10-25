@@ -63,7 +63,7 @@ void ResultScene::Init()
 
 	UpdateNum();
 
-	clearTime = timer_->GetTimer();
+	setTimer = timer_->GetTimer();
 }
 
 void ResultScene::Update()
@@ -118,9 +118,12 @@ void ResultScene::Update()
 		clearTime--;
 	}
 
-	UpdateNum();
+	const int maxT = 500;
+	if (t < maxT)t++;
 
-	
+	clearTime = Vec3::easeOutBack(t, 0, setTimer, maxT);
+
+	UpdateNum();
 
 	//スプライト更新
 	for (int i = 0; i < 10; i++) {
@@ -172,9 +175,7 @@ void ResultScene::UpdateNum()
 {
 	
 	//時間がマイナスにならないように
-	if (clearTime <= 0) {
-		clearTime = 0;
-	}
+	
 	//時間を代入する
 	int time = (clearTime * 100);
 	displayNum[0] = (time % 100000) / 10000;
@@ -188,21 +189,21 @@ void ResultScene::UpdateNum()
 	for (int i = 0; i < 5; i++) {
 		if (i == 3) {
 			//小数点の座標を代入
-			dotSprite.position.x = 50 + (50 * i);
-			dotSprite.position.y = 50;
+			dotSprite.position.x = 525 + (50 * i);
+			dotSprite.position.y = 300;
 			dotSprite.position.z = 0;
 		}
 
 		//数字の座標を代入
 		if (i <= 2) {
-			numSprite[display[i]].position.x = 50 + (50 * i);
-			numSprite[display[i]].position.y = 50;
+			numSprite[display[i]].position.x = 525 + (50 * i);
+			numSprite[display[i]].position.y = 300;
 			numSprite[display[i]].position.z = 0;
 			displayNumSprite[i] = numSprite[display[i]];	//表示用スプライトに代入
 		}
 		else {
-			numSprite[display[i]].position.x = 50 + (50 * (i + 1));
-			numSprite[display[i]].position.y = 50;
+			numSprite[display[i]].position.x = 525 + (50 * (i + 1));
+			numSprite[display[i]].position.y = 300;
 			numSprite[display[i]].position.z = 0;
 			displayNumSprite[i] = numSprite[display[i]];	//表示用スプライトに代入
 		}

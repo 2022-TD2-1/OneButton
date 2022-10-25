@@ -26,6 +26,8 @@ private:
 	
 	//クリア時間を入れる変数
 	float clearTime = 03.31f;
+	float setTimer;
+	int t;
 	//表示する4つの数字を入れる変数
 	float displayNum[5];
 	//表示させる画像
