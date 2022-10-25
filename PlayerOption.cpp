@@ -40,6 +40,10 @@ void PlayerOption::Draw()
 
 void PlayerOption::MoveUpdate()
 {
+	if (col.Collide(Player::GetCurrent()->col))
+	{
+		this->hasHit = false;
+	}
 	if (power <= 2.83f ) {
 		(*this->brightnessCB.contents) = Float4{ 0.5f, 1.0f, 1.0f, 1.0f };
 		power += 0.01f;
@@ -49,9 +53,10 @@ void PlayerOption::MoveUpdate()
 		(*brightnessCB.contents) = Float4{ 1.0f, 0.0f, 0.0f, 1.0f };
 	}
 	x -= 1.5f * power;
-	if (col.Collide(Boss::GetCurrent()->col))
+	if (col.Collide(Boss::GetCurrent()->col) && !hasHit)
 	{
 		Boss::GetCurrent()->Hit(this);
+		this->hasHit = true;
 	}
 
 	//ˆÚ“®‘—Ê‚©‚ç‰ñ“]Œã‚ÌˆÊ’u‚ğŒvZ

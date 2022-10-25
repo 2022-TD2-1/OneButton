@@ -81,6 +81,9 @@ public:
 
     Timer bulletTimer;
 
+    //円周上での座標
+    float laneX = 0;
+
     int phase = 0;
 
     //ボスが真ん中にいる秒数

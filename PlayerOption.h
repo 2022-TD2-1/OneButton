@@ -43,6 +43,8 @@ public:
 
 	float power = 1.0f;
 
+	bool hasHit = false;
+
 	Vec3 attackStartedPos;
 };
 

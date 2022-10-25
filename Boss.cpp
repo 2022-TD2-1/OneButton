@@ -31,7 +31,6 @@ void Boss::Init(Camera* camera)
 
 void Boss::Update()
 {
-
 	//死んでいるとき
 	if (health <= 0) {
 		DeadEffect();
@@ -178,6 +177,7 @@ void Boss::Hit(PlayerOption* other)
 			if (((Vec3)this->position).GetSquaredLength() >= 8.0f * 8.0f - 0.1f)
 			{
 				this->state = State::Down;
+				this->laneX = other->x - 180 / PlayerParams::degPerMove;
 			}
 			UpdateMatrix();
 			this->UpdateCol();
@@ -192,6 +192,20 @@ void Boss::Hit(PlayerOption* other)
 		{
 			health -= 1.f * other->power;
 			//kb処理
+			//
+			laneX -= 2.0f * other->power;
+			//移動総量から回転後の位置を計算
+			Matrix moveTemp = Matrix::Identity();
+			moveTemp *= Matrix::Translation({ PlayerParams::circleR, 0.f, 0.f });
+			moveTemp *= Matrix::RotZ(DegToRad(laneX * PlayerParams::degPerMove));
+
+			//回転後の位置に移動して自身の行列を更新
+			this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
+			UpdateMatrix();
+			//UpdateCollision();
+
+			//中央に戻るまでの時間を延長
+			backCoolTime = MaxBackCoolTime;
 		}
 	}
 }
@@ -210,6 +224,7 @@ void Boss::CenterUpdate()
 void Boss::DownUpdate()
 {
 	*this->brightnessCB.contents = { 1.0f, 0.0f, 0.0f, 1.0f };
+
 	backCoolTime--;
 	//ゼロになったら
 	if (backCoolTime <= 0) {
@@ -231,6 +246,10 @@ void Boss::P1Update()
 			ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
 		}
 	}
+	if (this->health < maxHealth * 3 / 4)
+	{
+		this->phase++;
+	}
 }
 
 void Boss::P2Update()
@@ -243,6 +262,10 @@ void Boss::P2Update()
 			phaseTimer->Subtract(phaseTimer[1].Check() - 1000.0);
 			ChangeAttack((AttackType)ApUtil::RNG(1, 2, true));
 		}
+	}
+	if (this->health < maxHealth / 4)
+	{
+		this->phase++;
 	}
 }
 
