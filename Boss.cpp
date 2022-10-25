@@ -238,7 +238,7 @@ void Boss::P1Update()
 	phaseTimer[0].Update();
 	if (attackType == AttackType::Idle)
 	{
-		if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+		if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
 		{
 			phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
 			ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
@@ -292,7 +292,7 @@ void Boss::BulletsUpdate()
 	bulletTimer.Update();
 	if (bulletTimer.Check() >= BossParams::bulletCD)
 	{
-		bulletTimer.Subtract(BossParams::bulletCD);
+   		bulletTimer.Subtract(BossParams::bulletCD);
 		double deg = (int)timer->Check() / 250;
 		deg *= BossParams::bulletDeg;
 
@@ -387,6 +387,7 @@ void Boss::ChangeAttack(AttackType next)
 	case Boss::AttackType::Idle:
 		break;
 	case Boss::AttackType::Bullets:
+		bulletTimer.Start();
 		break;
 	case Boss::AttackType::Bar1:
 		bossAttacks.emplace_back(new BossLaser((float)ApUtil::RNG(1, 360) * PI / 180));
