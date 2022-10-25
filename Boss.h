@@ -118,6 +118,8 @@ private:
     
     CountDown countDown_;
     GameTimer* timer_ = nullptr;
+
+    int step = 0;
     Player* player_ = nullptr;
 public:
     static Boss* Create();

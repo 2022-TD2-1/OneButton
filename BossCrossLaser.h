@@ -6,9 +6,11 @@ class BossCrossLaser :
 {
 public:
     BossCrossLaser(float rad) {
+        laser->emplace_back(rad);
+        laser->emplace_back(rad + PIf / 2);
     };
     void Update() override;
     void Draw() override;
 
-   // BossLaser laser[2];
+   vector<BossLaser> laser[2];
 };

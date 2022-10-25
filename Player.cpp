@@ -102,7 +102,6 @@ void Player::Update()
 		UpdateMatrix();
 		UpdateCollisionPos();
 
-
 		if (coolTime > 0) {
 			coolTime--;
 		}
