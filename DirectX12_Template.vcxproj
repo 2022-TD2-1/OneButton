@@ -154,6 +154,7 @@
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="CountDown.cpp" />
     <ClCompile Include="FrameRate.cpp" />
+    <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="HitEffect.cpp" />
     <ClCompile Include="Hpbar.cpp" />
     <ClCompile Include="IBossAttack.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="CountDown.h" />
     <ClInclude Include="Easing.h" />
     <ClInclude Include="FrameRate.h" />
+    <ClInclude Include="GameTimer.h" />
     <ClInclude Include="HitEffect.h" />
     <ClInclude Include="Hpbar.h" />
     <ClInclude Include="IBossAttack.h" />

@@ -18,6 +18,7 @@
 #include "GPipelineManager.h"
 #include <Parameters.h>
 #include <chrono>
+#include "GameTimer.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -65,6 +66,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//Init Scene
 	SceneManager::Init();
 
+	GameTimer* timer = GameTimer::GetInstance();
+
 	/*デバッグ有効化*/
 #ifdef  _DEBUG
 	ComPtr<ID3D12InfoQueue> infoQueue;
@@ -82,7 +85,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Input::Pad::Update();
 
 		/*毎フレーム処理*/
-
+		timer->Update();
 		/*更新処理*/
 		SceneManager::Update();
 		/*更新処理ここまで*/

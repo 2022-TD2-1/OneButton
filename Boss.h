@@ -7,6 +7,7 @@
 #include <HitEffect.h>
 #include <Camera.h>
 #include "CountDown.h"
+#include "GameTimer.h"
 class Boss :
     public Object3D
 {
@@ -112,6 +113,7 @@ private:
 
     
     CountDown countDown_;
+    GameTimer* timer_ = nullptr;
 public:
     static Boss* Create();
     static Boss* GetCurrent();

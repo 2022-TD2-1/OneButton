@@ -9,6 +9,7 @@
 #include <Player.h>
 #include <Boss.h>
 #include <TitleObj.h>
+#include <GameTimer.h>
 using namespace Input;
 
 class GameScene :
@@ -39,6 +40,8 @@ private:
 	TitleObj* titleObj;
 
 	Object3D spaceObj;
+
+	GameTimer* timer_ = nullptr;
 
 	enum GameState {
 		Title_,

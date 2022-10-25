@@ -6,6 +6,7 @@
 
 void ResultScene::Init()
 {
+	timer_ = GameTimer::GetInstance();
 #pragma region 数字読み込み
 	numSprite[0] = Sprite("Resources/Numbers/zero.png", "zero");
 	numSprite[1] = Sprite("Resources/Numbers/one.png", "one");
@@ -61,6 +62,8 @@ void ResultScene::Init()
 #pragma endregion
 
 	UpdateNum();
+
+	clearTime = timer_->GetTimer();
 }
 
 void ResultScene::Update()
@@ -92,6 +95,7 @@ void ResultScene::Update()
 	}
 	//決定したら以下の処理をする
 	if (isReturn == true) {
+		timer_->Ini();
 		//コンティニューを選択した場合
 		if (isSelect == Menu::Continue) {
 			SceneManager::Transition<GameScene>();
@@ -148,9 +152,9 @@ void ResultScene::Draw3D()
 void ResultScene::DrawSprite()
 {
 
-	const int display[4] =
-	{ displayNum[0],displayNum[1], displayNum[2], displayNum[3], };
-	for (int i = 0; i < 4; i++) {
+	const int display[5] =
+	{ displayNum[0],displayNum[1], displayNum[2], displayNum[3], displayNum[4] };
+	for (int i = 0; i < 5; i++) {
 		//数字を描画
 		displayNumSprite[i].Draw();
 
@@ -173,15 +177,16 @@ void ResultScene::UpdateNum()
 	}
 	//時間を代入する
 	int time = (clearTime * 100);
-	displayNum[0] = (time % 10000) / 1000;
-	displayNum[1] = (time % 1000) / 100;
-	displayNum[2] = (time % 100) / 10;
-	displayNum[3] = (time % 10);
+	displayNum[0] = (time % 100000) / 10000;
+	displayNum[1] = (time % 10000) / 1000;
+	displayNum[2] = (time % 1000) / 100;
+	displayNum[3] = (time % 100) / 10;
+	displayNum[4] = (time % 10);
 	
-	const int display[4] =
-	{ displayNum[0],displayNum[1], displayNum[2], displayNum[3] };
-	for (int i = 0; i < 4; i++) {
-		if (i == 2) {
+	const int display[5] =
+	{ displayNum[0],displayNum[1], displayNum[2], displayNum[3], displayNum[4] };
+	for (int i = 0; i < 5; i++) {
+		if (i == 3) {
 			//小数点の座標を代入
 			dotSprite.position.x = 50 + (50 * i);
 			dotSprite.position.y = 50;
@@ -189,7 +194,7 @@ void ResultScene::UpdateNum()
 		}
 
 		//数字の座標を代入
-		if (i <= 1) {
+		if (i <= 2) {
 			numSprite[display[i]].position.x = 50 + (50 * i);
 			numSprite[display[i]].position.y = 50;
 			numSprite[display[i]].position.z = 0;
