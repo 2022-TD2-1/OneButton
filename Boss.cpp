@@ -12,6 +12,7 @@ unique_ptr<Boss> Boss::current = nullptr;
 
 void Boss::Init(Camera* camera)
 {
+	timer_ = GameTimer::GetInstance();
 	Object3D::Object3D();
 	this->model = ModelManager::Get("Boss");
 
@@ -34,6 +35,7 @@ void Boss::Update()
 	if (health <= 0) {
 		DeadEffect();
 		UpdateMatrix();
+		timer_->StopTimer();
 	}
 	else {
 		//登場演出の時
@@ -50,6 +52,7 @@ void Boss::Update()
 				else if (countDown_.GetEnd() == true) {
 					//カウントダウンが終わったらゲームスタート
 					isActive = true;
+					timer_->StartTimer();
 				}
 				countDown_.Update();
 
@@ -59,11 +62,10 @@ void Boss::Update()
 				//カメラシェイク
 				camera_->ShakeSet(40, 0.7, 3);
 			}
-
-
 		}
 		//ゲームが始まった時
 		else if (isActive == true) {
+			
 			if (testTime >= 0) {
 				testTime--;
 				position = { 0,0,0 };
