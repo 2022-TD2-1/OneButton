@@ -41,6 +41,7 @@ void Boss::Update()
 		//登場演出の時
 		if (isActive == false) {
 			if (position.z < 0) {
+				player_->SetCanNotAttack();
 				position.z += 0.1f;
 			}
 			else {
@@ -53,6 +54,7 @@ void Boss::Update()
 					//カウントダウンが終わったらゲームスタート
 					isActive = true;
 					timer_->StartTimer();
+					player_->SetCanAttack();
 				}
 				countDown_.Update();
 

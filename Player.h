@@ -63,6 +63,9 @@ public:
 	void UpdateCollisionPos();
 
 	list<PlayerOption> opti;
+
+	void SetCanAttack() { isCanAttack = true; }
+	void SetCanNotAttack() { isCanAttack = false; }
 private:
 	static unique_ptr<Player> current;
 
@@ -77,5 +80,8 @@ private:
 	void RegisterBullet(Vec3 vel);
 
 	std::list<unique_ptr<TraceEffect>> trsEffect_;
+
+	//UŒ‚‚Å‚«‚é‚©ƒtƒ‰ƒO
+	bool isCanAttack = true;
 };
 

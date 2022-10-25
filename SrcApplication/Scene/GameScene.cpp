@@ -46,6 +46,7 @@ void GameScene::Init()
 
 	boss = Boss::Create();
 	boss->Init(&camera);
+	boss->SetPlayer(player);
 
 	SkyDome.model = ModelManager::Get("Skysphere");
 	SkyDome.position = { 0,0,0 };

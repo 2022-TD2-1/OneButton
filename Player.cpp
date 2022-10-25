@@ -33,47 +33,48 @@ void Player::Update()
 	}
 	//生きているとき
 	else if (health > 0) {
-
-		//キーが押されている間は停止状態に、そうでないなら移動
-		if (Input::Key::Down(DIK_SPACE))
-		{
-			state = State::Stop;
-		}
-		else
-		{
-			state = State::Move;
-			if (facing == Side::Clock)
+		if (isCanAttack == true) {
+			//キーが押されている間は停止状態に、そうでないなら移動
+			if (Input::Key::Down(DIK_SPACE))
 			{
-				x--;
+				state = State::Stop;
 			}
 			else
 			{
-				x++;
+				state = State::Move;
+				if (facing == Side::Clock)
+				{
+					x--;
+				}
+				else
+				{
+					x++;
+				}
 			}
-		}
-		//キーが押されたら分身を自分の座標に追加
-		if (Input::Key::Triggered(DIK_SPACE))
-		{
-			opti.emplace_back();
-			opti.back().x = this->x;
-		}
-		//キーが離されたら自分を分身の座標に移動
-		if (Input::Key::Released(DIK_SPACE))
-		{
-			if (opti.size() > 0) {
-				this->x = opti.back().x;
+			//キーが押されたら分身を自分の座標に追加
+			if (Input::Key::Triggered(DIK_SPACE))
+			{
+				opti.emplace_back();
+				opti.back().x = this->x;
 			}
-		}
+			//キーが離されたら自分を分身の座標に移動
+			if (Input::Key::Released(DIK_SPACE))
+			{
+				if (opti.size() > 0) {
+					this->x = opti.back().x;
+				}
+			}
 
-		if (Input::Key::Released(DIK_SPACE))
-		{
-			if (opti.size() > 0) {
-				opti.back().ChangeState(PlayerOption::State::Attack);
+			if (Input::Key::Released(DIK_SPACE))
+			{
+				if (opti.size() > 0) {
+					opti.back().ChangeState(PlayerOption::State::Attack);
+				}
 			}
-		}
-		else if (Input::Key::Triggered(DIK_SPACE))
-		{
-			opti.back().ChangeState(PlayerOption::State::Move);
+			else if (Input::Key::Triggered(DIK_SPACE))
+			{
+				opti.back().ChangeState(PlayerOption::State::Move);
+			}
 		}
 		for (auto itr = opti.begin(); itr != opti.end();)
 		{

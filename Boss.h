@@ -8,6 +8,7 @@
 #include <Camera.h>
 #include "CountDown.h"
 #include "GameTimer.h"
+#include "Player.h"
 class Boss :
     public Object3D
 {
@@ -117,8 +118,11 @@ private:
     
     CountDown countDown_;
     GameTimer* timer_ = nullptr;
+    Player* player_ = nullptr;
 public:
     static Boss* Create();
     static Boss* GetCurrent();
+
+    void SetPlayer(Player* player) { player_ = player; }
 };
 
