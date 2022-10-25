@@ -17,6 +17,10 @@ void ModelManager::LoadAllModels()
 	RegisterModel("one", "One");
 	RegisterModel("two", "Two");
 	RegisterModel("start", "Start");
+	RegisterModel("S", "S");
+	RegisterModel("A", "A");
+	RegisterModel("B", "B");
+	RegisterModel("C", "C");
 
 }
 

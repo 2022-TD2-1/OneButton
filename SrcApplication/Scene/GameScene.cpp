@@ -133,13 +133,13 @@ void GameScene::DrawSprite()
 {
 	float time = timer_->GetTimer();
 
-	StringOptions dbgstrop;
+	/*StringOptions dbgstrop;
 	dbgstrop.fontOptions.resolution = 24;
-	dbgstrop.size = 24;
+	dbgstrop.size = 48;
 	string debugstr;
-	debugstr += "timer = ";
+	debugstr += "timer : ";
 	debugstr += to_string(time);
-	TextDrawer::DrawString(debugstr, 100, 100, Align::TopLeft, dbgstrop);
+	TextDrawer::DrawString(debugstr, 100, 100, Align::TopLeft, dbgstrop);*/
 
 	/*if (player->opti.size() > 0) {
 		string debugscl;
@@ -151,6 +151,8 @@ void GameScene::DrawSprite()
 		debugpw += to_string(player->opti.back().power);
 		TextDrawer::DrawString(debugpw, 100, 180, Align::TopLeft, dbgstrop);
 	}*/
+
+	timer_->DrawTimer();
 }
 
 void GameScene::SetState(int state)

@@ -67,6 +67,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SceneManager::Init();
 
 	GameTimer* timer = GameTimer::GetInstance();
+	timer->Ini();
 
 	/*デバッグ有効化*/
 #ifdef  _DEBUG

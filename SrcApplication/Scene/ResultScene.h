@@ -40,6 +40,7 @@ private:
 	Sprite menuTxt[2];
 	Sprite selectSprite;
 
+	Object3D rankObj[4];
 	void UpdateNum();	//”š‚ğXV‚·‚é
 
 	int rank;

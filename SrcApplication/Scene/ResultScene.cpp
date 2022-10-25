@@ -46,6 +46,16 @@ void ResultScene::Init()
 	skyDome.scale = { 30,30,30 };
 	skyDome.UpdateMatrix();
 
+	rankObj[0].model = ModelManager::Get("S");
+	rankObj[1].model = ModelManager::Get("A");
+	rankObj[2].model = ModelManager::Get("B");
+	rankObj[3].model = ModelManager::Get("C");
+	for (int i = 0; i < 4; i++) {
+		rankObj[i].position = { 0,0,0 };
+		rankObj[i].scale = { 2,2,2 };
+		rankObj[i].UpdateMatrix();
+	}
+
 #pragma region ƒJƒƒ‰‰Šú‰»
 	camera.projectionMode = ProjectionMode::Perspective;
 	camera.position = { 0, 0, -12.5 };
@@ -66,6 +76,8 @@ void ResultScene::Init()
 	setTimer = timer_->GetTimer();
 
 	controlTime = 0;
+
+	
 }
 
 void ResultScene::Update()
@@ -162,6 +174,8 @@ void ResultScene::Draw3D()
 {
 	Camera::Set(camera);
 	skyDome.Draw();
+
+	rankObj[0].Draw("white");
 }
 
 void ResultScene::DrawSprite()
