@@ -244,6 +244,10 @@ void Boss::P1Update()
 			ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
 		}
 	}
+	if (this->health < maxHealth * 3 / 4)
+	{
+		this->phase++;
+	}
 }
 
 void Boss::P2Update()
@@ -256,6 +260,10 @@ void Boss::P2Update()
 			phaseTimer->Subtract(phaseTimer[1].Check() - 1000.0);
 			ChangeAttack((AttackType)ApUtil::RNG(1, 2, true));
 		}
+	}
+	if (this->health < maxHealth / 4)
+	{
+		this->phase++;
 	}
 }
 
