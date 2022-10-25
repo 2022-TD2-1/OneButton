@@ -191,7 +191,7 @@ void Boss::Hit(PlayerOption* other)
 			health -= 1.f * other->power;
 			//kbˆ—
 			//
-			laneX -= 1.0f * other->power;
+			laneX -= 2.0f * other->power;
 			//ˆÚ“®‘—Ê‚©‚ç‰ñ“]Œã‚ÌˆÊ’u‚ğŒvZ
 			Matrix moveTemp = Matrix::Identity();
 			moveTemp *= Matrix::Translation({ PlayerParams::circleR, 0.f, 0.f });
