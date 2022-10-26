@@ -74,8 +74,8 @@ private:
 	void UpdateAllBullets();
 	void DrawAllBullets();
 
-	LimitedTimer bulletTimer = LimitedTimer((double)500.0f);
-	float bulletSpeed = 0.08f;
+	LimitedTimer bulletTimer = LimitedTimer((double)200.0f);
+	float bulletSpeed = 0.32f;
 	list<PlayerBullet> bullets;
 
 	void RegisterBullet(Vec3 vel);
