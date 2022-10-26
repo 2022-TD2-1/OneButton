@@ -55,14 +55,17 @@ void ResultScene::Init()
 	rankObj[1].model = ModelManager::Get("A");
 	rankObj[2].model = ModelManager::Get("B");
 	rankObj[3].model = ModelManager::Get("C");
+
 	for (int i = 0; i < 4; i++) {
-		rankObj[i].position = { 4,0,0 };
-		rankObj[i].scale = { 2,2,2 };
+		rankObj[i].position = { 5,0,0 };
+		rankObj[i].scale.x = 10.f / (i + 2);
+		rankObj[i].scale.y = 10.f / (i + 2);
+		rankObj[i].scale.z = 10.f / (i + 2);
 		rankObj[i].UpdateMatrix();
 	}
 	rankTxtObj.model = ModelManager::Get("Rank");
-	rankTxtObj.position = { -2,0,0 };
-	rankTxtObj.scale = { 2,2,2 };
+	rankTxtObj.position = { -3,0,0 };
+	rankTxtObj.scale = { 3,3,3 };
 	rankTxtObj.UpdateMatrix();
 #pragma region ƒJƒƒ‰‰Šú‰»
 	camera.projectionMode = ProjectionMode::Perspective;
@@ -156,7 +159,7 @@ void ResultScene::Update()
 		}
 	}
 
-	
+	if (maxT == t)isDisplayRank = true;
 	if (t < maxT)t++;
 
 	clearTime = Vec3::easeOutBack(t, 0, setTimer, maxT);
@@ -188,8 +191,9 @@ void ResultScene::Draw3D()
 {
 	Camera::Set(camera);
 	skyDome.Draw();
-
-	rankObj[rank].Draw("white");
+	if (isDisplayRank == true) {
+		rankObj[rank].Draw("white");
+	}
 	rankTxtObj.Draw("white");
 }
 
@@ -260,10 +264,10 @@ void ResultScene::Rank()
 	else if (clearTime <= 50) {	//A
 		rank = 1;
 	}
-	else if (clearTime <= 50) {	//B
+	else if (clearTime <= 70) {	//B
 		rank = 2;
 	}
-	else if (clearTime <= 50) {	//C
+	else if (clearTime <= 90) {	//C
 		rank = 3;
 	}
 	//ˆÈ‰º“K“–‚É
