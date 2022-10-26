@@ -1,5 +1,6 @@
 #include "ModelManager.h"
 #include "TitleObj.h"
+#include <Player.h>
 
 
 unique_ptr<TitleObj> TitleObj::current = nullptr;
@@ -30,6 +31,7 @@ void TitleObj::Update()
 
 	if (health <= 0) {
 		isDead = true;
+		Player::GetCurrent()->showWall = false;
 	}
 
 	//エフェクト更新
