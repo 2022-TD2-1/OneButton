@@ -39,6 +39,7 @@ void wWindow::Create(LPCWSTR title, int windowWidth, int windowHeight) {
 	w.lpfnWndProc = (WNDPROC)WindowProc;
 	w.lpszClassName = title;
 	w.hInstance = GetModuleHandle(nullptr);
+	w.hIcon = LoadIcon(w.hInstance, TEXT("ICON"));
 	w.hCursor = LoadCursor(NULL, IDC_ARROW);
 
 	RegisterClassEx(&w);

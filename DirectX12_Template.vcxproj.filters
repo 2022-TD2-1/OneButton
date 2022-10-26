@@ -536,6 +536,9 @@
     <ClInclude Include="GameTimer.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">
@@ -558,5 +561,10 @@
     <None Include="Resources\Shaders\Sprite.hlsli">
       <Filter>Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Application\リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
