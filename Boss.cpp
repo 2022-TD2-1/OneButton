@@ -34,6 +34,12 @@ void Boss::Init(Camera* camera)
 	scale = {1.5f, 1.5f, 1.5f};
 
 	rotation.x = -(PI / 16);
+
+	shockWaveObj.model = ModelManager::Get("Sphere");
+	*shockWaveObj.brightnessCB.contents = { 1.f, 0.5f, 0.5f, .4f };
+	shockWaveObj.position = { 0,0,0 };
+	shockWaveObj.scale = { 0,0,0 };
+	shockWaveObj.UpdateMatrix();
 }
 
 void Boss::Update()
@@ -144,6 +150,10 @@ void Boss::Update()
 		{
 			return effect->GetAllDead();
 		});
+
+	if (isActiveShocWave == true) {
+		ShockwaveUpdate();
+	}
 }
 
 void Boss::Draw()
@@ -167,6 +177,10 @@ void Boss::Draw()
 	for (std::unique_ptr<HitEffect>& effect : deadEffect) {
 		effect->Draw();
 	}
+
+	if (isActiveShocWave == true) {
+		shockWaveObj.Draw("white");
+	}
 }
 
 void Boss::Hit(PlayerOption* other)
@@ -189,6 +203,7 @@ void Boss::Hit(PlayerOption* other)
 				SoundManager::Play(bossKnockSE);
 				this->state = State::Down;
 				this->laneX = other->x - 180 / PlayerParams::degPerMove;
+				isShocWave = true;	//衝撃波を出すフラグをオンにする
 			}
 			UpdateMatrix();
 			this->UpdateCol();
@@ -230,6 +245,11 @@ void Boss::CenterUpdate()
 {
 	MoveTo(Vec3(0, 0, 0), 0.1f);
 	*this->brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f };
+	if (isShocWave == true) {
+		if (position.x == 0) {
+			isActiveShocWave = true;	//衝撃波を出す
+		}
+	}
 }
 
 void Boss::DownUpdate()
@@ -645,6 +665,20 @@ void Boss::DeadEffect()
 			isDead = true;
 		}
 	}
+}
+
+void Boss::ShockwaveUpdate()
+{
+	shockWaveObj.scale.x += 0.5f;
+	shockWaveObj.scale.y += 0.5f;
+	shockWaveObj.scale.z += 0.5f;
+	if (shockWaveObj.scale.x >= 20) {
+		isShocWave = false;
+		isActiveShocWave = false;
+		shockWaveObj.scale = { 0,0,0 };
+	}
+	shockWaveObj.UpdateMatrix();
+
 }
 
 Boss* Boss::Create()
