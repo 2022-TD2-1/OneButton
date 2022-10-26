@@ -654,7 +654,7 @@ void Boss::DeadEffect()
 		//É{ÉXÇè¡Ç∑
 		isBossDisplay = false;
 		if (deadEffectTime % 8 == 0) {
-
+			SoundManager::Play("Explosion");
 			std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
 			newEffect->Ini(position, 4, true);
 			deadEffect.emplace_back(std::move(newEffect));
