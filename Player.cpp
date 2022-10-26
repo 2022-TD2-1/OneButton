@@ -13,14 +13,14 @@ void Player::Init()
 		hps_.back().Ini(0 - 17 + (3 * i));
 	}
 
-	bulletTimer.Start();
-
 	bulletTimer.SetOnTimeFunction(
 		[&, this](void)
 		{
 			RegisterBullet(((Vec3)Boss::GetCurrent()->position - position).SetLength(bulletSpeed));
 		}
 	);
+
+	bulletTimer.Start();
 
 }
 

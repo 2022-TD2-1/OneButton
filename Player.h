@@ -65,7 +65,11 @@ public:
 
 	list<PlayerOption> opti;
 
-	void SetCanAttack() { isCanAttack = true; }
+	void SetCanAttack() { 
+		isCanAttack = true; 
+
+		bulletTimer.Start();
+	}
 	void SetCanNotAttack() { isCanAttack = false; }
 private:
 	static unique_ptr<Player> current;
