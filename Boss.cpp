@@ -263,6 +263,9 @@ void Boss::DownUpdate()
 		backCoolTime = MaxBackCoolTime;
 		isReturning = true;
 	}
+
+	bossAoEs.clear();
+	bossAttacks.clear();
 }
 
 void Boss::P1Update()
@@ -356,7 +359,7 @@ void Boss::P2Update()
 		}
 		else
 		{
-			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
+			if (attackTimer[(int)AttackType::Idle].Check() >= 3000.0)
 			{//ステップ1なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
 				//ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
@@ -425,7 +428,7 @@ void Boss::P3Update()
 		}
 		else
 		{
-			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
+			if (attackTimer[(int)AttackType::Idle].Check() >= 3000.0)
 			{//ステップ1なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
 				ChangeAttack(AttackType::Bar1);

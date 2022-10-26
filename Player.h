@@ -18,6 +18,19 @@ class Player :
 public:
 	Player() {
 		Object3D::Object3D();
+		for (int i = 0; i < 2; i++)
+		{
+			auto& w = wall[i];
+			w.model = ModelManager::Get("Cube");
+			Matrix moveTemp = Matrix::Identity();
+			moveTemp *= Matrix::Translation({ PlayerParams::circleR, 0.f, 0.f });
+			moveTemp *= Matrix::RotZ(DegToRad(90 + 180 * i));
+
+			//回転後の位置に移動して自身の行列を更新
+			w.position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
+			w.scale.x = 0.2f;
+			w.UpdateMatrix();
+		}
 	};
 
 	void Init(Camera* camera);
@@ -74,6 +87,8 @@ public:
 		bulletTimer.Start();
 	}
 	void SetCanNotAttack() { isCanAttack = false; }
+
+	bool showWall = true;
 private:
 	static unique_ptr<Player> current;
 
@@ -95,5 +110,12 @@ private:
 	Camera* camera_ = nullptr;
 
 	Sprite damageSprite;
+
+	int bounceTimer = 0;
+	int bounceTime = 20;
+
+	Object3D wall[2];
+
+	
 };
 

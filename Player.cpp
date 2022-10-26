@@ -38,6 +38,12 @@ void Player::Update()
 		damageSprite.brightness.w -= 0.01f;
 	}
 	damageSprite.UpdateMatrix();
+	
+	if (!showWall)
+	{
+		facing = Side::Clock;
+	}
+	
 	//死んでいるとき
 	if (health <= 0) {
 		DeadEffect();
@@ -57,10 +63,29 @@ void Player::Update()
 				if (facing == Side::Clock)
 				{
 					x--;
+					if (!Boss::GetCurrent()->isActive)
+					{
+						int curDeg = (int)(x * PlayerParams::degPerMove) % 360;
+						while(curDeg < 0)
+						{
+							curDeg += 360;
+						}
+						if ((curDeg % 360 <= 90 && curDeg % 360 > 88) ||
+							(curDeg % 360 <= 272 && curDeg % 360 > 270))
+						{
+ 							facing = Side::CounterClock;
+							bounceTimer = bounceTime;
+						}
+					}
 				}
 				else
 				{
 					x++;
+					bounceTimer--;
+					if (bounceTimer <= 0)
+					{
+						facing = Side::Clock;
+					}
 				}
 			}
 			//キーが押されたら分身を自分の座標に追加
@@ -217,7 +242,7 @@ void Player::Draw()
 		effect->Draw();
 	}
 
-	
+	if (!Boss::GetCurrent()->isActive && showWall) for (auto& w : wall) w.Draw("white");
 }
 
 void Player::DrawSprite() {
