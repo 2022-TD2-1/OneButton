@@ -121,7 +121,9 @@ SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
 void SoundManager::StopBGM(SoundKey key)
 {
     SoundData* pSnd = &sndMap[key];
-    pSnd->sound->Stop();
+    if (pSnd->sound != nullptr) {
+        pSnd->sound->Stop();
+    }
 }
 
 void SoundManager::ReleaseAllSounds()

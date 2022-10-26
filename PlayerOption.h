@@ -2,6 +2,7 @@
 #include "Object3D.h"
 #include <CircleCollider.h>
 #include <ModelManager.h>
+#include <SoundManager.h>
 class PlayerOption :
 	public Object3D
 {
@@ -46,5 +47,7 @@ public:
 	bool hasHit = false;
 
 	Vec3 attackStartedPos;
+
+	
 };
 

@@ -13,6 +13,7 @@
 #include "Matrix.h"
 #include "wRootSignature.h"
 #include "SceneManager.h"
+#include <SoundManager.h>
 #include "Sprite.h"
 #include "TextDrawer.h"
 #include "GPipelineManager.h"
@@ -54,6 +55,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	InitWSCM();
 	InitWDepth();
 
+	SoundManager::Init();
+
 	wTextureManager::Create();
 
 	CreateAndInitRootSignature();
@@ -65,6 +68,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//Init Scene
 	SceneManager::Init();
+
 
 	GameTimer* timer = GameTimer::GetInstance();
 	

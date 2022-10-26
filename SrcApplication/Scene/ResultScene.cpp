@@ -6,6 +6,7 @@
 
 void ResultScene::Init()
 {
+	
 	timer_ = GameTimer::GetInstance();
 #pragma region 数字読み込み
 	numSprite[0] = Sprite("Resources/Numbers/zero.png", "zero");
@@ -20,6 +21,10 @@ void ResultScene::Init()
 	numSprite[9] = Sprite("Resources/Numbers/nine.png", "nine");
 	dotSprite = Sprite("Resources/Numbers/point.png", "point");
 #pragma endregion
+	for (int i = 0; i < 10; i++) {
+		numSprite[i].position = { -100,-100 };
+	}
+
 
 	menuTxt[0] = Sprite("Resources/continueTxt.png", "continue");
 	menuTxt[1] = Sprite("Resources/titleTxt.png", "title");
@@ -51,13 +56,13 @@ void ResultScene::Init()
 	rankObj[2].model = ModelManager::Get("B");
 	rankObj[3].model = ModelManager::Get("C");
 	for (int i = 0; i < 4; i++) {
-		rankObj[i].position = { 0,0,0 };
+		rankObj[i].position = { 4,0,0 };
 		rankObj[i].scale = { 2,2,2 };
 		rankObj[i].UpdateMatrix();
 	}
 	rankTxtObj.model = ModelManager::Get("Rank");
-	rankTxtObj.position = { 0,5,0 };
-	rankTxtObj.scale = { 1,1,1 };
+	rankTxtObj.position = { -2,0,0 };
+	rankTxtObj.scale = { 2,2,2 };
 	rankTxtObj.UpdateMatrix();
 #pragma region カメラ初期化
 	camera.projectionMode = ProjectionMode::Perspective;
@@ -92,6 +97,7 @@ void ResultScene::Update()
 		//メニューセレクト
  		if (Input::Key::Triggered(DIK_UP))
 		{
+			SoundManager::Play("Select");
 			isSelect = Menu::Continue;	//もう一度ボス戦へ
 			//セレクト画像の座標
 			selectSprite.position = {
@@ -102,6 +108,7 @@ void ResultScene::Update()
 		}
 		else if (Input::Key::Triggered(DIK_DOWN))
 		{
+			SoundManager::Play("Select");
 			isSelect = Menu::Title;		//タイトルに戻る
 			//セレクト画像の座標
 			selectSprite.position = {
@@ -112,6 +119,7 @@ void ResultScene::Update()
 		}
 		//決定
 		if (Input::Key::Triggered(DIK_SPACE)) {
+			SoundManager::Play("Enter");
 			isReturn = true;
 		}
 		//決定したら以下の処理をする
@@ -121,12 +129,14 @@ void ResultScene::Update()
 			if (isSelect == Menu::Continue) {
 				SceneManager::Transition<GameScene>();
 				dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(1);
+				SoundManager::PlayBGM("PlayBGM", true);
 				return;
 			}
 			//タイトルを選択した場合
 			else if (isSelect == Menu::Title) {
 				SceneManager::Transition<GameScene>();
 				dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(0);
+				SoundManager::PlayBGM("TitleBGM", true);
 				return;
 			}
 		}
@@ -141,6 +151,7 @@ void ResultScene::Update()
 	}
 	else {
 		if (Input::Key::Triggered(DIK_SPACE)) {
+			SoundManager::Play("Enter");
 			t = maxT;
 		}
 	}
@@ -178,7 +189,7 @@ void ResultScene::Draw3D()
 	Camera::Set(camera);
 	skyDome.Draw();
 
-	rankObj[0].Draw("white");
+	rankObj[rank].Draw("white");
 	rankTxtObj.Draw("white");
 }
 
@@ -220,20 +231,20 @@ void ResultScene::UpdateNum()
 		if (i == 3) {
 			//小数点の座標を代入
 			dotSprite.position.x = 525 + (50 * i);
-			dotSprite.position.y = 300;
+			dotSprite.position.y = 250;
 			dotSprite.position.z = 0;
 		}
 
 		//数字の座標を代入
 		if (i <= 2) {
 			numSprite[display[i]].position.x = 525 + (50 * i);
-			numSprite[display[i]].position.y = 300;
+			numSprite[display[i]].position.y = 250;
 			numSprite[display[i]].position.z = 0;
 			displayNumSprite[i] = numSprite[display[i]];	//表示用スプライトに代入
 		}
 		else {
 			numSprite[display[i]].position.x = 525 + (50 * (i + 1));
-			numSprite[display[i]].position.y = 300;
+			numSprite[display[i]].position.y = 250;
 			numSprite[display[i]].position.z = 0;
 			displayNumSprite[i] = numSprite[display[i]];	//表示用スプライトに代入
 		}
@@ -243,11 +254,17 @@ void ResultScene::UpdateNum()
 
 void ResultScene::Rank()
 {
-	if (clearTime <= 30) {		//A
+	if (clearTime <= 30) {		//S
 		rank = 0;
 	}
-	else if (clearTime <= 50) {	//B
+	else if (clearTime <= 50) {	//A
 		rank = 1;
+	}
+	else if (clearTime <= 50) {	//B
+		rank = 2;
+	}
+	else if (clearTime <= 50) {	//C
+		rank = 3;
 	}
 	//以下適当に
 }

@@ -28,12 +28,15 @@ void Boss::Init(Camera* camera)
 	camera_ = camera;
 
 	countDown_.Ini();
+
+	bossKnockSE = "bossKnock";
 }
 
 void Boss::Update()
 {
 	//Ž€‚ñ‚Å‚¢‚é‚Æ‚«
 	if (health <= 0) {
+		
 		DeadEffect();
 		UpdateMatrix();
 		timer_->StopTimer();
@@ -179,6 +182,7 @@ void Boss::Hit(PlayerOption* other)
 
 			if (((Vec3)this->position).GetSquaredLength() >= 8.0f * 8.0f - 0.1f)
 			{
+				SoundManager::Play(bossKnockSE);
 				this->state = State::Down;
 				this->laneX = other->x - 180 / PlayerParams::degPerMove;
 			}
@@ -600,6 +604,10 @@ void Boss::MoveTo(Vec3 goal, float speed)
 
 void Boss::DeadEffect()
 {
+	if (deadEffectTime == 0) {
+		SoundManager::Play("BossDead");
+	}
+
 	if (deadEffectTime < maxDeadEffectTime) {
 		deadEffectTime++;
 	}

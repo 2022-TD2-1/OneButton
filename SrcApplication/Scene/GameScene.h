@@ -10,6 +10,7 @@
 #include <Boss.h>
 #include <TitleObj.h>
 #include <GameTimer.h>
+#include <SoundManager.h>
 using namespace Input;
 
 class GameScene :
@@ -44,6 +45,8 @@ private:
 	GameTimer* timer_ = nullptr;
 
 	Sprite aoeSpr;
+
+	
 
 	enum GameState {
 		Title_,

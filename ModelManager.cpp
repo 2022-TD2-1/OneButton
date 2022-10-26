@@ -25,6 +25,18 @@ void ModelManager::LoadAllModels()
 
 }
 
+void ModelManager::LoadAllSound() {
+	SoundManager::LoadWave("Resources/SE_Bgm/boss.wav", "bossKnock");
+	SoundManager::LoadWave("Resources/SE_Bgm/PlayerAttack.wav", "PlayerAttack");
+	SoundManager::LoadWave("Resources/SE_Bgm/playerDamage.wav", "Damage");
+	SoundManager::LoadWave("Resources/SE_Bgm/bossDead.wav", "BossDead");
+	SoundManager::LoadWave("Resources/SE_Bgm/play.wav", "PlayBGM");
+	SoundManager::LoadWave("Resources/SE_Bgm/result.wav", "ResultBGM");
+	SoundManager::LoadWave("Resources/SE_Bgm/title.wav", "TitleBGM");
+	SoundManager::LoadWave("Resources/SE_Bgm/button.wav", "Select");
+	SoundManager::LoadWave("Resources/SE_Bgm/select.wav", "Enter");
+}
+
 Model* ModelManager::Get(string key)
 {
 	return &modelMap.find(key)->second;

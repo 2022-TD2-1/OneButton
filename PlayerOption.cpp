@@ -79,12 +79,14 @@ void PlayerOption::AttackUpdate()
 
 	if (col.Collide(Boss::GetCurrent()->col))
 	{
+		SoundManager::Play("PlayerAttack");
 		Boss::GetCurrent()->Hit(this);
 		ChangeState(State::Back);
 	}
 	//タイトルオブジェが生きているときだけ
 	if (TitleObj::GetCurrent()->GetDead() == false) {
 		if (col.Collide(TitleObj::GetCurrent()->col)) {
+			SoundManager::Play("PlayerAttack");
 			TitleObj::GetCurrent()->Hit(this);
 			ChangeState(State::Back);
 		}

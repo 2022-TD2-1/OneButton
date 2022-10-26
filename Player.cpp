@@ -76,6 +76,16 @@ void Player::Update()
 				opti.back().ChangeState(PlayerOption::State::Move);
 			}
 		}
+		else {
+			if (facing == Side::Clock)
+			{
+				x--;
+			}
+			else
+			{
+				x++;
+			}
+		}
 		for (auto itr = opti.begin(); itr != opti.end();)
 		{
 			itr->Update();
@@ -199,6 +209,7 @@ void Player::Draw()
 void Player::Damage(int damage)
 {
 	if (coolTime <= 0) {
+		SoundManager::Play("Damage");
 		health -= damage;
 		coolTime = maxCoolTime;
 		hps_.back().SetActive();

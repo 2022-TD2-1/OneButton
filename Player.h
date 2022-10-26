@@ -8,6 +8,7 @@
 #include <PlayerBullet.h>
 #include "HitEffect.h"
 #include <Timer.h>
+#include <SoundManager.h>
 
 class Player :
 	public Object3D
@@ -83,5 +84,6 @@ private:
 
 	//UŒ‚‚Å‚«‚é‚©ƒtƒ‰ƒO
 	bool isCanAttack = true;
+
 };
 
