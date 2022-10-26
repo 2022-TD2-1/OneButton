@@ -50,7 +50,7 @@ void PlayerOption::MoveUpdate()
 			//ボスをレーン上に弾けるようになったら色が変わる
 			(*brightnessCB.contents) = Float4{ 1.0f, 0.0f, 0.0f, 1.0f };
 		}
-		power += 0.01f;
+		power *= 1.01f;
 	}
 	else {
 		
