@@ -61,5 +61,7 @@ private:
 	GameTimer* timer_ = nullptr;
 	//‘€ì‚ğó‚¯•t‚¯‚È‚¢ŠÔ
 	int controlTime;
+	Player* player_ = nullptr;
+	bool isResultState;
 };
 
