@@ -81,7 +81,7 @@ void Boss::Update()
 		}
 		//ゲームが始まった時
 		else if (isActive == true) {
-
+			prePos = position;
 			if (testTime >= 0) {
 				testTime--;
 				position = { 0,0,0 };
@@ -255,6 +255,7 @@ void Boss::DownUpdate()
 	*this->brightnessCB.contents = { 1.0f, 0.0f, 0.0f, 1.0f };
 
 	backCoolTime--;
+	
 	//ゼロになったら
 	if (backCoolTime <= 0) {
 		//真ん中に戻っていく
@@ -262,6 +263,23 @@ void Boss::DownUpdate()
 		//カウントリセット
 		backCoolTime = MaxBackCoolTime;
 		isReturning = true;
+	}
+
+	if (backCoolTime <= 100) {
+		//乱数シード生成器
+		std::random_device seed_gen;
+		//メルセンヌ・ツイスターの乱数エンジン
+		std::mt19937_64 engine(seed_gen());
+		//移動速度
+		std::uniform_real_distribution<float> transDistX(-0.2f, 0.2f);
+		std::uniform_real_distribution<float> transDistY(-0.2f, 0.2f);
+		//プレイヤーが震える
+		Vec3 dist = { transDistX(engine),transDistY(engine) ,0 };
+
+		position = prePos + dist;
+	}
+	else {
+		prePos = position;
 	}
 
 	bossAoEs.clear();

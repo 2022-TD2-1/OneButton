@@ -43,6 +43,9 @@ void Player::Update()
 	{
 		facing = Side::Clock;
 	}
+	if (isCanAttack == false) {
+		showWall = false;
+	}
 	
 	//Ž€‚ñ‚Å‚¢‚é‚Æ‚«
 	if (health <= 0) {
@@ -242,7 +245,7 @@ void Player::Draw()
 		effect->Draw();
 	}
 
-	if (!Boss::GetCurrent()->isActive && showWall) for (auto& w : wall) w.Draw("white");
+	if (Boss::GetCurrent()->isActive == false && showWall) for (auto& w : wall) w.Draw("white");
 }
 
 void Player::DrawSprite() {
