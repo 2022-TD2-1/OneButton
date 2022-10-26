@@ -25,6 +25,13 @@ void ModelManager::LoadAllModels()
 
 }
 
+void ModelManager::LoadAllSound() {
+	SoundManager::LoadWave("Resources/SE_Bgm/boss.wav", "bossKnock");
+	SoundManager::LoadWave("Resources/SE_Bgm/PlayerAttack.wav", "PlayerAttack");
+	SoundManager::LoadWave("Resources/SE_Bgm/playerDamage.wav", "Damage");
+	SoundManager::LoadWave("Resources/SE_Bgm/bossDead.wav", "BossDead");
+}
+
 Model* ModelManager::Get(string key)
 {
 	return &modelMap.find(key)->second;

@@ -10,6 +10,7 @@ void GameScene::Init()
 {
 	wTextureManager::Init();
 	ModelManager::LoadAllModels();
+	ModelManager::LoadAllSound();
 	wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/CircleGuide.png", "CircleGuide");
 
