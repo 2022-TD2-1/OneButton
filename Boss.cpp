@@ -150,10 +150,6 @@ void Boss::Update()
 		{
 			return effect->GetAllDead();
 		});
-
-
-	
-
 }
 
 void Boss::Draw()
@@ -187,7 +183,7 @@ void Boss::Hit(PlayerOption* other)
 {
 	//this->health -= PlayerParams::damage;
 	if (isActive == true && health > 0) {
-		if (other->state == PlayerOption::State::Attack)
+		if (state == State::Center && !isReturning)
 		{
 			health -= 2.f * (other->power * (other->power / 2));
 			//kb処理
@@ -214,7 +210,7 @@ void Boss::Hit(PlayerOption* other)
 			//カメラシェイク
 			camera_->ShakeSet(20 * other->power, 0.3, other->power);
 		}
-		else if (other->state == PlayerOption::State::Move && state != State::Center)
+		else if (!isReturning)
 		{
 			SoundManager::Play("bossKnock");
 			health -= 1.f * other->power;
@@ -240,8 +236,13 @@ void Boss::Hit()
 
 void Boss::CenterUpdate()
 {
+	stateTimer[0].Update();
 	MoveTo(Vec3(0, 0, 0), 0.1f);
 	*this->brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f };
+	if (this->isReturning && (int)this->stateTimer[0].Check() % 500 < 250)
+	{
+		this->brightnessCB.contents->w = 0.25f;
+	}
 	if (isShocWave == true) {
 		if (position.x == 0) {
 			isActiveShocWave = true;	//衝撃波を出す
@@ -260,6 +261,7 @@ void Boss::DownUpdate()
 		state = State::Center;
 		//カウントリセット
 		backCoolTime = MaxBackCoolTime;
+		isReturning = true;
 	}
 }
 
@@ -618,6 +620,7 @@ void Boss::MoveTo(Vec3 goal, float speed)
 	if (dir.GetSquaredLength() < speed * speed)
 	{
 		position = goal;
+		isReturning = false;
 		return;
 	}
 	this->position = (Vec3)this->position + dir.SetLength(speed);
