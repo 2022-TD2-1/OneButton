@@ -38,7 +38,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウを生成
 	{
 		wWindow wwnd;
-		wwnd.Create(L"DirectX", CommonParams::Win::width, CommonParams::Win::height);
+		wwnd.Create(L"KOCKER", CommonParams::Win::width, CommonParams::Win::height);
 		RegisterwWindow(wwnd, "Default");
 	}
 
