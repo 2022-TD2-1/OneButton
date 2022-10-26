@@ -284,7 +284,7 @@ void ResultScene::Draw3D()
 	skyDome.Draw();
 	if (isResultState == false) {
 		if (isDisplayRank == true) {
-			rankObj[3].Draw();	//アルファベットオブジェ
+			rankObj[rank].Draw();	//アルファベットオブジェ
 		}
 		rankTxtObj.Draw("white");	//RANKの文字オブジェ
 		clearObj.Draw();
@@ -362,16 +362,16 @@ void ResultScene::UpdateNum()
 
 void ResultScene::Rank()
 {
-	if (clearTime <= 30) {		//S
+	if (clearTime <= 40) {		//S
 		rank = 0;
 	}
-	else if (clearTime <= 50) {	//A
+	else if (clearTime <= 55) {	//A
 		rank = 1;
 	}
 	else if (clearTime <= 70) {	//B
 		rank = 2;
 	}
-	else if (clearTime <= 90) {	//C
+	else if (clearTime <= 200) {	//C
 		rank = 3;
 	}
 	//以下適当に
