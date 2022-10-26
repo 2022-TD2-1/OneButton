@@ -231,6 +231,7 @@
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="PlayerHP.h" />
     <ClInclude Include="PlayerOption.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SrcApplication\Scene\GameScene.h" />
     <ClInclude Include="SrcApplication\Scene\MonkeyScene.h" />
     <ClInclude Include="SrcApplication\Scene\ResultScene.h" />
@@ -314,6 +315,12 @@
   <ItemGroup>
     <None Include="Resources\Shaders\Basic.hlsli" />
     <None Include="Resources\Shaders\Sprite.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
