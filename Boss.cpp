@@ -631,8 +631,11 @@ void Boss::DeadEffect()
 	if (deadEffectTime < maxDeadEffectTime) {
 		deadEffectTime++;
 	}
-	//プレイヤーが震える
+	//ボスが震える
 	if (deadEffectTime <= 120) {
+		if (deadEffectTime == 119) {
+			
+		}
 		//乱数シード生成器
 		std::random_device seed_gen;
 		//メルセンヌ・ツイスターの乱数エンジン
@@ -647,9 +650,11 @@ void Boss::DeadEffect()
 	}
 	//爆発して周囲にエフェクトが散らばる
 	else if (deadEffectTime <= 240) {
-		//プレイヤーを消す
+		
+		//ボスを消す
 		isBossDisplay = false;
 		if (deadEffectTime % 8 == 0) {
+			SoundManager::Play("Explosion");
 			std::unique_ptr<HitEffect> newEffect = std::make_unique<HitEffect>();
 			newEffect->Ini(position, 4, true);
 			deadEffect.emplace_back(std::move(newEffect));
