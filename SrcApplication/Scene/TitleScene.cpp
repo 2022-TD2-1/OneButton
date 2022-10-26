@@ -6,14 +6,6 @@ void TitleScene::Init()
 	ModelManager::LoadAllModels();
 	wTextureManager::LoadTexture("Resources/white.png", "white");
 
-	player.Init();
-
-	player.model = ModelManager::Get("Cube");
-	player.position = { 0,0,0 };
-	//タイトル初期化
-	testObj.model = ModelManager::Get("Cube");
-	testObj.position = { 0,0,0 };
-
 #pragma region カメラ
 	camera.projectionMode = ProjectionMode::Perspective;
 	camera.position = { 0, 0, -12.5 };
@@ -27,6 +19,16 @@ void TitleScene::Init()
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
 #pragma endregion
+
+	player.Init(&camera);
+
+	player.model = ModelManager::Get("Cube");
+	player.position = { 0,0,0 };
+	//タイトル初期化
+	testObj.model = ModelManager::Get("Cube");
+	testObj.position = { 0,0,0 };
+
+
 }
 
 void TitleScene::Update()

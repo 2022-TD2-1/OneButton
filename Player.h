@@ -9,6 +9,7 @@
 #include "HitEffect.h"
 #include <Timer.h>
 #include <SoundManager.h>
+#include <Camera.h>
 
 class Player :
 	public Object3D
@@ -18,7 +19,7 @@ public:
 		Object3D::Object3D();
 	};
 
-	void Init();
+	void Init(Camera* camera);
 
 	void Update();
 	void Draw();
@@ -88,5 +89,7 @@ private:
 
 	//UŒ‚‚Å‚«‚é‚©ƒtƒ‰ƒO
 	bool isCanAttack = true;
+
+	Camera* camera_ = nullptr;
 };
 
