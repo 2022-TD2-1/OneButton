@@ -74,6 +74,25 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
+	if (Input::Key::Down(DIK_SPACE))
+	{
+		if (spaceObj.scale.x >= 1.5f) {
+			if (spaceObj.position.z < 3) {
+				spaceObj.position.z += 0.01f;
+			}
+			spaceObj.scale += { -0.07f, -0.07f, -0.07f};
+		}
+	}
+	else {
+		if (spaceObj.position.z > 0) {
+			spaceObj.position.z -= 0.01f;
+		}
+		if (spaceObj.scale.x < 2.0f) {
+			spaceObj.scale += { 0.07f, 0.07f, 0.07f};
+		}
+	}
+	spaceObj.UpdateMatrix();
+
 	player->Update();
 	camera.UpdateMatrix();
 	if (gameState == GameState::Title_) {

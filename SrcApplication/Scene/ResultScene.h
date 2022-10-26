@@ -45,6 +45,7 @@ private:
 	void UpdateNum();	//数字を更新する
 
 	int rank;
+	bool isDisplayRank = false;
 	void Rank();		//クリアタイムに応じたランク
 
 	//何を選択しているか
