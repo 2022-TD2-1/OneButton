@@ -83,6 +83,7 @@ void GameScene::Update()
 			SoundManager::StopBGM("TitleBGM");
 			SoundManager::PlayBGM("PlayBGM", true);
 			gameState = GameState::Gamescene_;
+			player->opti.clear();
 		}
 	}
 	//ÉQÅ[ÉÄ
