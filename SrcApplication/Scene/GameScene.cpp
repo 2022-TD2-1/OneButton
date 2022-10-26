@@ -15,6 +15,21 @@ void GameScene::Init()
 	wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/CircleGuide.png", "CircleGuide");
 
+#pragma region ƒJƒƒ‰‰Šú‰»
+	camera.projectionMode = ProjectionMode::Perspective;
+	camera.position = { 0, -3, -12.5 };
+	camera.target = { 0,-1,0 };
+	camera.targetMode = CameraTargetMode::LookAt;
+	camera.rotation = { 0, 0, 0 };
+
+	camera.renderWidth = CommonParams::Win::width;
+	camera.renderHeight = CommonParams::Win::height;
+
+	camera.fov = PIf / 2;
+	camera.nearZ = 0.1f;
+	camera.farZ = 1000.0f;
+	camera.OriginalPosSet();
+#pragma endregion
 	timer_ = GameTimer::GetInstance();
 	timer_->Ini();
 
@@ -27,29 +42,13 @@ void GameScene::Init()
 	Light::directional.direction = Vec3(0, 0, 1);
 
 	player = Player::Create();
-	player->Init();
+	player->Init(&camera);
 
 	player->model = ModelManager::Get("Player");
 	player->position = { 0,0,0 };
 
 	RTVManager::CreateRenderTargetTexture(1280, 720, "aoeSpr");
 	aoeSpr = Sprite("aoeSpr");
-
-#pragma region ƒJƒƒ‰‰Šú‰»
-	camera.projectionMode = ProjectionMode::Perspective;
-	camera.position = { 0, -3, -12.5 };
-	camera.target = {0,-1,0};
-	camera.targetMode = CameraTargetMode::LookAt;
-	camera.rotation = { 0, 0, 0 };
-
-	camera.renderWidth = CommonParams::Win::width;
-	camera.renderHeight = CommonParams::Win::height;
-
-	camera.fov = PIf / 2;
-	camera.nearZ = 0.1f;
-	camera.farZ = 1000.0f;
-	camera.OriginalPosSet();
-#pragma endregion
 
 	boss = Boss::Create();
 	boss->Init(&camera);
@@ -181,6 +180,8 @@ void GameScene::DrawSprite()
 	float time = timer_->GetTimer();
 
 	aoeSpr.Draw();
+
+	player->DrawSprite();
 
 	/*StringOptions dbgstrop;
 	dbgstrop.fontOptions.resolution = 24;

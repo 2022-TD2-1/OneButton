@@ -3,7 +3,7 @@
 #include "Input.h"
 #include "Boss.h"
 
-void Player::Init()
+void Player::Init(Camera* camera)
 {
 	this->scale = { .5f, .5f, .5f };
 
@@ -22,10 +22,22 @@ void Player::Init()
 
 	bulletTimer.Start();
 
+	camera_ = camera;
+
+	damageSprite = Sprite("Resources/warn.png", "Warn");
+	damageSprite.brightness = { 1.0f,1.0f,1.0f,0.0f };
+	damageSprite.position = { 640,360,0 };
+	damageSprite.scale = { 1,1,1 };
+	damageSprite.UpdateMatrix();
+	
 }
 
 void Player::Update()
 {
+	if (damageSprite.brightness.w > 0) {
+		damageSprite.brightness.w -= 0.01f;
+	}
+	damageSprite.UpdateMatrix();
 	//死んでいるとき
 	if (health <= 0) {
 		DeadEffect();
@@ -206,15 +218,24 @@ void Player::Draw()
 	for (std::unique_ptr<HitEffect>& effect : deadEffect) {
 		effect->Draw();
 	}
+
+	
+}
+
+void Player::DrawSprite() {
+	damageSprite.Draw();
 }
 
 void Player::Damage(int damage)
 {
 	if (coolTime <= 0) {
+		//カメラシェイク
+		camera_->ShakeSet(40, 0.7, 3);
 		SoundManager::Play("Damage");
 		health -= damage;
 		coolTime = maxCoolTime;
 		hps_.back().SetActive();
+		damageSprite.brightness.w = 1.0f;
 	}
 }
 

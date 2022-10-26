@@ -17,6 +17,7 @@ void Hpbar::Update(float nowHp)
 {
 	//現在HPでスケールを変化させる
 	hpBar_.scale = { (float)(nowHp / 10),1,1 };
+	hpBar_.position.x = -(MaxHP_/10 - hpBar_.scale.x) / 2;
 	//数値が０を下回らないようにする
 	if (hpBar_.scale.x <= 0) {
 		hpBar_.scale.x = 0;
