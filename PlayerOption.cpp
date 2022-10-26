@@ -44,13 +44,16 @@ void PlayerOption::MoveUpdate()
 	{
 		this->hasHit = false;
 	}
-	if (power <= 2.83f ) {
-		(*this->brightnessCB.contents) = Float4{ 0.5f, 1.0f, 1.0f, 1.0f };
+	if (power <= 10.f ) {
+			(*this->brightnessCB.contents) = Float4{ 0.5f, 1.0f, 1.0f, 1.0f };
+		if (power >= 2.83f) {
+			//ボスをレーン上に弾けるようになったら色が変わる
+			(*brightnessCB.contents) = Float4{ 1.0f, 0.0f, 0.0f, 1.0f };
+		}
 		power += 0.01f;
 	}
 	else {
-		//ボスをレーン上に弾けるようになったら色が変わる
-		(*brightnessCB.contents) = Float4{ 1.0f, 0.0f, 0.0f, 1.0f };
+		
 	}
 	x -= 1.5f * power;
 	if (col.Collide(Boss::GetCurrent()->col) && !hasHit)

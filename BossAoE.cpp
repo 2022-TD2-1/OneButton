@@ -21,8 +21,8 @@ void BossAoE::Update()
 	}
 	else 
 	{
-		if (entityObj.scale.x < PlayerParams::circleR * 3 / 4) {
-			entityObj.scale += {0.05f, 0.05f, 0.05f};
+		if (entityObj.scale.x < PlayerParams::circleR * 3 / 5) {
+			entityObj.scale += {0.1f, 0.1f, 0.1f};
 		}
 
 		if (col.Collide(Player::GetCurrent()->col))
@@ -37,9 +37,9 @@ void BossAoE::Update()
 	col.y = position.y;
 
 	scale = { 
-		PlayerParams::circleR * 3 / 4,
-		PlayerParams::circleR * 3 / 4,
-		PlayerParams::circleR * 3 / 4 };
+		PlayerParams::circleR * 3 / 5,
+		PlayerParams::circleR * 3 / 5,
+		PlayerParams::circleR * 3 / 5 };
 
 	entityObj.UpdateMatrix();
 	UpdateMatrix();
