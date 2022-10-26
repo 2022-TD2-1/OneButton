@@ -212,6 +212,7 @@ void Boss::Hit(PlayerOption* other)
 		}
 		else if (!isReturning)
 		{
+			SoundManager::Play("bossKnock");
 			health -= 1.f * other->power;
 			//kbˆ—
 			laneX -= 2.0f * other->power;
