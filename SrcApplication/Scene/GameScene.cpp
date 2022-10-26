@@ -37,8 +37,9 @@ void GameScene::Init()
 
 #pragma region ƒJƒƒ‰‰Šú‰»
 	camera.projectionMode = ProjectionMode::Perspective;
-	camera.position = { 0, 0, -12.5 };
-	camera.targetMode = CameraTargetMode::LookTo;
+	camera.position = { 0, -3, -12.5 };
+	camera.target = {0,-1,0};
+	camera.targetMode = CameraTargetMode::LookAt;
 	camera.rotation = { 0, 0, 0 };
 
 	camera.renderWidth = CommonParams::Win::width;

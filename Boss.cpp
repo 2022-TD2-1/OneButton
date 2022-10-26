@@ -30,6 +30,10 @@ void Boss::Init(Camera* camera)
 	countDown_.Ini();
 
 	bossKnockSE = "bossKnock";
+
+	scale = {1.5f, 1.5f, 1.5f};
+
+	rotation.x = -(PI / 16);
 }
 
 void Boss::Update()
