@@ -132,6 +132,8 @@ private:
     Object3D shockWaveObj;
     bool isShocWave = false;
     bool isActiveShocWave = false;
+
+    bool isReturning = false;
 public:
     static Boss* Create();
     static Boss* GetCurrent();
