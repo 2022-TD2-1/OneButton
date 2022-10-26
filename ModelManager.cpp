@@ -37,6 +37,7 @@ void ModelManager::LoadAllSound() {
 	SoundManager::LoadWave("Resources/SE_Bgm/title.wav", "TitleBGM");
 	SoundManager::LoadWave("Resources/SE_Bgm/button.wav", "Select");
 	SoundManager::LoadWave("Resources/SE_Bgm/select.wav", "Enter");
+	SoundManager::LoadWave("Resources/SE_Bgm/explosion.wav", "Explosion");
 }
 
 Model* ModelManager::Get(string key)

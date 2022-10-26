@@ -31,7 +31,7 @@ void Boss::Init(Camera* camera)
 
 	bossKnockSE = "bossKnock";
 
-	scale = {1.5f, 1.5f, 1.5f};
+	scale = { 1.5f, 1.5f, 1.5f };
 
 	rotation.x = -(PI / 16);
 
@@ -46,7 +46,7 @@ void Boss::Update()
 {
 	//Ž€‚ñ‚Å‚¢‚é‚Æ‚«
 	if (health <= 0) {
-		
+
 		DeadEffect();
 		UpdateMatrix();
 		timer_->StopTimer();
@@ -81,7 +81,7 @@ void Boss::Update()
 		}
 		//ƒQ[ƒ€‚ªŽn‚Ü‚Á‚½Žž
 		else if (isActive == true) {
-			
+
 			if (testTime >= 0) {
 				testTime--;
 				position = { 0,0,0 };
@@ -151,9 +151,9 @@ void Boss::Update()
 			return effect->GetAllDead();
 		});
 
-	if (isActiveShocWave == true) {
-		ShockwaveUpdate();
-	}
+
+	
+
 }
 
 void Boss::Draw()
@@ -188,8 +188,8 @@ void Boss::Hit(PlayerOption* other)
 	//this->health -= PlayerParams::damage;
 	if (isActive == true && health > 0) {
 		if (other->state == PlayerOption::State::Attack)
-		{ 
- 			health -= 2.f * (other->power * (other->power / 2));
+		{
+			health -= 2.f * (other->power * (other->power / 2));
 			//kbˆ—
 			float kbPower = 1.0f * other->power * other->power;
 			Vec3 dir = (Vec3)this->position - other->position;
@@ -400,7 +400,7 @@ void Boss::P3Update()
 				ChangeAttack(AttackType::Bar2);
 				step++;
 			}
-		}		
+		}
 		else if (step == 2)
 		{
 			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
@@ -410,7 +410,7 @@ void Boss::P3Update()
 				ChangeAttack(AttackType::Bullets);
 				step++;
 			}
-		}		
+		}
 		else if (step == 1)
 		{
 			if (attackTimer[(int)AttackType::Idle].Check() >= 500.0)
@@ -445,7 +445,7 @@ void Boss::BulletsUpdate()
 	bulletTimer.Update();
 	if (bulletTimer.Check() >= BossParams::bulletCD)
 	{
-   		bulletTimer.Subtract(BossParams::bulletCD);
+		bulletTimer.Subtract(BossParams::bulletCD);
 		double deg = (int)timer->Check() / 250;
 		deg *= BossParams::bulletDeg;
 
@@ -665,30 +665,32 @@ void Boss::DeadEffect()
 
 void Boss::ShockwaveUpdate()
 {
-	shockWaveObj.scale.x += 0.5f;
-	shockWaveObj.scale.y += 0.5f;
-	shockWaveObj.scale.z += 0.5f;
-	if (shockWaveObj.scale.x >= 20) {
-		isShocWave = false;
-		isActiveShocWave = false;
-		shockWaveObj.scale = { 0,0,0 };
-	}
-	shockWaveObj.UpdateMatrix();
-
-	CircleCollider swcol;
-	swcol.x = shockWaveObj.position.x;
-	swcol.y = shockWaveObj.position.y;
-	swcol.r = shockWaveObj.scale.x;
-
-	for (auto itr = Player::GetCurrent()->opti.begin(); itr != Player::GetCurrent()->opti.end();)
-	{
-		if (swcol.Collide(itr->col))
-		{
-			itr = Player::GetCurrent()->opti.erase(itr);
+	if (isActiveShocWave == true) {
+		shockWaveObj.scale.x += 0.5f;
+		shockWaveObj.scale.y += 0.5f;
+		shockWaveObj.scale.z += 0.5f;
+		if (shockWaveObj.scale.x >= 20) {
+			isShocWave = false;
+			isActiveShocWave = false;
+			shockWaveObj.scale = { 0,0,0 };
 		}
-		else
+		shockWaveObj.UpdateMatrix();
+
+		CircleCollider swcol;
+		swcol.x = shockWaveObj.position.x;
+		swcol.y = shockWaveObj.position.y;
+		swcol.r = shockWaveObj.scale.x;
+
+		for (auto itr = Player::GetCurrent()->opti.begin(); itr != Player::GetCurrent()->opti.end();)
 		{
-			itr++;
+			if (swcol.Collide(itr->col))
+			{
+				itr = Player::GetCurrent()->opti.erase(itr);
+			}
+			else
+			{
+				itr++;
+			}
 		}
 	}
 }

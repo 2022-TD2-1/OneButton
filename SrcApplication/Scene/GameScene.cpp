@@ -74,6 +74,7 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
+	//spaceオブジェ
 	if (Input::Key::Down(DIK_SPACE))
 	{
 		if (spaceObj.scale.x >= 1.5f) {
@@ -95,6 +96,7 @@ void GameScene::Update()
 
 	player->Update();
 	camera.UpdateMatrix();
+	boss->ShockwaveUpdate();
 	if (gameState == GameState::Title_) {
 		
 		titleObj->Update();
@@ -102,6 +104,7 @@ void GameScene::Update()
 			SoundManager::PlayBGM("PlayBGM", true);
 			gameState = GameState::Gamescene_;
 			player->opti.clear();
+			boss->SetShockWave();
 		}
 	}
 	//ゲーム
