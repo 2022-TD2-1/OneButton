@@ -16,7 +16,7 @@ void SceneManager::Update()
 {
 	FrameRate::FrameStartWithWait();
 	currentScene->Update();
-#ifdef DEBUG
+#ifdef _DEBUG
 
 	
 	if (Input::Key::Triggered(DIK_R))
