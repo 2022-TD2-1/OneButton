@@ -57,6 +57,8 @@ private:
 	bool isReturn = false;
 
 	Object3D skyDome;
+	Object3D clearObj;
+	Object3D gameOverObj;
 
 	GameTimer* timer_ = nullptr;
 	//‘€ì‚ğó‚¯•t‚¯‚È‚¢ŠÔ
