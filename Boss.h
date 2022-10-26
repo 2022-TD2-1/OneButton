@@ -128,6 +128,11 @@ private:
     Player* player_ = nullptr;
 
     SoundKey bossKnockSE;   //ƒŒ[ƒ“ã‚ÉÚ‚éUŒ‚‚ğó‚¯‚½‚Æ‚«
+
+    Object3D shockWaveObj;
+    bool isShocWave = false;
+    bool isActiveShocWave = false;
+    void ShockwaveUpdate();
 public:
     static Boss* Create();
     static Boss* GetCurrent();

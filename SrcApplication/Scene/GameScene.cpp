@@ -99,8 +99,6 @@ void GameScene::Update()
 		
 		titleObj->Update();
 		if (titleObj->GetDead()) {
-			//タイトルオブジェを倒したらゲームシーンへ移る
-			SoundManager::StopBGM("TitleBGM");
 			SoundManager::PlayBGM("PlayBGM", true);
 			gameState = GameState::Gamescene_;
 			player->opti.clear();
@@ -108,6 +106,8 @@ void GameScene::Update()
 	}
 	//ゲーム
 	if (gameState == GameState::Gamescene_) {
+		//タイトルオブジェを倒したらゲームシーンへ移る
+		SoundManager::StopBGM("TitleBGM");
 		if (Input::Key::Triggered(DIK_S))
 		{
 			player->health = 0;
