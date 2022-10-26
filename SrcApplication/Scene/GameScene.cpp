@@ -111,6 +111,8 @@ void GameScene::Update()
 	if (gameState == GameState::Gamescene_) {
 		//タイトルオブジェを倒したらゲームシーンへ移る
 		SoundManager::StopBGM("TitleBGM");
+#ifdef DEBUG
+
 		if (Input::Key::Triggered(DIK_S))
 		{
 			player->health = 0;
@@ -119,6 +121,8 @@ void GameScene::Update()
 		{
 			boss->health = 1;
 		}
+
+#endif // DEBUG
 		boss->Update();
 		//リザルトシーンへ移る
 		if (boss->isDead == true)

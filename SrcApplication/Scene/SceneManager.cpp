@@ -16,7 +16,9 @@ void SceneManager::Update()
 {
 	FrameRate::FrameStartWithWait();
 	currentScene->Update();
+#ifdef DEBUG
 
+	
 	if (Input::Key::Triggered(DIK_R))
 	{
 		Transition<GameScene>();
@@ -25,7 +27,9 @@ void SceneManager::Update()
 	{
 		Transition<TitleScene>();
 	}
-	if (Input::Key::Triggered(DIK_9))
+#endif // DEBUG
+	if (Input::Key::Triggered(DIK_9) && Input::Key::Triggered(DIK_LSHIFT)
+		&& Input::Key::Triggered(DIK_1))
 	{
 		Transition<ResultScene>();
 	}
