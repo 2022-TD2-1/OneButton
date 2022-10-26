@@ -216,6 +216,7 @@ void Boss::Hit(PlayerOption* other)
 		}
 		else if (other->state == PlayerOption::State::Move && state != State::Center)
 		{
+			SoundManager::Play("bossKnock");
 			health -= 1.f * other->power;
 			//kbˆ—
 			laneX -= 2.0f * other->power;

@@ -49,9 +49,7 @@ void Player::Update()
 			//ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ‚Í’âŽ~ó‘Ô‚ÉA‚»‚¤‚Å‚È‚¢‚È‚çˆÚ“®
 			if (Input::Key::Down(DIK_SPACE) && opti.size() > 0)
 			{
-
 				state = State::Stop;
-
 			}
 			else
 			{
