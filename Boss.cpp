@@ -8,6 +8,7 @@
 #include <ResultScene.h>
 #include <random>
 #include <BossAoE.h>
+#include "BossCrossLaser.h"
 unique_ptr<Boss> Boss::current = nullptr;
 
 void Boss::Init(Camera* camera)
@@ -97,8 +98,8 @@ void Boss::Update()
 				{
 					&Boss::IdleUpdate,
 					&Boss::BulletsUpdate,
-					&Boss::Bar1Update,/*
-					&Boss::Bar2Update,*/
+					&Boss::Bar1Update,
+					&Boss::Bar2Update,
 					&Boss::AoEUpdate
 				};
 
@@ -248,7 +249,7 @@ void Boss::P1Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
 			{
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
+				ChangeAttack(AttackType::AoE);//aoe
 				step = 0;
 			}
 		}
@@ -257,7 +258,7 @@ void Boss::P1Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
 			{//ステップ2なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
+				ChangeAttack(AttackType::Bar2);//laser cross
 				step++;
 			}
 		}
@@ -266,7 +267,7 @@ void Boss::P1Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
 			{//ステップ1なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
+				ChangeAttack(AttackType::Bar1);//laser
 				step++;
 			}
 		}
@@ -288,7 +289,8 @@ void Boss::P2Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
 			{
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack(AttackType::AoE);
+				ChangeAttack(AttackType::AoE);
 				step = 0;
 			}
 		}
@@ -297,7 +299,15 @@ void Boss::P2Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
 			{//ステップ3なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				if (ApUtil::Chance(50))
+				{
+					ChangeAttack(AttackType::Bar2);
+				}
+				else
+				{
+					ChangeAttack(AttackType::Bar1);
+					ChangeAttack(AttackType::Bullets);
+				}
 				step++;
 			}
 		}
@@ -306,7 +316,14 @@ void Boss::P2Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
 			{//ステップ2なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				if (ApUtil::Chance(50))
+				{
+					ChangeAttack(AttackType::Bar1);
+				}
+				else
+				{
+					ChangeAttack(AttackType::Bullets);
+				}
 				step++;
 			}
 		}
@@ -315,7 +332,15 @@ void Boss::P2Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
 			{//ステップ1なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				//ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				if (ApUtil::Chance(50))
+				{
+					ChangeAttack(AttackType::Bar1);
+				}
+				else
+				{
+					ChangeAttack(AttackType::Bullets);
+				}
 				step++;
 			}
 		}
@@ -331,22 +356,24 @@ void Boss::P3Update()
 	phaseTimer[2].Update();
 	if (attackType == AttackType::Idle)
 	{
-		//ステップ3なら
+		//ステップ5なら
 		if (step >= 4)
 		{
 			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
 			{
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack(AttackType::AoE);
+				ChangeAttack(AttackType::AoE);
+				ChangeAttack(AttackType::AoE);
 				step = 0;
 			}
 		}
 		else if (step == 3)
 		{
-			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+			if (attackTimer[(int)AttackType::Idle].Check() >= 500.0)
 			{//ステップ4なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack(AttackType::Bar2);
 				step++;
 			}
 		}		
@@ -355,16 +382,17 @@ void Boss::P3Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
 			{//ステップ3なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack(AttackType::Bar2);
+				ChangeAttack(AttackType::Bullets);
 				step++;
 			}
 		}		
 		else if (step == 1)
 		{
-			if (attackTimer[(int)AttackType::Idle].Check() >= 1000.0)
+			if (attackTimer[(int)AttackType::Idle].Check() >= 500.0)
 			{//ステップ2なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack(AttackType::Bar1);
 				step++;
 			}
 		}
@@ -373,7 +401,8 @@ void Boss::P3Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
 			{//ステップ1なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack(AttackType::Bar1);
+				ChangeAttack(AttackType::Bullets);
 				step++;
 			}
 		}
@@ -422,7 +451,13 @@ void Boss::Bar1Update()
 
 void Boss::Bar2Update()
 {
+	Timer* timer = &attackTimer[(int)AttackType::Bar2];
+	timer->Update();
 
+	if (timer->Check() > BossLaser::totalTime)
+	{
+		ChangeAttack(AttackType::Idle);
+	}
 }
 
 void Boss::AoEUpdate()
@@ -517,9 +552,10 @@ void Boss::ChangeAttack(AttackType next)
 		break;
 	case Boss::AttackType::Bar1:
 		bossAttacks.emplace_back(new BossLaser((float)ApUtil::RNG(1, 360) * PI / 180));
-		break;/*
+		break;
 	case Boss::AttackType::Bar2:
-		break;*/
+		bossAttacks.emplace_back(new BossCrossLaser((float)ApUtil::RNG(1, 360) * PI / 180));
+		break;
 	case Boss::AttackType::AoE:
 		bossAoEs.emplace_back(new BossAoE((float)ApUtil::RNG(1, 360) * PI / 180));
 		break;

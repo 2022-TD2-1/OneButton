@@ -37,8 +37,8 @@ public:
     enum class AttackType {
         Idle,
         Bullets,
-        Bar1,/*
-        Bar2,*/
+        Bar1,
+        Bar2,
         AoE,
         SumTypes
     } attackType = AttackType::Idle;
