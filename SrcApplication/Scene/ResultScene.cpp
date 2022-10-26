@@ -6,6 +6,7 @@
 
 void ResultScene::Init()
 {
+	
 	timer_ = GameTimer::GetInstance();
 #pragma region 数字読み込み
 	numSprite[0] = Sprite("Resources/Numbers/zero.png", "zero");
@@ -96,6 +97,7 @@ void ResultScene::Update()
 		//メニューセレクト
  		if (Input::Key::Triggered(DIK_UP))
 		{
+			SoundManager::Play("Select");
 			isSelect = Menu::Continue;	//もう一度ボス戦へ
 			//セレクト画像の座標
 			selectSprite.position = {
@@ -106,6 +108,7 @@ void ResultScene::Update()
 		}
 		else if (Input::Key::Triggered(DIK_DOWN))
 		{
+			SoundManager::Play("Select");
 			isSelect = Menu::Title;		//タイトルに戻る
 			//セレクト画像の座標
 			selectSprite.position = {
@@ -116,6 +119,7 @@ void ResultScene::Update()
 		}
 		//決定
 		if (Input::Key::Triggered(DIK_SPACE)) {
+			SoundManager::Play("Enter");
 			isReturn = true;
 		}
 		//決定したら以下の処理をする
@@ -147,6 +151,7 @@ void ResultScene::Update()
 	}
 	else {
 		if (Input::Key::Triggered(DIK_SPACE)) {
+			SoundManager::Play("Enter");
 			t = maxT;
 		}
 	}

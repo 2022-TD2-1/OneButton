@@ -568,6 +568,10 @@ void Boss::MoveTo(Vec3 goal, float speed)
 
 void Boss::DeadEffect()
 {
+	if (deadEffectTime == 0) {
+		SoundManager::Play("BossDead");
+	}
+
 	if (deadEffectTime < maxDeadEffectTime) {
 		deadEffectTime++;
 	}
