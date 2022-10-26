@@ -44,6 +44,8 @@ private:
 
 	GameTimer* timer_ = nullptr;
 
+	Sprite aoeSpr;
+
 	
 
 	enum GameState {

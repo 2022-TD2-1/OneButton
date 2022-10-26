@@ -252,7 +252,7 @@ void Boss::P1Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
 			{
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
 				step = 0;
 			}
 		}
@@ -261,7 +261,7 @@ void Boss::P1Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
 			{//ステップ2なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
 				step++;
 			}
 		}
@@ -270,7 +270,7 @@ void Boss::P1Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
 			{//ステップ1なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
 				step++;
 			}
 		}
@@ -426,6 +426,7 @@ void Boss::Bar1Update()
 
 void Boss::Bar2Update()
 {
+
 }
 
 void Boss::AoEUpdate()
@@ -453,11 +454,36 @@ void Boss::UpdateAllAttacks()
 			itr++;
 		}
 	}
+
+	for (auto itr = bossAoEs.begin(); itr != bossAoEs.end();)
+	{
+		(*itr)->Update();
+		if ((*itr)->del)
+		{
+			itr = bossAoEs.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
 }
 
 void Boss::DrawAllAttacks()
 {
 	for (auto& attack : bossAttacks)
+	{
+		attack->Draw();
+	}
+	for (auto& attack : bossAoEs)
+	{
+		dynamic_cast<BossAoE*>(attack.get())->DrawEnt();
+	}
+}
+
+void Boss::DrawAoEs()
+{
+	for (auto& attack : bossAoEs)
 	{
 		attack->Draw();
 	}
@@ -499,7 +525,7 @@ void Boss::ChangeAttack(AttackType next)
 	case Boss::AttackType::Bar2:
 		break;*/
 	case Boss::AttackType::AoE:
-		bossAttacks.emplace_back(new BossAoE((float)ApUtil::RNG(1, 360) * PI / 180));
+		bossAoEs.emplace_back(new BossAoE((float)ApUtil::RNG(1, 360) * PI / 180));
 		break;
 	case Boss::AttackType::SumTypes:
 		break;

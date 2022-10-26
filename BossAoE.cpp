@@ -14,9 +14,9 @@ void BossAoE::Update()
 	if (timer.Check() < readyTime)
 	{
 		//—\‰~
-		*this->brightnessCB.contents = { 1.f, 1.f, 1.f, .2f };
+		*this->brightnessCB.contents = { 1.f, 1.f, 1.f, .5f };
 		//UŒ‚
-		*entityObj.brightnessCB.contents = { 1.f, 1.f, 1.f, 1.f };
+		*entityObj.brightnessCB.contents = { 1.f, 1.f, 1.f, 1.0f };
 
 	}
 	else 
@@ -29,9 +29,7 @@ void BossAoE::Update()
 		{
 			Player::GetCurrent()->Damage(1);
 		}
-	}
-
-	
+	}	
 
 	col.r = entityObj.scale.x;
 
@@ -49,6 +47,10 @@ void BossAoE::Update()
 
 void BossAoE::Draw()
 {
-	entityObj.Draw();
 	Object3D::Draw();
+}
+
+void BossAoE::DrawEnt()
+{
+	entityObj.Draw();
 }

@@ -30,6 +30,9 @@ void GameScene::Init()
 	player->model = ModelManager::Get("Player");
 	player->position = { 0,0,0 };
 
+	RTVManager::CreateRenderTargetTexture(1280, 720, "aoeSpr");
+	aoeSpr = Sprite("aoeSpr");
+
 #pragma region ƒJƒƒ‰‰Šú‰»
 	camera.projectionMode = ProjectionMode::Perspective;
 	camera.position = { 0, 0, -12.5 };
@@ -104,6 +107,9 @@ void GameScene::Update()
 	camera.Shake();
 	SkyDome.rotation += {0.00025f, 0.0002f, 0.0001f};
 	SkyDome.UpdateMatrix();
+
+	aoeSpr.position = { 640.f, 360.f, 0 };
+	aoeSpr.UpdateMatrix();
 }
 
 void GameScene::DrawBack()
@@ -126,12 +132,20 @@ void GameScene::Draw3D()
 
 	spaceObj.Draw();
 
-	
+	RTVManager::SetRenderTargetToTexture("aoeSpr");
+
+	Camera::Set(camera);
+	boss->DrawAoEs();
+
+	Camera::Set(camera);
+	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }
 
 void GameScene::DrawSprite()
 {
 	float time = timer_->GetTimer();
+
+	aoeSpr.Draw();
 
 	/*StringOptions dbgstrop;
 	dbgstrop.fontOptions.resolution = 24;
