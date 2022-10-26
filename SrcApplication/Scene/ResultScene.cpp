@@ -38,13 +38,13 @@ void ResultScene::Init()
 		600,
 		0
 	};
-	selectSprite = Sprite("Resources/think.png", "select");
+	selectSprite = Sprite("Resources/allow.png", "select");
 	selectSprite.position = {
-		400,
+		450,
 		menuTxt[0].position.y,
 		0
 	};
-	selectSprite.scale = { 0.1,0.1,0.1 };
+	selectSprite.scale = { 0.5f, 0.5f, 0.5f };
 
 	skyDome.model = ModelManager::Get("Skysphere");
 	skyDome.position = { 0,0,0 };
@@ -101,7 +101,7 @@ void ResultScene::Update()
 			isSelect = Menu::Continue;	//もう一度ボス戦へ
 			//セレクト画像の座標
 			selectSprite.position = {
-			400,
+			450,
 			menuTxt[0].position.y,
 			0
 			};
@@ -112,7 +112,7 @@ void ResultScene::Update()
 			isSelect = Menu::Title;		//タイトルに戻る
 			//セレクト画像の座標
 			selectSprite.position = {
-			400,
+			450,
 			menuTxt[1].position.y,
 			0
 			};

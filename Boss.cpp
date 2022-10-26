@@ -174,8 +174,8 @@ void Boss::Hit(PlayerOption* other)
 	//this->health -= PlayerParams::damage;
 	if (isActive == true && health > 0) {
 		if (other->state == PlayerOption::State::Attack)
-		{
-			health -= 2.f * (other->power * other->power);
+		{ 
+ 			health -= 2.f * (other->power * (other->power / 2));
 			//kbˆ—
 			float kbPower = 1.0f * other->power * other->power;
 			Vec3 dir = (Vec3)this->position - other->position;
