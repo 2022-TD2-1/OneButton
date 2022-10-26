@@ -284,7 +284,7 @@ void ResultScene::Draw3D()
 	skyDome.Draw();
 	if (isResultState == false) {
 		if (isDisplayRank == true) {
-			rankObj[rank].Draw("white");	//アルファベットオブジェ
+			rankObj[3].Draw();	//アルファベットオブジェ
 		}
 		rankTxtObj.Draw("white");	//RANKの文字オブジェ
 		clearObj.Draw();
