@@ -48,6 +48,6 @@ public:
 
 	Vec3 attackStartedPos;
 
-	SoundKey playerAttack;
+	
 };
 

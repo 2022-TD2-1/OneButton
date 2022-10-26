@@ -28,14 +28,14 @@ void Boss::Init(Camera* camera)
 
 	countDown_.Ini();
 
-	bossKnockSE = SoundManager::LoadWave("Resources/SE_Bgm/boss.wav", "bossKnock");
-
+	bossKnockSE = "bossKnock";
 }
 
 void Boss::Update()
 {
 	//Ž€‚ñ‚Å‚¢‚é‚Æ‚«
 	if (health <= 0) {
+		
 		DeadEffect();
 		UpdateMatrix();
 		timer_->StopTimer();

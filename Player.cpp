@@ -209,6 +209,7 @@ void Player::Draw()
 void Player::Damage(int damage)
 {
 	if (coolTime <= 0) {
+		SoundManager::Play("Damage");
 		health -= damage;
 		coolTime = maxCoolTime;
 		hps_.back().SetActive();
