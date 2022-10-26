@@ -27,6 +27,9 @@ void Boss::Init(Camera* camera)
 	camera_ = camera;
 
 	countDown_.Ini();
+
+	bossKnockSE = SoundManager::LoadWave("Resources/SE_Bgm/boss.wav", "bossKnock");
+
 }
 
 void Boss::Update()
@@ -178,6 +181,7 @@ void Boss::Hit(PlayerOption* other)
 
 			if (((Vec3)this->position).GetSquaredLength() >= 8.0f * 8.0f - 0.1f)
 			{
+				SoundManager::Play(bossKnockSE);
 				this->state = State::Down;
 				this->laneX = other->x - 180 / PlayerParams::degPerMove;
 			}

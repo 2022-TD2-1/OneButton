@@ -62,7 +62,6 @@ void GameScene::Init()
 	
 	spaceObj.UpdateMatrix();
 
-	
 }
 
 void GameScene::Update()

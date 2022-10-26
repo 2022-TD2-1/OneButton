@@ -76,6 +76,16 @@ void Player::Update()
 				opti.back().ChangeState(PlayerOption::State::Move);
 			}
 		}
+		else {
+			if (facing == Side::Clock)
+			{
+				x--;
+			}
+			else
+			{
+				x++;
+			}
+		}
 		for (auto itr = opti.begin(); itr != opti.end();)
 		{
 			itr->Update();

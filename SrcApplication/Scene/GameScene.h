@@ -10,6 +10,7 @@
 #include <Boss.h>
 #include <TitleObj.h>
 #include <GameTimer.h>
+#include <SoundManager.h>
 using namespace Input;
 
 class GameScene :
@@ -42,6 +43,8 @@ private:
 	Object3D spaceObj;
 
 	GameTimer* timer_ = nullptr;
+
+	
 
 	enum GameState {
 		Title_,

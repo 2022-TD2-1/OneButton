@@ -9,6 +9,7 @@
 #include "CountDown.h"
 #include "GameTimer.h"
 #include "Player.h"
+#include <SoundManager.h>
 class Boss :
     public Object3D
 {
@@ -121,6 +122,8 @@ private:
 
     int step = 0;
     Player* player_ = nullptr;
+
+    SoundKey bossKnockSE;
 public:
     static Boss* Create();
     static Boss* GetCurrent();

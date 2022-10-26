@@ -20,6 +20,10 @@ void ResultScene::Init()
 	numSprite[9] = Sprite("Resources/Numbers/nine.png", "nine");
 	dotSprite = Sprite("Resources/Numbers/point.png", "point");
 #pragma endregion
+	for (int i = 0; i < 10; i++) {
+		numSprite[i].position = { -100,-100 };
+	}
+
 
 	menuTxt[0] = Sprite("Resources/continueTxt.png", "continue");
 	menuTxt[1] = Sprite("Resources/titleTxt.png", "title");
@@ -51,13 +55,13 @@ void ResultScene::Init()
 	rankObj[2].model = ModelManager::Get("B");
 	rankObj[3].model = ModelManager::Get("C");
 	for (int i = 0; i < 4; i++) {
-		rankObj[i].position = { 0,0,0 };
+		rankObj[i].position = { 4,0,0 };
 		rankObj[i].scale = { 2,2,2 };
 		rankObj[i].UpdateMatrix();
 	}
 	rankTxtObj.model = ModelManager::Get("Rank");
-	rankTxtObj.position = { 0,5,0 };
-	rankTxtObj.scale = { 1,1,1 };
+	rankTxtObj.position = { -2,0,0 };
+	rankTxtObj.scale = { 2,2,2 };
 	rankTxtObj.UpdateMatrix();
 #pragma region カメラ初期化
 	camera.projectionMode = ProjectionMode::Perspective;
@@ -220,20 +224,20 @@ void ResultScene::UpdateNum()
 		if (i == 3) {
 			//小数点の座標を代入
 			dotSprite.position.x = 525 + (50 * i);
-			dotSprite.position.y = 300;
+			dotSprite.position.y = 250;
 			dotSprite.position.z = 0;
 		}
 
 		//数字の座標を代入
 		if (i <= 2) {
 			numSprite[display[i]].position.x = 525 + (50 * i);
-			numSprite[display[i]].position.y = 300;
+			numSprite[display[i]].position.y = 250;
 			numSprite[display[i]].position.z = 0;
 			displayNumSprite[i] = numSprite[display[i]];	//表示用スプライトに代入
 		}
 		else {
 			numSprite[display[i]].position.x = 525 + (50 * (i + 1));
-			numSprite[display[i]].position.y = 300;
+			numSprite[display[i]].position.y = 250;
 			numSprite[display[i]].position.z = 0;
 			displayNumSprite[i] = numSprite[display[i]];	//表示用スプライトに代入
 		}

@@ -14,7 +14,7 @@ void BossAoE::Update()
 	if (timer.Check() < readyTime)
 	{
 		//ó\çêâ~
-		*this->brightnessCB.contents = { 1.f, 1.f, 1.f, .1f };
+		*this->brightnessCB.contents = { 1.f, 1.f, 1.f, .2f };
 		//çUåÇ
 		*entityObj.brightnessCB.contents = { 1.f, 1.f, 1.f, 1.f };
 
