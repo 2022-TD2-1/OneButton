@@ -82,7 +82,7 @@ void PlayerOption::AttackUpdate()
 
 	if (col.Collide(Boss::GetCurrent()->col))
 	{
-		SoundManager::Play("PlayerAttack");
+		
 		Boss::GetCurrent()->Hit(this);
 		ChangeState(State::Back);
 	}
