@@ -248,7 +248,7 @@ void Boss::P1Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
 			{
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
 				step = 0;
 			}
 		}
@@ -257,7 +257,7 @@ void Boss::P1Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 2000.0)
 			{//ステップ2なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
 				step++;
 			}
 		}
@@ -266,7 +266,7 @@ void Boss::P1Update()
 			if (attackTimer[(int)AttackType::Idle].Check() >= 4000.0)
 			{//ステップ1なら
 				phaseTimer->Subtract(phaseTimer[0].Check() - 1000.0);
-				ChangeAttack((AttackType)ApUtil::RNG(1, 3, true));
+				ChangeAttack((AttackType)ApUtil::RNG(3, 3, true));
 				step++;
 			}
 		}
@@ -470,6 +470,10 @@ void Boss::DrawAllAttacks()
 	for (auto& attack : bossAttacks)
 	{
 		attack->Draw();
+	}
+	for (auto& attack : bossAoEs)
+	{
+		dynamic_cast<BossAoE*>(attack.get())->DrawEnt();
 	}
 }
 

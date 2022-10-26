@@ -32,6 +32,7 @@ public:
 
     void Update();
     void Draw();
+    void DrawEnt();
 
     CircleCollider col;
     float posR = (float)PlayerParams::circleR * 3 / 4;

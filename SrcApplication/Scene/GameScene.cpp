@@ -109,7 +109,7 @@ void GameScene::Update()
 	SkyDome.rotation += {0.00025f, 0.0002f, 0.0001f};
 	SkyDome.UpdateMatrix();
 
-	aoeSpr.position = { 640, 380, 0 };
+	aoeSpr.position = { 640.f, 360.f, 0 };
 	aoeSpr.UpdateMatrix();
 }
 
@@ -135,8 +135,10 @@ void GameScene::Draw3D()
 
 	RTVManager::SetRenderTargetToTexture("aoeSpr");
 
+	Camera::Set(camera);
 	boss->DrawAoEs();
 
+	Camera::Set(camera);
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }
 
