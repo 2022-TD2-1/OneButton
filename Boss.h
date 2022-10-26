@@ -91,8 +91,10 @@ public:
     int phase = 0;
 
     //ƒ{ƒX‚ª^‚ñ’†‚É‚¢‚é•b”
-    const int MaxBackCoolTime = 120;
+    const int MaxBackCoolTime = 300;
     int backCoolTime = MaxBackCoolTime;
+
+    int overTime = 0;
     
     int isActive = false;
 

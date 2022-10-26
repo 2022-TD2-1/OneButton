@@ -214,11 +214,10 @@ void Boss::Hit(PlayerOption* other)
 			//カメラシェイク
 			camera_->ShakeSet(20 * other->power, 0.3, other->power);
 		}
-		else if (other->state == PlayerOption::State::Move)
+		else if (other->state == PlayerOption::State::Move && state != State::Center)
 		{
 			health -= 1.f * other->power;
 			//kb処理
-			//
 			laneX -= 2.0f * other->power;
 			//移動総量から回転後の位置を計算
 			Matrix moveTemp = Matrix::Identity();
@@ -229,9 +228,6 @@ void Boss::Hit(PlayerOption* other)
 			this->position = { moveTemp[3][0], moveTemp[3][1], moveTemp[3][2] };
 			UpdateMatrix();
 			//UpdateCollision();
-
-			//中央に戻るまでの時間を延長
-			backCoolTime = MaxBackCoolTime;
 		}
 	}
 }
@@ -679,6 +675,22 @@ void Boss::ShockwaveUpdate()
 	}
 	shockWaveObj.UpdateMatrix();
 
+	CircleCollider swcol;
+	swcol.x = shockWaveObj.position.x;
+	swcol.y = shockWaveObj.position.y;
+	swcol.r = shockWaveObj.scale.x;
+
+	for (auto itr = Player::GetCurrent()->opti.begin(); itr != Player::GetCurrent()->opti.end();)
+	{
+		if (swcol.Collide(itr->col))
+		{
+			itr = Player::GetCurrent()->opti.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
 }
 
 Boss* Boss::Create()

@@ -84,6 +84,5 @@ private:
 
 	//UŒ‚‚Å‚«‚é‚©ƒtƒ‰ƒO
 	bool isCanAttack = true;
-
 };
 
