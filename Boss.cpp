@@ -190,6 +190,7 @@ void Boss::Hit(PlayerOption* other)
 	if (isActive == true && health > 0) {
 		if (state == State::Center && !isReturning)
 		{
+			SoundManager::Play("PlayerAttack");
 			health -= 2.f * (other->power * (other->power / 2));
 			//kbˆ—
 			float kbPower = 1.0f * other->power * other->power;
