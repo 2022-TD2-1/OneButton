@@ -62,6 +62,7 @@ public:
     //攻撃のアップデートとドロー
     void UpdateAllAttacks();
     void DrawAllAttacks();
+    void DrawAoEs();
 
     //状態遷移ごとの初期化処理
     void ChangeState(State next);
@@ -75,6 +76,7 @@ public:
     CircleCollider col;
 
     list<unique_ptr<IBossAttack>> bossAttacks;
+    list<unique_ptr<IBossAttack>> bossAoEs;
 
     Timer attackTimer[(int)AttackType::SumTypes];
     Timer phaseTimer[4];

@@ -422,6 +422,7 @@ void Boss::Bar1Update()
 
 void Boss::Bar2Update()
 {
+
 }
 
 void Boss::AoEUpdate()
@@ -449,11 +450,32 @@ void Boss::UpdateAllAttacks()
 			itr++;
 		}
 	}
+
+	for (auto itr = bossAoEs.begin(); itr != bossAoEs.end();)
+	{
+		(*itr)->Update();
+		if ((*itr)->del)
+		{
+			itr = bossAoEs.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
 }
 
 void Boss::DrawAllAttacks()
 {
 	for (auto& attack : bossAttacks)
+	{
+		attack->Draw();
+	}
+}
+
+void Boss::DrawAoEs()
+{
+	for (auto& attack : bossAoEs)
 	{
 		attack->Draw();
 	}
@@ -495,7 +517,7 @@ void Boss::ChangeAttack(AttackType next)
 	case Boss::AttackType::Bar2:
 		break;*/
 	case Boss::AttackType::AoE:
-		bossAttacks.emplace_back(new BossAoE((float)ApUtil::RNG(1, 360) * PI / 180));
+		bossAoEs.emplace_back(new BossAoE((float)ApUtil::RNG(1, 360) * PI / 180));
 		break;
 	case Boss::AttackType::SumTypes:
 		break;
