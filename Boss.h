@@ -132,11 +132,12 @@ private:
     Object3D shockWaveObj;
     bool isShocWave = false;
     bool isActiveShocWave = false;
-    void ShockwaveUpdate();
 public:
     static Boss* Create();
     static Boss* GetCurrent();
 
     void SetPlayer(Player* player) { player_ = player; }
+    void SetShockWave() { isActiveShocWave = true; }
+    void ShockwaveUpdate();
 };
 
