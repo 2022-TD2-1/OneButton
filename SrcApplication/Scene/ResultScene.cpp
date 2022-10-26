@@ -125,12 +125,14 @@ void ResultScene::Update()
 			if (isSelect == Menu::Continue) {
 				SceneManager::Transition<GameScene>();
 				dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(1);
+				SoundManager::PlayBGM("PlayBGM", true);
 				return;
 			}
 			//タイトルを選択した場合
 			else if (isSelect == Menu::Title) {
 				SceneManager::Transition<GameScene>();
 				dynamic_cast<GameScene*>(SceneManager::currentScene.get())->SetState(0);
+				SoundManager::PlayBGM("TitleBGM", true);
 				return;
 			}
 		}

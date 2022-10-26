@@ -6,6 +6,7 @@
 #include <ModelManager.h>
 #include "SceneManager.h"
 #include <ResultScene.h>
+#include <SoundManager.h>
 void GameScene::Init()
 {
 	wTextureManager::Init();
@@ -66,6 +67,13 @@ void GameScene::Init()
 	
 	spaceObj.UpdateMatrix();
 
+	SoundManager::StopBGM("ResultBGM");
+	if (gameState == GameState::Title_) {
+		
+	}
+	else if(gameState == GameState::Gamescene_) {
+		
+	}
 }
 
 void GameScene::Update()
@@ -73,9 +81,12 @@ void GameScene::Update()
 	player->Update();
 	camera.UpdateMatrix();
 	if (gameState == GameState::Title_) {
+		
 		titleObj->Update();
 		if (titleObj->GetDead()) {
 			//タイトルオブジェを倒したらゲームシーンへ移る
+			SoundManager::StopBGM("TitleBGM");
+			SoundManager::PlayBGM("PlayBGM", true);
 			gameState = GameState::Gamescene_;
 		}
 	}
@@ -93,12 +104,16 @@ void GameScene::Update()
 		//リザルトシーンへ移る
 		if (boss->isDead == true)
 		{
+			SoundManager::StopBGM("PlayBGM");
+			SoundManager::PlayBGM("ResultBGM", true);
 			SceneManager::Transition<ResultScene>();
 			return;
 		}
 		//リザルトシーンへ移る
 		if (player->isDead == true)
 		{
+			SoundManager::StopBGM("PlayBGM");
+			SoundManager::PlayBGM("ResultBGM", true);
 			SceneManager::Transition<ResultScene>();
 			return;
 		}

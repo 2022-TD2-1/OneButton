@@ -30,6 +30,9 @@ void ModelManager::LoadAllSound() {
 	SoundManager::LoadWave("Resources/SE_Bgm/PlayerAttack.wav", "PlayerAttack");
 	SoundManager::LoadWave("Resources/SE_Bgm/playerDamage.wav", "Damage");
 	SoundManager::LoadWave("Resources/SE_Bgm/bossDead.wav", "BossDead");
+	SoundManager::LoadWave("Resources/SE_Bgm/play.wav", "PlayBGM");
+	SoundManager::LoadWave("Resources/SE_Bgm/result.wav", "ResultBGM");
+	SoundManager::LoadWave("Resources/SE_Bgm/title.wav", "TitleBGM");
 }
 
 Model* ModelManager::Get(string key)
