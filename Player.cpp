@@ -35,9 +35,11 @@ void Player::Update()
 	else if (health > 0) {
 		if (isCanAttack == true) {
 			//ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ‚Í’âŽ~ó‘Ô‚ÉA‚»‚¤‚Å‚È‚¢‚È‚çˆÚ“®
-			if (Input::Key::Down(DIK_SPACE))
+			if (Input::Key::Down(DIK_SPACE) && opti.size() > 0)
 			{
+
 				state = State::Stop;
+
 			}
 			else
 			{
