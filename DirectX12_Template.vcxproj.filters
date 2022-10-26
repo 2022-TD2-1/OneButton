@@ -563,6 +563,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>Application\リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
     <ResourceCompile Include="Resource.rc">
       <Filter>Application\リソース ファイル</Filter>
     </ResourceCompile>

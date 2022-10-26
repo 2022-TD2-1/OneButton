@@ -1,5 +1,5 @@
 #include "wWindow.h"
-
+#include <resource.h>
 static string defWndID = "Default";
 map<string, wWindow> wWindowList;
 wWindow* GetwWindow(string ID)
@@ -39,7 +39,7 @@ void wWindow::Create(LPCWSTR title, int windowWidth, int windowHeight) {
 	w.lpfnWndProc = (WNDPROC)WindowProc;
 	w.lpszClassName = title;
 	w.hInstance = GetModuleHandle(nullptr);
-	w.hIcon = LoadIcon(w.hInstance, TEXT("ICON"));
+	w.hIcon = LoadIcon(w.hInstance, MAKEINTRESOURCE(IDI_ICON1));
 	w.hCursor = LoadCursor(NULL, IDC_ARROW);
 
 	RegisterClassEx(&w);
