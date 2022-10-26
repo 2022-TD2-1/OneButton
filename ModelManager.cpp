@@ -22,6 +22,8 @@ void ModelManager::LoadAllModels()
 	RegisterModel("B", "B");
 	RegisterModel("C", "C");
 	RegisterModel("rank", "Rank");
+	RegisterModel("gameover", "Gameover");
+	RegisterModel("clear", "Clear");
 
 }
 
