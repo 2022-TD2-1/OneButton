@@ -67,6 +67,7 @@ void GameScene::Init()
 	
 	spaceObj.UpdateMatrix();
 
+	SoundManager::StopBGM("ClearBGM");
 	SoundManager::StopBGM("ResultBGM");
 	SoundManager::PlayBGM("TitleBGM", true);
 }
@@ -123,7 +124,6 @@ void GameScene::Update()
 		if (boss->isDead == true)
 		{
 			SoundManager::StopBGM("PlayBGM");
-			SoundManager::PlayBGM("ResultBGM", true);
 			SceneManager::Transition<ResultScene>();
 			return;
 		}
@@ -131,7 +131,6 @@ void GameScene::Update()
 		if (player->isDead == true)
 		{
 			SoundManager::StopBGM("PlayBGM");
-			SoundManager::PlayBGM("ResultBGM", true);
 			SceneManager::Transition<ResultScene>();
 			return;
 		}

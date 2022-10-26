@@ -92,9 +92,11 @@ void ResultScene::Init()
 	player_ = Player::GetCurrent();
 	if (player_->isDead == false) {
 		isResultState = false;	//クリアしたとき
+		SoundManager::PlayBGM("ClearBGM", true);
 	}
 	else if (player_->isDead == true) {
 		isResultState = true;	//ゲームおーべー
+		SoundManager::PlayBGM("ResultBGM", true);
 	}
 
 	clearObj.model = ModelManager::Get("Clear");
