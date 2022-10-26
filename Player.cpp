@@ -3,7 +3,7 @@
 #include "Input.h"
 #include "Boss.h"
 
-void Player::Init()
+void Player::Init(Camera* camera)
 {
 	this->scale = { .5f, .5f, .5f };
 
@@ -22,6 +22,7 @@ void Player::Init()
 
 	bulletTimer.Start();
 
+	camera_ = camera;
 }
 
 void Player::Update()
@@ -211,6 +212,8 @@ void Player::Draw()
 void Player::Damage(int damage)
 {
 	if (coolTime <= 0) {
+		//カメラシェイク
+		camera_->ShakeSet(40, 0.7, 3);
 		SoundManager::Play("Damage");
 		health -= damage;
 		coolTime = maxCoolTime;
