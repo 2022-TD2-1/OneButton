@@ -23,10 +23,21 @@ void Player::Init(Camera* camera)
 	bulletTimer.Start();
 
 	camera_ = camera;
+
+	damageSprite = Sprite("Resources/warn.png", "Warn");
+	damageSprite.brightness = { 1.0f,1.0f,1.0f,0.0f };
+	damageSprite.position = { 640,360,0 };
+	damageSprite.scale = { 1,1,1 };
+	damageSprite.UpdateMatrix();
+	
 }
 
 void Player::Update()
 {
+	if (damageSprite.brightness.w > 0) {
+		damageSprite.brightness.w -= 0.01f;
+	}
+	damageSprite.UpdateMatrix();
 	//Ž€‚ñ‚Å‚¢‚é‚Æ‚«
 	if (health <= 0) {
 		DeadEffect();
@@ -207,6 +218,12 @@ void Player::Draw()
 	for (std::unique_ptr<HitEffect>& effect : deadEffect) {
 		effect->Draw();
 	}
+
+	
+}
+
+void Player::DrawSprite() {
+	damageSprite.Draw();
 }
 
 void Player::Damage(int damage)
@@ -218,6 +235,7 @@ void Player::Damage(int damage)
 		health -= damage;
 		coolTime = maxCoolTime;
 		hps_.back().SetActive();
+		damageSprite.brightness.w = 1.0f;
 	}
 }
 

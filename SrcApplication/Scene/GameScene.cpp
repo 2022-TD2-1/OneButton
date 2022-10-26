@@ -181,6 +181,8 @@ void GameScene::DrawSprite()
 
 	aoeSpr.Draw();
 
+	player->DrawSprite();
+
 	/*StringOptions dbgstrop;
 	dbgstrop.fontOptions.resolution = 24;
 	dbgstrop.size = 48;

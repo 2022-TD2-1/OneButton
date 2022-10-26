@@ -10,6 +10,7 @@
 #include <Timer.h>
 #include <SoundManager.h>
 #include <Camera.h>
+#include <Sprite.h>
 
 class Player :
 	public Object3D
@@ -23,6 +24,7 @@ public:
 
 	void Update();
 	void Draw();
+	void DrawSprite();
 
 	//HPŒn
 	void Damage(int damage);
@@ -91,5 +93,7 @@ private:
 	bool isCanAttack = true;
 
 	Camera* camera_ = nullptr;
+
+	Sprite damageSprite;
 };
 
