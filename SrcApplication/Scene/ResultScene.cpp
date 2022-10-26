@@ -189,7 +189,7 @@ void ResultScene::Draw3D()
 	Camera::Set(camera);
 	skyDome.Draw();
 
-	rankObj[0].Draw("white");
+	rankObj[rank].Draw("white");
 	rankTxtObj.Draw("white");
 }
 
@@ -254,11 +254,17 @@ void ResultScene::UpdateNum()
 
 void ResultScene::Rank()
 {
-	if (clearTime <= 30) {		//A
+	if (clearTime <= 30) {		//S
 		rank = 0;
 	}
-	else if (clearTime <= 50) {	//B
+	else if (clearTime <= 50) {	//A
 		rank = 1;
+	}
+	else if (clearTime <= 50) {	//B
+		rank = 2;
+	}
+	else if (clearTime <= 50) {	//C
+		rank = 3;
 	}
 	//ˆÈ‰º“K“–‚É
 }

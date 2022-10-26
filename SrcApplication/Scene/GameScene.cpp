@@ -68,12 +68,7 @@ void GameScene::Init()
 	spaceObj.UpdateMatrix();
 
 	SoundManager::StopBGM("ResultBGM");
-	if (gameState == GameState::Title_) {
-		
-	}
-	else if(gameState == GameState::Gamescene_) {
-		
-	}
+	SoundManager::PlayBGM("TitleBGM", true);
 }
 
 void GameScene::Update()
