@@ -675,6 +675,22 @@ void Boss::ShockwaveUpdate()
 	}
 	shockWaveObj.UpdateMatrix();
 
+	CircleCollider swcol;
+	swcol.x = shockWaveObj.position.x;
+	swcol.y = shockWaveObj.position.y;
+	swcol.r = shockWaveObj.scale.x;
+
+	for (auto itr = Player::GetCurrent()->opti.begin(); itr != Player::GetCurrent()->opti.end();)
+	{
+		if (swcol.Collide(itr->col))
+		{
+			itr = Player::GetCurrent()->opti.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
 }
 
 Boss* Boss::Create()
