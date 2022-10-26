@@ -91,7 +91,7 @@ public:
     int phase = 0;
 
     //ƒ{ƒX‚ª^‚ñ’†‚É‚¢‚é•b”
-    const int MaxBackCoolTime = 300;
+    const int MaxBackCoolTime = 360;
     int backCoolTime = MaxBackCoolTime;
 
     int overTime = 0;

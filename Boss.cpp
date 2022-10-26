@@ -57,6 +57,11 @@ void Boss::Update()
 			if (position.z < 0) {
 				player_->SetCanNotAttack();
 				position.z += 0.1f;
+
+				if (position.z > -0.2f) {
+					SoundManager::Play("bossKnock");
+				}
+
 			}
 			else {
 				position.z = 0;
@@ -264,6 +269,7 @@ void Boss::DownUpdate()
 		backCoolTime = MaxBackCoolTime;
 		isReturning = true;
 	}
+	
 
 	if (backCoolTime <= 100) {
 		//—”ƒV[ƒh¶¬Ší
