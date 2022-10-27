@@ -59,6 +59,7 @@ void Player::Update()
 			if (Input::Key::Down(DIK_SPACE) && opti.size() > 0)
 			{
 				state = State::Stop;
+				facing = Side::Clock;
 			}
 			else
 			{
