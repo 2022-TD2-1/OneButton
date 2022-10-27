@@ -26,7 +26,7 @@ public:
     //通常弾に当たった場合
     void Hit();
 
-    const float maxHealth = 350;
+    const float maxHealth = 400;
     float health = maxHealth;
 
     enum class State {
@@ -90,8 +90,8 @@ public:
 
     int phase = 0;
 
-    //ボスが真ん中にいる秒数
-    const int MaxBackCoolTime = 360;
+    //ボスがレーンにいる秒数
+    const int MaxBackCoolTime = 300;
     int backCoolTime = MaxBackCoolTime;
 
     int overTime = 0;
