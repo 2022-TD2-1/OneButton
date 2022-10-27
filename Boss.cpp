@@ -296,7 +296,7 @@ void Boss::DownUpdate()
 void Boss::P1Update()
 {
 	phaseTimer[0].Update();
-	if (attackType == AttackType::Idle)
+	if (attackType == AttackType::Idle && !isReturning)
 	{
 		//ステップ3なら
 		if (step >= 2)
@@ -336,7 +336,7 @@ void Boss::P1Update()
 void Boss::P2Update()
 {
 	phaseTimer[1].Update();
-	if (attackType == AttackType::Idle)
+	if (attackType == AttackType::Idle && !isReturning)
 	{
 		//ステップ4なら
 		if (step >= 3)
@@ -409,7 +409,7 @@ void Boss::P2Update()
 void Boss::P3Update()
 {
 	phaseTimer[2].Update();
-	if (attackType == AttackType::Idle)
+	if (attackType == AttackType::Idle && !isReturning)
 	{
 		//ステップ5なら
 		if (step >= 4)
