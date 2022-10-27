@@ -362,13 +362,13 @@ void ResultScene::UpdateNum()
 
 void ResultScene::Rank()
 {
-	if (clearTime <= 40) {		//S
+	if (clearTime <= 45) {		//S
 		rank = 0;
 	}
-	else if (clearTime <= 55) {	//A
+	else if (clearTime <= 60) {	//A
 		rank = 1;
 	}
-	else if (clearTime <= 70) {	//B
+	else if (clearTime <= 75) {	//B
 		rank = 2;
 	}
 	else if (clearTime <= 200) {	//C
