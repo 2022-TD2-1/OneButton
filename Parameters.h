@@ -23,7 +23,7 @@ namespace BossParams {
 	constexpr float bulletDeg = 30;
 
 	//レーザーの速度
-	constexpr float laserSpeed = 3.141592f / 1800 * 1.25/2;
+	constexpr float laserSpeed = 3.141592f / 1800 /2;
 }
 
 namespace CommonParams {
